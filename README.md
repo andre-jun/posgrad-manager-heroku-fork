@@ -4,12 +4,11 @@
 
 O desenvolvimento desta aplicação surgiu da vontade de apoiar a **Comissão Coordenadora de Curso (CCG) do curso de SI da EACH/USP**, no contexto da pós-graduação.  
 
-Atualmente, muitos dos processos de acompanhamento, controle e gestão acadêmica são realizados de forma **manual, descentralizada e burocrática**, o que torna o trabalho mais lento, suscetível a erros e de difícil manutenção.  
+Atualmente, muitos dos processos de acompanhamento, controle e gestão acadêmica, mais especificamente o controle dos relatórios de desempenho semestrais, são realizados de forma **manual**, o que torna o trabalho mais lento, suscetível a erros e de difícil manutenção.  
 
 A motivação principal do projeto é **simplificar e automatizar** essas rotinas, oferecendo uma ferramenta unificada que facilite:  
 
 - o acompanhamento de alunos,  
-- a organização de disciplinas,  
 - a geração de relatórios,  
 - e a comunicação entre os envolvidos na pós-graduação.  
 
