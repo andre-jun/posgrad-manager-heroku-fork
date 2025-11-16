@@ -61,6 +61,7 @@ class StudentsController < ApplicationController
   def create
     @student = current_user.build_student(student_params)
     if @student.save
+      @contact_info = ContactInfo.create!(user: @student.user)
       redirect_to root_path, notice: 'Student created!'
     else
       format.html { render :new, status: :unprocessable_entity }
@@ -88,7 +89,8 @@ class StudentsController < ApplicationController
 
   def student_params
     params.require(:student).permit(:name, :student_id, :role, :email, :lattes_link, :lattes_last_update,
-                                    :pretended_career, :join_date)
+                                    :pretended_career, :join_date,
+                                    )
   end
 
   def check_permissions

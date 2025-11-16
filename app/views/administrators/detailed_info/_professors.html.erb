@@ -1,11 +1,11 @@
 <tbody>
     <tr>
-      <td class="border-b border-gray-200 px-3 py-2 font-semibold text-gray-900"><%= professor.name %></td>
+      <td class="border-b border-gray-200 px-3 py-2 font-semibold text-gray-900"><%= professor.user.name %> <%= professor.user.surname %></td>
       <td class="border-b border-gray-200 px-3 py-2 text-gray-600"><%= professor.user.email %></td>
       <td class="border-b border-gray-200 px-3 py-2 text-gray-600"><%= professor.user.nusp %></td>
       <td class="border-b border-gray-200 px-3 py-2 text-gray-600"><%= professor.department %></td>
       <td class="border-b border-gray-200 px-3 py-2">
-        <% status = professor.user.name || 'Desconhecido' %>
+        <% status = professor.user.status || 'Desconhecido' %>
         <% if status == 'Ativo' %>
           <span class="inline-block px-2 py-0.5 bg-green-200 text-green-800 text-xs font-semibold rounded">Ativo</span>
         <% else %>

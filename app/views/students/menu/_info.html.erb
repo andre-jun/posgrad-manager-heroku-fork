@@ -7,6 +7,11 @@
         <span>Informações Gerais</span>
     </h3>
     <div class="space-y-4" autocomplete="off">
+        <div>
+            <label for="full_name" class="block text-gray-700 font-semibold mb-1">Nome Completo</label>
+            <p class="w-full border border-gray-300 rounded-md bg-gray-50 px-3 py-2 text-gray-700 text-sm"> <%= student.user.name %> <%= student.user.surname %></p>
+        </div>
+
         <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
             <div>
                 <label for="email" class="block text-gray-700 font-semibold mb-1">E-mail</label>
@@ -18,14 +23,10 @@
             </div>
         </div>
 
-        <div>
-            <label for="full_name" class="block text-gray-700 font-semibold mb-1">Nome Completo</label>
-            <p class="w-full border border-gray-300 rounded-md bg-gray-50 px-3 py-2 text-gray-700 text-sm"> <%= student.name %> </p>
-        </div>
 
         <div>
             <label for="advisor" class="block text-gray-700 font-semibold mb-1">Orientador</label>
-            <p class="w-full border border-gray-300 rounded-md bg-gray-50 px-3 py-2 text-gray-700 text-sm"> <%= @professor&.name || "Nenhum professor atribuido"%> </p>
+            <p class="w-full border border-gray-300 rounded-md bg-gray-50 px-3 py-2 text-gray-700 text-sm"> <%= @professor&.user.name|| "Nenhum professor atribuido"%> <%= @professor&.user.surname %> </p>
         </div>
 
         <div class="grid grid-cols-1 md:grid-cols-2 gap-4">

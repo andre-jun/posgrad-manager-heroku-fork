@@ -26,7 +26,9 @@ Rails.application.routes.draw do
   get 'admin_home', to: 'administrators#home', as: 'adm_home'
   post :change_professor, to: 'students#change_professor'
   get 'export_pdf', to: 'administrators#export_pdf', as: 'export_pdf'
+  get 'contact_info', to: 'users#contact_info', as: 'contact_info'
 
+  # tem que fazer o root directionar pra home certa dependendo do tipo de usuario
   authenticated :user do
     root to: 'pages#home', as: :authenticated_user_root
   end

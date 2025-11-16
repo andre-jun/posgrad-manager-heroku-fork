@@ -18,8 +18,12 @@
   </button>
   <div class="text-right text-xs text-gray-500">
     <p>Logado como:</p>
-    <p class="font-semibold text-blue-700"><%= @administrator.name %></p>
+    <p class="font-semibold text-blue-700"><%= @administrator.user.name %></p>
   </div>
+
+  <%= link_to 'Editar Perfil', edit_administrator_path(@administrator), data: { turbo: false }, class: "bg-blue-600 hover:bg-blue-700 text-white text-sm font-semibold px-4 py-2 rounded-md" %>
+
+
   <%= button_to destroy_user_session_path, method: :delete, class: "ml-4 px-4 py-1 border border-red-500 text-red-500 hover:bg-red-100 rounded flex items-center space-x-1" do %>
     <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24" stroke-linecap="round" stroke-linejoin="round">
       <path d="M15 4.00098H5V18.001C5 19.1055 5.89543 20.001 7 20.001H15" stroke-linecap="round" stroke-linejoin="round"></path> 

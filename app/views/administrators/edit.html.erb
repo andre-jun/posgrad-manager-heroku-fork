@@ -4,10 +4,10 @@
   <h1 class="text-3xl font-bold text-blue-600 mb-8">Editing profile</h1>
 
   <div class="bg-white shadow-md rounded-lg p-8 w-full max-w-lg mb-6">
-    <%= render "edit_form", professor: @professor %>
+    <%= render "form", user: @administrator.user %>
   </div>
 
   <div>
-    <%= link_to "Back to home", professor_home_path, class: "text-gray-600 hover:text-gray-800 font-semibold" %>
+    <%= link_to "Back to home", adm_home_path, class: "text-gray-600 hover:text-gray-800 font-semibold" %>
   </div>
 </div>

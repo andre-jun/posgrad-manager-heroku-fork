@@ -1,6 +1,6 @@
 <tbody>
     <tr>
-      <td class="border-b border-gray-200 px-3 py-2 font-semibold text-gray-900"><%= student.name %></td>
+      <td class="border-b border-gray-200 px-3 py-2 font-semibold text-gray-900"><%= student.user.name %> <%= student.user.surname %></td>
       <td class="border-b border-gray-200 px-3 py-2 text-gray-600"><%= student.user.email %></td>
       <td class="border-b border-gray-200 px-3 py-2 text-gray-600"><%= student.user.nusp %></td>
       <td class="border-b border-gray-200 px-3 py-2">
@@ -13,10 +13,10 @@
         <% end %>
       </td>
       <td class="border-b border-gray-200 px-3 py-2 text-gray-600">
-        <%= student.user.name || '—' %>
+        <%= student.professor&.user&.name || '—' %> <%= student.professor&.user&.surname || ''%>
       </td>
       <td class="border-b border-gray-200 px-3 py-2">
-        <% status = student.user.name || 'Desconhecido' %>
+        <% status = student.user.status || 'Desconhecido' %>
         <% if status == 'Ativo' %>
           <span class="inline-block px-2 py-0.5 bg-green-200 text-green-800 text-xs font-semibold rounded">Ativo</span>
         <% else %>

@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[8.1].define(version: 2025_11_13_211637) do
+ActiveRecord::Schema[8.1].define(version: 2025_11_16_202420) do
   create_table "administrators", force: :cascade do |t|
     t.datetime "created_at", null: false
     t.string "name"
@@ -18,6 +18,15 @@ ActiveRecord::Schema[8.1].define(version: 2025_11_13_211637) do
     t.datetime "updated_at", null: false
     t.integer "user_id", null: false
     t.index ["user_id"], name: "index_administrators_on_user_id"
+  end
+
+  create_table "contact_infos", force: :cascade do |t|
+    t.datetime "created_at", null: false
+    t.string "phone_number"
+    t.string "room_number"
+    t.datetime "updated_at", null: false
+    t.integer "user_id", null: false
+    t.index ["user_id"], name: "index_contact_infos_on_user_id"
   end
 
   create_table "courses", force: :cascade do |t|
@@ -150,16 +159,20 @@ ActiveRecord::Schema[8.1].define(version: 2025_11_13_211637) do
     t.string "login_id"
     t.string "name"
     t.string "nusp"
+    t.string "pronoun"
     t.datetime "remember_created_at"
     t.datetime "reset_password_sent_at"
     t.string "reset_password_token"
     t.integer "sign_in_count", default: 0, null: false
+    t.string "status", default: "Ativo"
+    t.string "surname"
     t.datetime "updated_at", null: false
     t.index ["login_id"], name: "index_users_on_login_id"
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token"
   end
 
   add_foreign_key "administrators", "users"
+  add_foreign_key "contact_infos", "users"
   add_foreign_key "courses", "professors"
   add_foreign_key "professors", "professors"
   add_foreign_key "professors", "users"
