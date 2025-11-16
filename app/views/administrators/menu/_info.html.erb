@@ -48,11 +48,15 @@
 </div>
 
 <nav class="mb-4 border border-gray-300 rounded-md bg-gray-100 flex gap-1 text-gray-700 text-sm overflow-auto select-none">
-  <% tabs = { 'alumni' => { label: 'Alunos', icon: 'user-group' }, 'faculty' => { label: 'Docentes', icon: 'academic-cap' }, 'reports' => { label: 'Relatórios', icon: 'document-text' }, 'register' => { label: 'Cadastrar', icon: 'user-add' } } %>
+  <% tabs = { 'overview' => { label: 'Acoes necessarias?', icon: 'user-group' }, 'alumni' => { label: 'Alunos', icon: 'user-group' }, 'faculty' => { label: 'Docentes', icon: 'academic-cap' }, 'reports' => { label: 'Relatórios', icon: 'document-text' }, 'register' => { label: 'Cadastrar', icon: 'user-add' } } %>
     <% tabs.each do |key, tab| %>
       <%= link_to adm_home_path(tab: key), data: { turbo_frame: "tab_content" }, class: "mx-auto flex items-center gap-2 px-3 py-1 rounded-md whitespace-nowrap #{params[:tab] == key ? 'bg-white shadow text-purple-700 font-semibold' : 'hover:bg-white'}" do %>
 
-        <% if key == 'alunos' %>
+        <% if key == 'overview' %>
+          <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2" >
+            <path stroke-linecap="round" stroke-linejoin="round" d="M12 4v16m8-8H4" />
+          </svg>
+        <% elsif key == 'alunos' %>
           <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2" >
             <path stroke-linecap="round" stroke-linejoin="round" d="M17 20h5v-2a4 4 0 00-4-4h-1M9 12h6m-6 0v6a4 4 0 110-8m0 0V7a4 4 0 10-3 0" />
           </svg>
