@@ -1,12 +1,23 @@
-<div>
-    ----------- DOCENTES ------------
-</div>
-
-<div>
-    <p> Docentes </p>
-    <% if @professors.any? %>
+<div class="p-6 bg-white rounded-lg border border-gray-200">
+  <h2 class="text-orange-700 font-semibold mb-1">Gerenciar Docentes</h2>
+  <p class="text-gray-600 text-sm mb-4">Lista de todos os Docentes do programa</p>
+  <% if @professors.any? %>
+    <div class="rounded-md overflow-hidden border border-orange-300">
+      <table class="w-full table-auto border-collapse text-left text-sm rounded-md">
+        <thead>
+          <tr class="bg-orange-100 rounded-t-md">
+            <th class="border-b border-gray-300 px-3 py-2 font-semibold text-gray-700">Nome</th>
+            <th class="border-b border-gray-300 px-3 py-2 font-semibold text-gray-700">E-mail</th>
+            <th class="border-b border-gray-300 px-3 py-2 font-semibold text-gray-700">Nº USP</th>
+            <th class="border-b border-gray-300 px-3 py-2 font-semibold text-gray-700">Departamento</th>
+            <th class="border-b border-gray-300 px-3 py-2 font-semibold text-gray-700">Status</th>
+            <th class="border-b border-gray-300 px-3 py-2 font-semibold text-gray-700">Ações</th>
+          </tr>
+        </thead>
         <%= render partial: "/administrators/detailed_info/professors", collection: @professors, as: :professor %>
-    <% else %>
-        <p class="text-gray-500 italic">Nenhum docente ainda.</p>
-    <% end %>
+      </table>
+    </div>
+  <% else %>
+    <p class="text-gray-500 italic">Nenhum docente ainda.</p>
+  <% end %>
 </div>
