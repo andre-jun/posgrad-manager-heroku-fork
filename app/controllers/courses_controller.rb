@@ -1,8 +1,8 @@
-class coursesController < ApplicationController
+class CoursesController < ApplicationController
   before_action :authenticate_user!
-  before_action :set_course, only: %i[ home show edit update ]
+  before_action :set_course, only: %i[home show edit update]
 
-# AQUI NAO TEM NADA FEITO AINDA !!
+  # AQUI NAO TEM NADA FEITO AINDA !!
   def show
   end
 
@@ -10,13 +10,14 @@ class coursesController < ApplicationController
   end
 
   def update
-      respond_to do |format|
-    if @course.update(course_params)
-      format.html { redirect_to @course, notice: "Course was successfully updated.", status: :see_other }
-      format.json { render :show, status: :ok, location: @course }
-    else
-      format.html { render :edit, status: :unprocessable_entity }
-      format.json { render json: @course.errors, status: :unprocessable_entity }
+    respond_to do |format|
+      if @course.update(course_params)
+        format.html { redirect_to @course, notice: 'Course was successfully updated.', status: :see_other }
+        format.json { render :show, status: :ok, location: @course }
+      else
+        format.html { render :edit, status: :unprocessable_entity }
+        format.json { render json: @course.errors, status: :unprocessable_entity }
+      end
     end
   end
 
@@ -27,7 +28,7 @@ class coursesController < ApplicationController
   def create
     @course = current_user.build_course(course_params)
     if @course.save
-      redirect_to root_path, notice: "course created!"
+      redirect_to root_path, notice: 'course created!'
     else
       format.html { render :new, status: :unprocessable_entity }
       format.json { render json: @course.errors, status: :unprocessable_entity }
@@ -43,5 +44,4 @@ class coursesController < ApplicationController
   def course_params
     params.require(:course).permit(:name, :course_id, :professor_id, :credits)
   end
-
 end
