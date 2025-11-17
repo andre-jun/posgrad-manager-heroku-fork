@@ -1,6 +1,6 @@
 class StudentsController < ApplicationController
   before_action :authenticate_user!
-  before_action :set_student, only: %i[home show edit update change_professor]
+  before_action :set_student, only: %i[ home show edit update change_professor]
   before_action :check_permissions, only: %i[home edit]
   before_action :find_professor, only: %i[change_professor]
   before_action :calculate_credits, only: %i[home]
@@ -18,7 +18,7 @@ class StudentsController < ApplicationController
     end
   end
 
-  def home
+  def home 
     @reports = Report.where(id: @student.report_infos.pluck(:report_id)).all.order(year: :asc, semester: :asc)
   end
 
@@ -72,7 +72,8 @@ class StudentsController < ApplicationController
   private
 
   def set_student
-    @student = Student.find_by(params[:id])
+    # @student = Student.find_by(params[:id])
+    @student = current_user.student
   end
 
   def find_professor
@@ -88,8 +89,8 @@ class StudentsController < ApplicationController
   end
 
   def student_params
-    params.require(:student).permit(:name, :student_id, :role, :email, :lattes_link, :lattes_last_update,
-                                    :pretended_career, :join_date,
+    params.require(:student).permit(:student_id, :program_level, :lattes_link, :lattes_last_update,
+                                    :pretended_career, :join_date, :semester, :credits, :credist_needed,
                                     )
   end
 

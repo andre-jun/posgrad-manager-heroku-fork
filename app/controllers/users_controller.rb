@@ -29,7 +29,7 @@ class UsersController < ApplicationController
     if @user.update(user_params)
       redirect_to root_path, notice: 'User was successfully updated!'
     else
-      render :edit
+      redirect_to root_path, notice: 'User could not be updated.'
     end
   end
 
@@ -42,10 +42,11 @@ class UsersController < ApplicationController
   def user_params
     params.require(:user).permit(:user_id, :name, :surname, :email, :login_id, :user_id, :nusp, :pronouns, 
                                   :status, :password, :password_confirmation, :pronoun, :status,
-                                  student_attributes: [ :id, :role, :lattes_link, 
-                                              :lattes_last_update, :pretended_career, :join_date],
+                                  student_attributes: [ :id, :program_level, :lattes_link, 
+                                              :lattes_last_update, :pretended_career, :join_date,
+                                              :semester, :credits, :credits_needed],
                                   professor_attributes: [ :id, :research_area, :department],
-                                  professor_attributes: [ :id, :role],
+                                  administrator_attributes: [ :administrator_id ],
                                   contact_info_attributes: [ :phone_number, :room_number, :id ])
     
     # aqui eu quero que o password default seja o nusp

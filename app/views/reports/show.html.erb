@@ -1,23 +1,38 @@
-<div>
+<div class="p-3 flex-column spacing-y-3">
     <%= link_to "home", adm_home_path, class: "border border-red-500" %>
-
+    
     <h1 class="text-xl font-bold"> RELATÓRIO </h1>
     <p> Período: <%= @report.semester %>o Sem. <%= @report.year %> </p>
     <p> Prazos de entrega: </p>
-    <li>
-        <p> Estudante: <%= @report.due_date_student %> </p>
-        <p> Docente: <%= @report.due_date_professor %> </p>
-        <p> Coordenação: <%=  @report.due_date_administrator %> </p>   
-    </li>
+    <p> Estudante: <%= @report.due_date_student&.strftime("%d de %B, %Y") %> </p>
+    <p> Docente: <%= @report.due_date_professor&.strftime("%d de %B, %Y") %> </p>
+    <p> Coordenação: <%=  @report.due_date_administrator&.strftime("%d de %B, %Y") %> </p>   
 
     <p> ----------------------------------------- </p>
 
-    <h2 class="text-lg font-bold"> Alunos que responderam: </h2>
+    <div>
+        <!-- [Bookmark] Criar essa funcionalidade. -->
+        <!-- Vai permitir adicionar um comentario e vai adicionar pra todos aqueles reports com review_professor == "Aprovado" -->
+        <p class="text-lg font-bold"> Realizar parecer em massa </p>
+            <%= link_to "Confirmar todos aqueles marcados com \"Aprovado\"", "", class: "border text-green-500" %>
+    </div>
+
+    <!-- deixa conseguir esconder isso aqui -->
+    <h2 class="text-lg font-bold"> Alunos que responderam (<%= @reports_returned&.count %>/<%= @report.report_infos&.count %>): </h2>
     <div class="outline spacing-y-3">
-        <% if @report.report_infos.any? %>
-            <%= render partial: "/administrators/detailed_info/reports_info", collection: @report.report_infos, as: :report %>
+        <% if @reports_returned.any? %>
+            <%= render partial: "/administrators/detailed_info/reports_info", collection: @reports_returned, as: :report %>
         <% else %>
             <p class="text-gray-500 italic">Nenhuma resposta ainda.</p>
+        <% end %>
+    </div>
+    <!-- esse aqui também -->
+    <h2 class="text-lg font-bold"> Alunos que ainda não responderam (<%= @reports_pending&.count %>): </h2>
+    <div class="outline spacing-y-3">
+        <% if @reports_pending.any? %>
+            <%= render partial: "/administrators/detailed_info/reports_info", collection: @reports_pending, as: :report %>
+        <% else %>
+            <p class="text-gray-500 italic">Todos já responderam :) </p>
         <% end %>
     </div>
 

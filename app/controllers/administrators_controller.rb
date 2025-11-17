@@ -65,7 +65,8 @@ class AdministratorsController < ApplicationController
   private
 
   def set_administrator
-    @administrator = Administrator.find_by(params[:id])
+    # @administrator = Administrator.find_by(params[:id])
+    @administrator = current_user.administrator
   end
 
   def set_students

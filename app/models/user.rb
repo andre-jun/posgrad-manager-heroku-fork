@@ -11,6 +11,8 @@ class User < ApplicationRecord
   has_one :contact_info
   
   accepts_nested_attributes_for :student
+  accepts_nested_attributes_for :professor
+  accepts_nested_attributes_for :administrator
   accepts_nested_attributes_for :contact_info
   # Stackoverflow falou pra ter isso mas vai ficar comentado enquanto é só magia negra
   # attr_accessible :password, :password_confirmation

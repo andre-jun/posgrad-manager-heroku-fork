@@ -1,9 +1,11 @@
 class ReportsController < ApplicationController
   before_action :authenticate_user!
-  before_action :set_report, only: %i[ show edit update ]
+  before_action :set_report, only: %i[ show edit update destroy ]
   before_action :check_permissions, only: %i[ create ]
 
   def show
+    @reports_returned = @report.report_infos.where(owner: "Administrator")
+    @reports_pending = @report.report_infos.excluding(@reports_returned)
   end
 
   def index
@@ -24,6 +26,16 @@ class ReportsController < ApplicationController
   def new
     @report = Report.new
   end
+  
+  def create
+    @report = Report.create(report_params)
+    if @report.save
+      redirect_to adm_home_path, notice: "report created!"
+    else
+      format.html { render :new, status: :unprocessable_entity }
+      format.json { render json: @report.errors, status: :unprocessable_entity }
+    end
+  end
 
   def copy_and_create
     @old_report = Report.find_by(params[:id])
@@ -38,15 +50,18 @@ class ReportsController < ApplicationController
 
   def report_answers
     @report = ReportInfo.find_by(params[:report_info])
+    @r_answers = @report.report_field_answers
+    # só retorna as não respondidas que são obrigatórias. as opcionais não importa
+    @r_unanswereds = @report.report.report_fields.excluding((@r_answers.includes(:report_field).map(&:report_field))).where(required: true)
   end
 
-  def create
-    @report = current_user.build_report(report_params)
-    if @report.save
-      redirect_to root_path, notice: "report created!"
-    else
-      format.html { render :new, status: :unprocessable_entity }
-      format.json { render json: @report.errors, status: :unprocessable_entity }
+  # por enquanto fica dando "FOREIGN KEY constraint failed" n sei pq T_T
+  def destroy
+    @report.destroy!
+
+    respond_to do |format|
+      format.html { redirect_to adm_home_path, notice: "Report was successfully destroyed.", status: :see_other }
+      format.json { head :no_content }
     end
   end
 

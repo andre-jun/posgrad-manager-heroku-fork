@@ -23,7 +23,7 @@
         <span class="font-semibold"><%= student.user.name %></span> - <%= student.program_level || 'missing'%> - PPgSI EACH-USP
       </p>
       <p class="text-blue-600">
-        Orientador(a): <%= @professor&.user.name || "Nenhum professor atribuido"%> | Número USP:  <%= @professor.user&.nusp || ""%>
+        Orientador(a): <%= @professor&.user&.name || "Nenhum professor atribuido"%> | Número USP:  <%= @professor&.user&.nusp || ""%>
       </p>
     </div>
   </section>

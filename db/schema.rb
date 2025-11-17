@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[8.1].define(version: 2025_11_17_104702) do
+ActiveRecord::Schema[8.1].define(version: 2025_11_17_214443) do
   create_table "administrators", force: :cascade do |t|
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
@@ -47,11 +47,9 @@ ActiveRecord::Schema[8.1].define(version: 2025_11_17_104702) do
   create_table "professors", force: :cascade do |t|
     t.datetime "created_at", null: false
     t.string "department"
-    t.integer "professor_id", null: false
     t.string "research_area"
     t.datetime "updated_at", null: false
     t.integer "user_id", null: false
-    t.index ["professor_id"], name: "index_professors_on_professor_id"
     t.index ["user_id"], name: "index_professors_on_user_id"
   end
 
@@ -96,7 +94,9 @@ ActiveRecord::Schema[8.1].define(version: 2025_11_17_104702) do
     t.string "owner", default: "Student"
     t.string "professor_comments"
     t.integer "report_id", null: false
+    t.string "review_administrator", default: "Pendente"
     t.datetime "review_date"
+    t.string "review_professor", default: "Pendente"
     t.integer "reviewer_id"
     t.string "status", default: "Draft"
     t.integer "student_id", null: false
@@ -127,10 +127,8 @@ ActiveRecord::Schema[8.1].define(version: 2025_11_17_104702) do
     t.string "pretended_career"
     t.string "program_level"
     t.integer "semester", default: 0
-    t.integer "student_id", null: false
     t.datetime "updated_at", null: false
     t.integer "user_id", null: false
-    t.index ["student_id"], name: "index_students_on_student_id"
     t.index ["user_id"], name: "index_students_on_user_id"
   end
 
@@ -169,7 +167,6 @@ ActiveRecord::Schema[8.1].define(version: 2025_11_17_104702) do
   add_foreign_key "administrators", "users"
   add_foreign_key "contact_infos", "users"
   add_foreign_key "courses", "professors"
-  add_foreign_key "professors", "professors"
   add_foreign_key "professors", "users"
   add_foreign_key "publications", "professors"
   add_foreign_key "publications", "students"
@@ -179,6 +176,5 @@ ActiveRecord::Schema[8.1].define(version: 2025_11_17_104702) do
   add_foreign_key "report_infos", "professors", column: "reviewer_id"
   add_foreign_key "report_infos", "reports"
   add_foreign_key "report_infos", "students"
-  add_foreign_key "students", "students"
   add_foreign_key "students", "users"
 end

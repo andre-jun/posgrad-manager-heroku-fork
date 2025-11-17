@@ -26,7 +26,7 @@
 
         <div>
             <label for="advisor" class="block text-gray-700 font-semibold mb-1">Orientador</label>
-            <p class="w-full border border-gray-300 rounded-md bg-gray-50 px-3 py-2 text-gray-700 text-sm"> <%= @professor&.user.name|| "Nenhum professor atribuido"%> <%= @professor&.user.surname %> </p>
+            <p class="w-full border border-gray-300 rounded-md bg-gray-50 px-3 py-2 text-gray-700 text-sm"> <%= @professor&.user&.name|| "Nenhum professor atribuido"%> <%= @professor&.user&.surname %> </p>
         </div>
 
         <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
