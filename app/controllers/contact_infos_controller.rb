@@ -1,10 +1,9 @@
-class StudentsController < ApplicationController
+class ContactInfosController < ApplicationController
   before_action :authenticate_user!
-  before_action :set_contact_info, only: %i[ show edit update ]
+  before_action :set_contact_info, only: %i[show edit update]
 
   def show
   end
-
 
   def edit
     return unless !@contact_info.user.id == current_user.id
@@ -39,7 +38,6 @@ class StudentsController < ApplicationController
   def set_contact_info
     @contact_info = ContactInfo.find_by(params[:id])
   end
-
 
   def contact_info_params
     params.require(:contact_info).permit(:contact_info_id, :user_id, :phone_number, :room_number)
