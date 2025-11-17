@@ -4,11 +4,13 @@
 
 <div>
     <!-- > Menu pra criar relatorio novo vai ficar aqui < -->
-    <%= button_to "Criar relatório", "https://www.youtube.com/watch?v=2_opjVlYhi4", class:"text-red-500 border border-red-500 hover:bg-red-500 hover:text-white px-3 py-1 rounded text-xs" %>
+    <p>
+        <%= link_to "Criar relatório", new_report_options_path, class:"text-red-500 border border-red-500 hover:bg-red-500 hover:text-white px-3 py-1 rounded text-xs" %>
+    </p>
     -------------------------
 </div>
 
-<div>
+<div class="space-y-3">
     <p> Relatórios </p>
     <!-- Adicionar um jeito de filtrar os reports aqui -->
     <!-- Por status, orientador, aluno, período -->

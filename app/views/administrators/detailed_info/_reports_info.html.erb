@@ -5,7 +5,7 @@
     <p> Status: <%= report.status %> </p>
     <p> Responsável: <%= report.owner %> </p>
     <p> Data da Avaliação: <%= report.review_date %> </p>
-    <p> <%= link_to "Visualizar", "" %> </p>   
+    <p> <%= link_to "Visualizar", report_answers_path(report_info: report) %> </p>   
     <%# aí aqui vai linkar pra um parcial do Report e vai ter todas as info de respostas, etc %>
     <p> <%= link_to "Baixar em PDF", export_pdf_path(format: :pdf) %> </p>
 

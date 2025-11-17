@@ -27,6 +27,9 @@ Rails.application.routes.draw do
   post :change_professor, to: 'students#change_professor'
   get 'export_pdf', to: 'administrators#export_pdf', as: 'export_pdf'
   get 'contact_info', to: 'users#contact_info', as: 'contact_info'
+  get 'new_report_options', to: 'reports#new_report_options', as: 'new_report_options'
+  post :copy_and_create, to: 'reports#copy_and_create', as: 'copy_and_create'
+  get 'report_answers', to: 'reports#report_answers', as: 'report_answers'
 
   # tem que fazer o root directionar pra home certa dependendo do tipo de usuario
   authenticated :user do

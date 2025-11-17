@@ -43,7 +43,7 @@ class UsersController < ApplicationController
     params.require(:user).permit(:user_id, :name, :surname, :email, :login_id, :user_id, :nusp, :pronouns, 
                                   :status, :password, :password_confirmation, :pronoun, :status,
                                   student_attributes: [ :id, :role, :lattes_link, 
-                                  :lattes_last_update, :pretended_career, :join_date],
+                                              :lattes_last_update, :pretended_career, :join_date],
                                   professor_attributes: [ :id, :research_area, :department],
                                   professor_attributes: [ :id, :role],
                                   contact_info_attributes: [ :phone_number, :room_number, :id ])

@@ -1,0 +1,21 @@
+<!-- aqui é a view que mostra a ReportInfo + renderiza as respostas em si -->
+    <%= link_to "home", adm_home_path, class: "border border-red-500" %>
+
+<div class="outline spacing-3-y">
+    <h1> Info </h1>
+    <p> Aluno: <%= @report.student.user.name %> </p>
+    <p> Data de Envio: <%= @report.date_sent %> </p>
+    <p> Orientador: <%= Professor.find_by(id: @report.reviewer_id).user.name %> </p>
+    <p> Status: <%= @report.status %> </p>
+    <p> Responsável: <%= @report.owner %> </p>
+    <p> Data da Avaliação: <%= @report.review_date %> </p>
+</div>
+
+<div class="outline spacing-3-y">
+    <% if @report.report.report_fields.any? %>
+        <%= render partial: "report_qa", collection: @report.report.report_fields, as: :report %>
+    <% else %>
+        <p class="text-gray-500 italic">Nenhuma resposta ainda.</p>
+    <% end %>
+
+</div>

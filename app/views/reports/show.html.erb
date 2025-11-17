@@ -1,13 +1,24 @@
 <div>
-    <h1> RELATÓRIO </h1>
-    <p> Período: <%= @report.semester %>o Sem. <%= @report.year %> </p>
-    <%# <p> Data de Envio: <%= @report.date_sent > </p>
-    <p> Status: <%= @report.status > </p>
-    <p> Avaliado em: <%= @report.review_date > </p>
-    <p> Avaliado por: <%= @report.reviewer > </p>
-    <p> Status: <%= @report.status > </p>
-    <p> Comentário do Professor: <%= @report.professor_comments > </p>
-    <p> Comentário do Coordenador: <%= @report.coordinator_comments > </p> %>
+    <%= link_to "home", adm_home_path, class: "border border-red-500" %>
 
-    <%= link_to "home", root_path %>
+    <h1 class="text-xl font-bold"> RELATÓRIO </h1>
+    <p> Período: <%= @report.semester %>o Sem. <%= @report.year %> </p>
+    <p> Prazos de entrega: </p>
+    <li>
+        <p> Estudante: <%= @report.due_date_student %> </p>
+        <p> Docente: <%= @report.due_date_professor %> </p>
+        <p> Coordenação: <%=  @report.due_date_administrator %> </p>   
+    </li>
+
+    <p> ----------------------------------------- </p>
+
+    <h2 class="text-lg font-bold"> Alunos que responderam: </h2>
+    <div class="outline spacing-y-3">
+        <% if @report.report_infos.any? %>
+            <%= render partial: "/administrators/detailed_info/reports_info", collection: @report.report_infos, as: :report %>
+        <% else %>
+            <p class="text-gray-500 italic">Nenhuma resposta ainda.</p>
+        <% end %>
+    </div>
+
 </div>

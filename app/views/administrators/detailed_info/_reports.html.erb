@@ -1,12 +1,8 @@
-<div>
+<div class="outline">
+    <%= link_to "Visualizar", report, class: "text-blue-500" %>
     <p> Período: <%= report.semester %>o Sem. <%= report.year %> </p>
     <p> Prazos de entrega: </p>
         <p> Estudante: <%= report.due_date_student %> </p>
         <p> Docente: <%= report.due_date_professor %> </p>
-        <p> Coordenação: <%= report.due_date_administrator %> </p>
-    <% if report.report_infos.any? %>
-        <%= render partial: "/administrators/detailed_info/reports_info", collection: report.report_infos, as: :report %>
-    <% else %>
-        <p class="text-gray-500 italic">Nenhuma resposta ainda.</p>
-    <% end %>
+        <p> Coordenação: <%= report.due_date_administrator %> </p>     
 </div>

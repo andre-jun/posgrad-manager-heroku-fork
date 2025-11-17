@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[8.1].define(version: 2025_11_16_202420) do
+ActiveRecord::Schema[8.1].define(version: 2025_11_17_040933) do
   create_table "administrators", force: :cascade do |t|
     t.datetime "created_at", null: false
     t.string "name"
@@ -74,10 +74,10 @@ ActiveRecord::Schema[8.1].define(version: 2025_11_16_202420) do
   create_table "report_field_answers", force: :cascade do |t|
     t.string "answer"
     t.datetime "created_at", null: false
-    t.integer "report_fields_id", null: false
+    t.integer "report_field_id", null: false
     t.integer "report_info_id", null: false
     t.datetime "updated_at", null: false
-    t.index ["report_fields_id"], name: "index_report_field_answers_on_report_fields_id"
+    t.index ["report_field_id"], name: "index_report_field_answers_on_report_field_id"
     t.index ["report_info_id"], name: "index_report_field_answers_on_report_info_id"
   end
 
@@ -178,7 +178,7 @@ ActiveRecord::Schema[8.1].define(version: 2025_11_16_202420) do
   add_foreign_key "professors", "users"
   add_foreign_key "publications", "professors"
   add_foreign_key "publications", "students"
-  add_foreign_key "report_field_answers", "report_fields", column: "report_fields_id"
+  add_foreign_key "report_field_answers", "report_fields"
   add_foreign_key "report_field_answers", "report_infos"
   add_foreign_key "report_fields", "reports"
   add_foreign_key "report_infos", "professors", column: "reviewer_id"
