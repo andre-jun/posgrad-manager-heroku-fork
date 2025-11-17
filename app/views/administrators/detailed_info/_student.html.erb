@@ -4,12 +4,12 @@
       <td class="border-b border-gray-200 px-3 py-2 text-gray-600"><%= student.user.email %></td>
       <td class="border-b border-gray-200 px-3 py-2 text-gray-600"><%= student.user.nusp %></td>
       <td class="border-b border-gray-200 px-3 py-2">
-        <% if student.role == 'Doutorado' %>
-          <span class="px-2 py-0.5 rounded text-xs font-semibold bg-orange-200 text-orange-800"><%= student.role %></span>
-        <% elsif student.role == 'Mestrado' %>
-          <span class="px-2 py-0.5 rounded text-xs font-semibold bg-blue-200 text-blue-800"><%= student.role %></span>
+        <% if student.program_level == 'Doutorado' %>
+          <span class="px-2 py-0.5 rounded text-xs font-semibold bg-orange-200 text-orange-800"><%= student.program_level %></span>
+        <% elsif student.program_level == 'Mestrado' %>
+          <span class="px-2 py-0.5 rounded text-xs font-semibold bg-blue-200 text-blue-800"><%= student.program_level %></span>
         <% else %>
-          <span class="px-2 py-0.5 rounded text-xs font-semibold bg-gray-200 text-gray-700"><%= student.role %></span>
+          <span class="px-2 py-0.5 rounded text-xs font-semibold bg-gray-200 text-gray-700"><%= student.program_level %></span>
         <% end %>
       </td>
       <td class="border-b border-gray-200 px-3 py-2 text-gray-600">

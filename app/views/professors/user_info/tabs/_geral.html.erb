@@ -2,7 +2,7 @@
       <div class="grid grid-cols-2 gap-y-3 mb-4">
         <div>
           <p class="text-sm text-gray-600">Tipo de Curso</p>
-          <p class="font-semibold"><%= student.role %></p>
+          <p class="font-semibold"><%= student.program_level %></p>
         </div>
         <div>
           <p class="text-sm text-gray-600">Data de Ingresso</p>
@@ -11,7 +11,7 @@
         <div>
           <p class="text-sm text-gray-600">Semestre Atual</p>
           <p class="font-semibold"><%= student.semester %>
-                  <% if student.role == "Mestrado" %>
+                  <% if student.program_level == "Mestrado" %>
                   / 4
                   <% else %>
                   / 8

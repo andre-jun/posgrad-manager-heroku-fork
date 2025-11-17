@@ -32,7 +32,7 @@
             #ainda sem
         </svg>
         <div>
-            <div class="font-bold text-lg"><%= @students.where(role: "Mestrado").count %></div>
+            <div class="font-bold text-lg"><%= @students.where(program_level: "Mestrado").count %></div>
             <div>Mestrandos</div>
         </div>
     </div>
@@ -41,7 +41,7 @@
             #ainda sem
         </svg>
         <div>
-            <div class="font-bold text-lg"><%= @students.where(role: "Doutorado").count %></div>
+            <div class="font-bold text-lg"><%= @students.where(program_level: "Doutorado").count %></div>
             <div>Doutorandos</div>
         </div>
     </div>

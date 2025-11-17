@@ -10,11 +10,9 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[8.1].define(version: 2025_11_17_040933) do
+ActiveRecord::Schema[8.1].define(version: 2025_11_17_104702) do
   create_table "administrators", force: :cascade do |t|
     t.datetime "created_at", null: false
-    t.string "name"
-    t.string "role"
     t.datetime "updated_at", null: false
     t.integer "user_id", null: false
     t.index ["user_id"], name: "index_administrators_on_user_id"
@@ -49,7 +47,6 @@ ActiveRecord::Schema[8.1].define(version: 2025_11_17_040933) do
   create_table "professors", force: :cascade do |t|
     t.datetime "created_at", null: false
     t.string "department"
-    t.string "name"
     t.integer "professor_id", null: false
     t.string "research_area"
     t.datetime "updated_at", null: false
@@ -124,13 +121,11 @@ ActiveRecord::Schema[8.1].define(version: 2025_11_17_040933) do
     t.datetime "created_at", null: false
     t.integer "credits", default: 0
     t.integer "credits_needed", default: 0
-    t.string "email"
     t.date "join_date"
     t.date "lattes_last_update"
     t.string "lattes_link"
-    t.string "name"
     t.string "pretended_career"
-    t.string "role"
+    t.string "program_level"
     t.integer "semester", default: 0
     t.integer "student_id", null: false
     t.datetime "updated_at", null: false

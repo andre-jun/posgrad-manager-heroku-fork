@@ -1,12 +1,12 @@
 <section class="flex items-center justify-between bg-white border border-blue-200 rounded-md px-4 py-3 shadow-sm">
     <div class="flex items-center space-x-4">
     <div class="bg-blue-600 text-white rounded-full w-12 h-12 flex items-center justify-center font-semibold uppercase">
-        <%= student.name[0] %>
+        <%= 'N/A' || student.user.name[0] %>
     </div>
     <div>
-        <h2 class="font-semibold text-lg text-blue-900"><%= student.name %></h2>
+        <h2 class="font-semibold text-lg text-blue-900"><%= 'N/A' || student.user.name %></h2>
         <p class="text-sm text-gray-700">
-        <% if @student.role == "Doutorado" %>
+        <% if @student.program_level == "Doutorado" %>
             Doutorando 
         <% else %>
             Mestrando 
