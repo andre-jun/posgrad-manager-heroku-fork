@@ -1,0 +1,6 @@
+<!-- -->
+<div class="outline spacing-3-y flex-column">
+    <% if @pending_report&.report.report_fields.any? %>
+        <%= render partial: "/students/tabs/report_fields", collection: @pending_report&.report.report_fields, as: :report_field %>
+    <% end %>
+</div>

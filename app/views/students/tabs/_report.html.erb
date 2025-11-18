@@ -14,7 +14,7 @@
         </h1>
       </div>
       <span class="px-2.5 py-0.5 text-xs font-medium text-orange-800 bg-orange-100 rounded-lg">
-        aqui o semestre e o ano
+        <%= @pending_report&.report.semester %> º Sem. <%= @pending_report&.report.year %>
       </span>
     </header>
 
@@ -40,7 +40,7 @@
             <path d="M12 21.5C17.1086 21.5 21.25 17.3586 21.25 12.25C21.25 7.14137 17.1086 3 12 3C6.89137 3 2.75 7.14137 2.75 12.25C2.75 17.3586 6.89137 21.5 12 21.5Z" stroke-linecap="round" stroke-linejoin="round"></path>
         </svg>
             <p class="text-center">
-                <strong>O prazo para preenchimento do relatório é <%#data%></strong>
+                <strong>O prazo para preenchimento do relatório é <%= @pending_report&.report.due_date_student&.strftime("%d de %B, %Y")  %></strong>
             </p>
     </div>
   <%end%>
@@ -63,18 +63,18 @@
       <div>
         <p class="block mb-1 text-sm font-medium text-blue-700">Semestre</p>
         <p class="w-full px-3 py-2 border border-blue-300 rounded-md bg-blue-50 text-blue-800 text-sm focus:ring-2 focus:ring-blue-400 focus:outline-none">
-          2º Semestre
+          <%= @pending_report&.report.semester %>º Semestre
         </p>
       </div>
       <div>
         <p class="block mb-1 text-sm font-medium text-blue-700">Ano</p>
         <p class="w-full px-3 py-2 border border-blue-300 rounded-md bg-blue-50 text-blue-800 text-sm focus:ring-2 focus:ring-blue-400 focus:outline-none">
-          2024
+          <%= @pending_report&.report.year %>
         </p>
       </div>
     </div>
 
-    <%= render "students/tabs/report_fields", student: @student, data: { turbo: false } %>
+    <%= render "students/tabs/report_sheet", student: @student, data: { turbo: false } %>
 
     <div class="pt-4 flex justify-end space-x-3 border-t border-blue-100">
         <button type="submit" name="commit" value="save_draft" class="inline-flex items-center px-4 py-2 border border-orange-400 text-orange-700 rounded-md text-sm font-medium hover:bg-orange-50 focus:outline-none focus:ring-2 focus:ring-orange-300">

@@ -20,6 +20,7 @@ class StudentsController < ApplicationController
 
   def home 
     @reports = Report.where(id: @student.report_infos.pluck(:report_id)).all.order(year: :asc, semester: :asc)
+    @pending_report = @student.report_infos.where(owner: "Student").order(created_at: :asc).last
   end
 
   def show
