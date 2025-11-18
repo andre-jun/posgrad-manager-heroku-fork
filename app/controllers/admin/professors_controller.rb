@@ -57,7 +57,6 @@ module Admin
       params.require(:professor).permit(
         :research_area,
         :department,
-        :professor_id,
         :user_id,
         :publications_count,
         :students_count

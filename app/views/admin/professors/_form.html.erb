@@ -80,10 +80,6 @@
     <legend class="text-lg font-semibold text-gray-900 px-2">Informações do Professor</legend>
     <div class="grid grid-cols-2 gap-4 mt-4">
       <div>
-        <%= form.label :professor_id, "ID do Professor", class: "block font-medium mb-1" %>
-        <%= form.text_field :professor_id, value: @professor.professor_id, name: "professor[professor_id]", class: "w-full border px-3 py-2 rounded" %>
-      </div>
-      <div>
         <%= form.label :department, "Departamento", class: "block font-medium mb-1" %>
         <%= form.text_field :department, value: @professor.department, name: "professor[department]", class: "w-full border px-3 py-2 rounded" %>
       </div>
