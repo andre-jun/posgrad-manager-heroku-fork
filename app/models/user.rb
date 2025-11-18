@@ -9,13 +9,27 @@ class User < ApplicationRecord
   has_one :student
   has_one :professor
   has_one :contact_info
-  
+
   accepts_nested_attributes_for :student
   accepts_nested_attributes_for :professor
   accepts_nested_attributes_for :administrator
   accepts_nested_attributes_for :contact_info
   # Stackoverflow falou pra ter isso mas vai ficar comentado enquanto é só magia negra
   # attr_accessible :password, :password_confirmation
-  
-  
+
+  def full_name
+    "#{name} #{surname}"
+  end
+
+  def administrator?
+    administrator.present?
+  end
+
+  def professor?
+    professor.present?
+  end
+
+  def student?
+    student.present?
+  end
 end

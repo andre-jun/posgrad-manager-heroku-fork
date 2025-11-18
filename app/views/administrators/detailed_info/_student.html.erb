@@ -1,6 +1,6 @@
 <tbody>
     <tr>
-      <td class="border-b border-gray-200 px-3 py-2 font-semibold text-gray-900"><%= student.user.name %> <%= student.user.surname %></td>
+      <td class="border-b border-gray-200 px-3 py-2 font-semibold text-gray-900"><%= student.user.name || 'N/a'%> <%= student.user.surname %></td>
       <td class="border-b border-gray-200 px-3 py-2 text-gray-600"><%= student.user.email %></td>
       <td class="border-b border-gray-200 px-3 py-2 text-gray-600"><%= student.user.nusp %></td>
       <td class="border-b border-gray-200 px-3 py-2">
@@ -9,7 +9,7 @@
         <% elsif student.program_level == 'Mestrado' %>
           <span class="px-2 py-0.5 rounded text-xs font-semibold bg-blue-200 text-blue-800"><%= student.program_level %></span>
         <% else %>
-          <span class="px-2 py-0.5 rounded text-xs font-semibold bg-gray-200 text-gray-700"><%= student.program_level %></span>
+          <span class="px-2 py-0.5 rounded text-xs font-semibold bg-gray-200 text-gray-700"><%= student.program_level || 'N/a' %></span>
         <% end %>
       </td>
       <td class="border-b border-gray-200 px-3 py-2 text-gray-600">

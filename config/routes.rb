@@ -1,29 +1,29 @@
 Rails.application.routes.draw do
-  # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html
+  namespace :admin do
+    resources :students,       only: %i[new create edit update]
+    resources :professors,     only: %i[new create edit update]
+    resources :administrators, only: %i[new create edit update]
+  end
 
-  resources :students
-  resources :reports
-  resources :professors do
+  resources :students, only: %i[edit update]
+  resources :professors, only: %i[edit update] do
     member do
       get :student_info
     end
   end
-  resources :administrators
 
-  devise_for :users, controllers: {
-    sessions: 'users/sessions',
-    registrations: 'users/registrations'
+  resources :reports
+
+  devise_for :users, skip: [:registrations], controllers: {
+    sessions: 'users/sessions'
   }
 
-  resources :users
-  resources :users_admin, controller: :users
-  # Reveal health status on /up that returns 200 if the app boots with no exceptions, otherwise 500.
-  # Can be used by load balancers and uptime monitors to verify that the app is live.
+  get 'student_home',   to: 'students#home',      as: 'student_home'
+  get 'professor_home', to: 'professors#home',    as: 'professor_home'
+  get 'admin_home',     to: 'administrators#home', as: 'adm_home'
+
   get 'up' => 'rails/health#show', as: :rails_health_check
 
-  get 'student_home', to: 'students#home', as: 'student_home'
-  get 'professor_home', to: 'professors#home', as: 'professor_home'
-  get 'admin_home', to: 'administrators#home', as: 'adm_home'
   post :change_professor, to: 'students#change_professor'
   get 'export_pdf', to: 'administrators#export_pdf', as: 'export_pdf'
   get 'contact_info', to: 'users#contact_info', as: 'contact_info'

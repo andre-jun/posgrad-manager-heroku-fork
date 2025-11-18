@@ -1,0 +1,100 @@
+<%= form_with(url: @professor.persisted? ? admin_professor_path(@professor) : admin_professors_path,
+              local: true,
+              class: "space-y-8") do |form| %>
+
+  <% if @user.errors.any? %>
+    <div class="bg-red-100 border border-red-400 text-red-700 px-4 py-3 rounded">
+      <h2 class="font-semibold mb-2"><%= pluralize(@user.errors.count, "erro") %> proibiu este usuário de ser salvo:</h2>
+      <ul class="list-disc list-inside space-y-1">
+        <% @user.errors.full_messages.each do |msg| %>
+          <li><%= msg %></li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <% if @professor.errors.any? %>
+    <div class="bg-red-100 border border-red-400 text-red-700 px-4 py-3 rounded">
+      <h2 class="font-semibold mb-2"><%= pluralize(@professor.errors.count, "erro") %> proibiu este professor de ser salvo:</h2>
+      <ul class="list-disc list-inside space-y-1">
+        <% @professor.errors.full_messages.each do |msg| %>
+          <li><%= msg %></li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <fieldset class="border border-gray-300 rounded p-4">
+    <legend class="text-lg font-semibold text-gray-900 px-2">Informações do Usuário</legend>
+
+    <div class="grid grid-cols-2 gap-4 mt-4">
+      <div>
+        <%= form.label :name, "Nome", class: "block font-medium mb-1" %>
+        <%= form.text_field :name, value: @user.name, name: "user[name]", class: "w-full border px-3 py-2 rounded" %>
+      </div>
+
+      <div>
+        <%= form.label :surname, "Sobrenome", class: "block font-medium mb-1" %>
+        <%= form.text_field :surname, value: @user.surname, name: "user[surname]", class: "w-full border px-3 py-2 rounded" %>
+      </div>
+    </div>
+
+    <div class="grid grid-cols-2 gap-4 mt-4">
+      <div>
+        <%= form.label :email, "Email", class: "block font-medium mb-1" %>
+        <%= form.email_field :email, value: @user.email, name: "user[email]", class: "w-full border px-3 py-2 rounded" %>
+      </div>
+
+      <div>
+        <%= form.label :nusp, "NUSP", class: "block font-medium mb-1" %>
+        <%= form.text_field :nusp, value: @user.nusp, name: "user[nusp]", class: "w-full border px-3 py-2 rounded" %>
+      </div>
+    </div>
+
+    <div class="grid grid-cols-2 gap-4 mt-4">
+      <div>
+        <%= form.label :pronoun, "Pronomes", class: "block font-medium mb-1" %>
+        <%= form.text_field :pronoun, value: @user.pronoun, name: "user[pronoun]", class: "w-full border px-3 py-2 rounded" %>
+      </div>
+
+      <div>
+        <%= form.label :status, "Status", class: "block font-medium mb-1" %>
+        <%= form.text_field :status, value: @user.status, name: "user[status]", class: "w-full border px-3 py-2 rounded" %>
+      </div>
+    </div>
+
+    <div class="grid grid-cols-2 gap-4 mt-4">
+      <div>
+        <%= form.label :password, "Senha", class: "block font-medium mb-1" %>
+        <%= form.password_field :password, name: "user[password]", placeholder: "Deixe em branco para manter", class: "w-full border px-3 py-2 rounded" %>
+      </div>
+
+      <div>
+        <%= form.label :password_confirmation, "Confirmação de Senha", class: "block font-medium mb-1" %>
+        <%= form.password_field :password_confirmation, name: "user[password_confirmation]", placeholder: "Confirme a senha", class: "w-full border px-3 py-2 rounded" %>
+      </div>
+    </div>
+  </fieldset>
+
+  <fieldset class="border border-gray-300 rounded p-4">
+    <legend class="text-lg font-semibold text-gray-900 px-2">Informações do Professor</legend>
+    <div class="grid grid-cols-2 gap-4 mt-4">
+      <div>
+        <%= form.label :professor_id, "ID do Professor", class: "block font-medium mb-1" %>
+        <%= form.text_field :professor_id, value: @professor.professor_id, name: "professor[professor_id]", class: "w-full border px-3 py-2 rounded" %>
+      </div>
+      <div>
+        <%= form.label :department, "Departamento", class: "block font-medium mb-1" %>
+        <%= form.text_field :department, value: @professor.department, name: "professor[department]", class: "w-full border px-3 py-2 rounded" %>
+      </div>
+    </div>
+    <div class="mt-4">
+      <%= form.label :research_area, "Área de Pesquisa", class: "block font-medium mb-1" %>
+      <%= form.text_area :research_area, value: @professor.research_area, name: "professor[research_area]", rows: 4, class: "w-full border px-3 py-2 rounded" %>
+    </div>
+  </fieldset>
+
+  <div class="mt-6">
+    <%= form.submit "Confirmar", class: "bg-blue-500 hover:bg-blue-600 text-white font-semibold px-6 py-2 rounded shadow" %>
+  </div>
+<% end %>
