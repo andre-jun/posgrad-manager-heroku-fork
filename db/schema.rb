@@ -91,14 +91,14 @@ ActiveRecord::Schema[8.1].define(version: 2025_11_17_214443) do
     t.string "coordinator_comments"
     t.datetime "created_at", null: false
     t.date "date_sent"
-    t.string "owner", default: "Student"
+    t.string "owner", default: "Student"    # Outros são "Professor" e "Administrator"
     t.string "professor_comments"
     t.integer "report_id", null: false
     t.string "review_administrator", default: "Pendente"
     t.datetime "review_date"
     t.string "review_professor", default: "Pendente"
     t.integer "reviewer_id"
-    t.string "status", default: "Draft"
+    t.string "status", default: "Draft"   # Outros são "Sent"(professor), "Review"(admin), "Archived"(retornou ao student)
     t.integer "student_id", null: false
     t.datetime "updated_at", null: false
     t.index ["report_id", "student_id"], name: "index_report_infos_on_report_id_and_student_id", unique: true

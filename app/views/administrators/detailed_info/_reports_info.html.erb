@@ -10,8 +10,4 @@
     <p> <%= link_to "Visualizar", report_answers_path(report_info: report), class: "border text-white bg-purple-500 px-3" %> </p>   
     <%# aí aqui vai linkar pra um parcial do Report e vai ter todas as info de respostas, etc %>
     <p> <%= link_to "Baixar em PDF", export_pdf_path(format: :pdf), class: "border text-white bg-orange-500 px-3" %> </p>
-
-    <% if report.status == "Administrator "%>
-        <p> <%= link_to "Avaliar", "" %> </p>
-    <% end %>
 </div>

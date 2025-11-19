@@ -1,96 +1,100 @@
-<div class="max-w-5xl mx-auto p-6 space-y-6 bg-white border border-blue-200 rounded-lg">
-  <section class="bg-white border border-blue-200 rounded-md px-6 py-4 shadow-sm max-w-5xl mx-auto space-y-4 text-center">
-    <header class="flex flex-col sm:flex-row justify-between items-start sm:items-center w-full">
-      <div class="flex items-center space-x-3">
-        <svg class="w-6 h-6 text-blue-600" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
-          <path d="M4 21.4V2.6C4 2.26863 4.26863 2 4.6 2H16.2515C16.4106 2 16.5632 2.06321 16.6757 2.17574L19.8243 5.32426C19.9368 5.43679 20 5.5894 20 5.74853V21.4C20 21.7314 19.7314 22 19.4 22H4.6C4.26863 22 4 21.7314 4 21.4Z" stroke-linecap="round" stroke-linejoin="round"></path> 
-          <path d="M16 5.4V2.35355C16 2.15829 16.1583 2 16.3536 2C16.4473 2 16.5372 2.03725 16.6036 2.10355L19.8964 5.39645C19.9628 5.46275 20 5.55268 20 5.64645C20 5.84171 19.8417 6 19.6464 6H16.6C16.2686 6 16 5.73137 16 5.4Z" fill="currentColor" stroke-linecap="round" stroke-linejoin="round"></path> 
-          <path d="M8 10L16 10" stroke-linecap="round" stroke-linejoin="round"></path>
-          <path d="M8 18L16 18" stroke-linecap="round" stroke-linejoin="round"></path> 
-          <path d="M8 14L12 14" stroke-linecap="round" stroke-linejoin="round"></path>
-        </svg>
-        <h1 class="text-blue-800 font-semibold text-lg leading-tight">
-            Relatório Semestral de Aluno Regular
-        </h1>
+<% if @pending_report %>
+  
+  <div class="max-w-5xl mx-auto p-6 space-y-6 bg-white border border-blue-200 rounded-lg">
+    <section class="bg-white border border-blue-200 rounded-md px-6 py-4 shadow-sm max-w-5xl mx-auto space-y-4 text-center">
+      <header class="flex flex-col sm:flex-row justify-between items-start sm:items-center w-full">
+        <div class="flex items-center space-x-3">
+          <svg class="w-6 h-6 text-blue-600" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+            <path d="M4 21.4V2.6C4 2.26863 4.26863 2 4.6 2H16.2515C16.4106 2 16.5632 2.06321 16.6757 2.17574L19.8243 5.32426C19.9368 5.43679 20 5.5894 20 5.74853V21.4C20 21.7314 19.7314 22 19.4 22H4.6C4.26863 22 4 21.7314 4 21.4Z" stroke-linecap="round" stroke-linejoin="round"></path> 
+            <path d="M16 5.4V2.35355C16 2.15829 16.1583 2 16.3536 2C16.4473 2 16.5372 2.03725 16.6036 2.10355L19.8964 5.39645C19.9628 5.46275 20 5.55268 20 5.64645C20 5.84171 19.8417 6 19.6464 6H16.6C16.2686 6 16 5.73137 16 5.4Z" fill="currentColor" stroke-linecap="round" stroke-linejoin="round"></path> 
+            <path d="M8 10L16 10" stroke-linecap="round" stroke-linejoin="round"></path>
+            <path d="M8 18L16 18" stroke-linecap="round" stroke-linejoin="round"></path> 
+            <path d="M8 14L12 14" stroke-linecap="round" stroke-linejoin="round"></path>
+          </svg>
+          <h1 class="text-blue-800 font-semibold text-lg leading-tight">
+              Relatório Semestral de Aluno Regular
+          </h1>
+        </div>
+        <span class="px-2.5 py-0.5 text-xs font-medium text-orange-800 bg-orange-100 rounded-lg">
+          <%= @pending_report&.report&.semester %> º Sem. <%= @pending_report&.report&.year %>
+        </span>
+      </header>
+
+      <div class="space-y-1 text-sm text-blue-700">
+        <p>
+          <span class="font-semibold"><%= student.user.name %></span> - <%= student.program_level || 'missing'%> - PPgSI EACH-USP
+        </p>
+        <p class="text-blue-600">
+          Orientador(a): <%= @professor&.user&.name || "Nenhum professor atribuido"%> | Número USP:  <%= @professor&.user&.nusp || ""%>
+        </p>
       </div>
-      <span class="px-2.5 py-0.5 text-xs font-medium text-orange-800 bg-orange-100 rounded-lg">
-        <%= @pending_report&.report.semester %> º Sem. <%= @pending_report&.report.year %>
-      </span>
-    </header>
+    </section>
+    
+      <section class="bg-blue-50 p-4 rounded-md text-sm text-blue-900/90 leading-relaxed">
+        <p>
+          Ao enviar este relatório, o aluno declara serem verdadeiras todas as informações nele relatadas, incluindo aquelas relativas aos artigos atualmente submetidos (ainda em avaliação) ou aceitos para publicação, mas ainda não publicados. Em caso de solicitação por parte da CCP-PPgSI, declaro ter todos os documentos necessários para comprovação das informações apresentadas.
+        </p>
+      </section>
+        <div class="bg-orange-50 border border-orange-300 rounded-md p-4 text-orange-800 relative">
+            <svg class="w-5 h-5 absolute left-4 top-1/2 -translate-y-1/2" fill="none" stroke="currentColor" stroke-width="1" viewBox="0 0 24 24">
+                <path d="M10.8809 16.15C10.8809 16.0021 10.9101 15.8556 10.967 15.7191C11.024 15.5825 11.1073 15.4586 11.2124 15.3545C11.3175 15.2504 11.4422 15.1681 11.5792 15.1124C11.7163 15.0567 11.8629 15.0287 12.0109 15.03C12.2291 15.034 12.4413 15.1021 12.621 15.226C12.8006 15.3499 12.9399 15.5241 13.0211 15.7266C13.1024 15.9292 13.122 16.1512 13.0778 16.3649C13.0335 16.5786 12.9272 16.7745 12.7722 16.9282C12.6172 17.0818 12.4204 17.1863 12.2063 17.2287C11.9922 17.2711 11.7703 17.2494 11.5685 17.1663C11.3666 17.0833 11.1938 16.9426 11.0715 16.7618C10.9492 16.5811 10.8829 16.3683 10.8809 16.15ZM11.2408 13.42L11.1008 8.20001C11.0875 8.07453 11.1008 7.94766 11.1398 7.82764C11.1787 7.70761 11.2424 7.5971 11.3268 7.5033C11.4112 7.40949 11.5144 7.33449 11.6296 7.28314C11.7449 7.2318 11.8697 7.20526 11.9958 7.20526C12.122 7.20526 12.2468 7.2318 12.3621 7.28314C12.4773 7.33449 12.5805 7.40949 12.6649 7.5033C12.7493 7.5971 12.813 7.70761 12.8519 7.82764C12.8909 7.94766 12.9042 8.07453 12.8909 8.20001L12.7609 13.42C12.7609 13.6215 12.6809 13.8149 12.5383 13.9574C12.3958 14.0999 12.2024 14.18 12.0009 14.18C11.7993 14.18 11.606 14.0999 11.4635 13.9574C11.321 13.8149 11.2408 13.6215 11.2408 13.42Z" fill="currentColor"></path> 
+                <path d="M12 21.5C17.1086 21.5 21.25 17.3586 21.25 12.25C21.25 7.14137 17.1086 3 12 3C6.89137 3 2.75 7.14137 2.75 12.25C2.75 17.3586 6.89137 21.5 12 21.5Z" stroke-linecap="round" stroke-linejoin="round"></path>
+            </svg>
+                <p class="text-center">
+                    <strong>O prazo para preenchimento do relatório é <%= @pending_report&.report&.due_date_student&.strftime("%d de %B, %Y")  %></strong>
+                </p>
+        </div>
 
-    <div class="space-y-1 text-sm text-blue-700">
-      <p>
-        <span class="font-semibold"><%= student.user.name %></span> - <%= student.program_level || 'missing'%> - PPgSI EACH-USP
-      </p>
-      <p class="text-blue-600">
-        Orientador(a): <%= @professor&.user&.name || "Nenhum professor atribuido"%> | Número USP:  <%= @professor&.user&.nusp || ""%>
-      </p>
-    </div>
-  </section>
+      <section>
+        <h2 class="flex items-center text-blue-800 font-semibold mb-3 text-md">
+          <svg class="w-5 h-5 mr-1 text-blue-600" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+            <rect x="3" y="4" width="18" height="18" rx="2" ry="2"/>
+            <line x1="16" y1="2" x2="16" y2="6"/>
+            <line x1="8" y1="2" x2="8" y2="6"/>
+            <line x1="3" y1="10" x2="21" y2="10"/>
+          </svg>
 
-  <section class="bg-blue-50 p-4 rounded-md text-sm text-blue-900/90 leading-relaxed">
-    <p>
-      Ao enviar este relatório, o aluno declara serem verdadeiras todas as informações nele relatadas, incluindo aquelas relativas aos artigos atualmente submetidos (ainda em avaliação) ou aceitos para publicação, mas ainda não publicados. Em caso de solicitação por parte da CCP-PPgSI, declaro ter todos os documentos necessários para comprovação das informações apresentadas.
-    </p>
-  </section>
-  <%if true #aqui logica pra se a data tiver chegando%>
-    <div class="bg-orange-50 border border-orange-300 rounded-md p-4 text-orange-800 relative">
-        <svg class="w-5 h-5 absolute left-4 top-1/2 -translate-y-1/2" fill="none" stroke="currentColor" stroke-width="1" viewBox="0 0 24 24">
-            <path d="M10.8809 16.15C10.8809 16.0021 10.9101 15.8556 10.967 15.7191C11.024 15.5825 11.1073 15.4586 11.2124 15.3545C11.3175 15.2504 11.4422 15.1681 11.5792 15.1124C11.7163 15.0567 11.8629 15.0287 12.0109 15.03C12.2291 15.034 12.4413 15.1021 12.621 15.226C12.8006 15.3499 12.9399 15.5241 13.0211 15.7266C13.1024 15.9292 13.122 16.1512 13.0778 16.3649C13.0335 16.5786 12.9272 16.7745 12.7722 16.9282C12.6172 17.0818 12.4204 17.1863 12.2063 17.2287C11.9922 17.2711 11.7703 17.2494 11.5685 17.1663C11.3666 17.0833 11.1938 16.9426 11.0715 16.7618C10.9492 16.5811 10.8829 16.3683 10.8809 16.15ZM11.2408 13.42L11.1008 8.20001C11.0875 8.07453 11.1008 7.94766 11.1398 7.82764C11.1787 7.70761 11.2424 7.5971 11.3268 7.5033C11.4112 7.40949 11.5144 7.33449 11.6296 7.28314C11.7449 7.2318 11.8697 7.20526 11.9958 7.20526C12.122 7.20526 12.2468 7.2318 12.3621 7.28314C12.4773 7.33449 12.5805 7.40949 12.6649 7.5033C12.7493 7.5971 12.813 7.70761 12.8519 7.82764C12.8909 7.94766 12.9042 8.07453 12.8909 8.20001L12.7609 13.42C12.7609 13.6215 12.6809 13.8149 12.5383 13.9574C12.3958 14.0999 12.2024 14.18 12.0009 14.18C11.7993 14.18 11.606 14.0999 11.4635 13.9574C11.321 13.8149 11.2408 13.6215 11.2408 13.42Z" fill="currentColor"></path> 
-            <path d="M12 21.5C17.1086 21.5 21.25 17.3586 21.25 12.25C21.25 7.14137 17.1086 3 12 3C6.89137 3 2.75 7.14137 2.75 12.25C2.75 17.3586 6.89137 21.5 12 21.5Z" stroke-linecap="round" stroke-linejoin="round"></path>
-        </svg>
-            <p class="text-center">
-                <strong>O prazo para preenchimento do relatório é <%= @pending_report&.report.due_date_student&.strftime("%d de %B, %Y")  %></strong>
+          Informações do Período
+
+        </h2>
+
+        <div class="grid grid-cols-1 sm:grid-cols-3 gap-4 mb-6">
+          <div>
+            <p class="block mb-1 text-sm font-medium text-blue-700">Semestre</p>
+            <p class="w-full px-3 py-2 border border-blue-300 rounded-md bg-blue-50 text-blue-800 text-sm focus:ring-2 focus:ring-blue-400 focus:outline-none">
+              <%= @pending_report&.report&.semester %>º Semestre
             </p>
-    </div>
-  <%end%>
+          </div>
+          <div>
+            <p class="block mb-1 text-sm font-medium text-blue-700">Ano</p>
+            <p class="w-full px-3 py-2 border border-blue-300 rounded-md bg-blue-50 text-blue-800 text-sm focus:ring-2 focus:ring-blue-400 focus:outline-none">
+              <%= @pending_report&.report&.year %>
+            </p>
+          </div>
+        </div>
 
+        <%= render "students/tabs/report_sheet", student: @student, data: { turbo: false } %>
 
-  <section>
-    <h2 class="flex items-center text-blue-800 font-semibold mb-3 text-md">
-      <svg class="w-5 h-5 mr-1 text-blue-600" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
-        <rect x="3" y="4" width="18" height="18" rx="2" ry="2"/>
-        <line x1="16" y1="2" x2="16" y2="6"/>
-        <line x1="8" y1="2" x2="8" y2="6"/>
-        <line x1="3" y1="10" x2="21" y2="10"/>
-      </svg>
+        <div class="pt-4 flex justify-end space-x-3 border-t border-blue-100">
+            <button type="submit" name="commit" value="save_draft" class="inline-flex items-center px-4 py-2 border border-orange-400 text-orange-700 rounded-md text-sm font-medium hover:bg-orange-50 focus:outline-none focus:ring-2 focus:ring-orange-300">
+                <svg class="w-4 h-4 mr-2" fill="currentColor" stroke="currentColor" stroke-width="1" viewBox="0 0 24 24">
+                    <path d="M8 6H5c-.553 0-1-.448-1-1s.447-1 1-1h3c.553 0 1 .448 1 1s-.447 1-1 1zM13 10H5c-.553 0-1-.448-1-1s.447-1 1-1h8c.553 0 1 .448 1 1s-.447 1-1 1zM13 14H5c-.553 0-1-.448-1-1s.447-1 1-1h8c.553 0 1 .448 1 1s-.447 1-1 1z"></path> 
+                    <path d="M18 2v8c0 .55-.45 1-1 1s-1-.45-1-1V2.5c0-.28-.22-.5-.5-.5h-13c-.28 0-.5.22-.5.5v19c0 .28.22.5.5.5h13c.28 0 .5-.22.5-.5V21c0-.55.45-1 1-1s1 .45 1 1v1c0 1.1-.9 2-2 2H2c-1.1 0-2-.9-2-2V2C0 .9.9 0 2 0h14c1.1 0 2 .9 2 2z"></path> 
+                    <path d="M23.71 8.817c.44.438.372 1.212-.148 1.732l-7.835 7.84c-.07.068-.148.126-.227.173l-2.382 1.317c-.33.183-.7.152-.927-.075-.226-.227-.25-.603-.07-.923l1.328-2.373c.042-.085.1-.153.162-.216 0-.012.007-.018.007-.018l7.835-7.84c.52-.52 1.294-.587 1.73-.15l.53.53z"></path>
+                </svg>
+                Salvar Rascunho
+            </button>
+            <button type="submit" name="commit" value="submit" class="inline-flex items-center px-5 py-2 bg-blue-700 text-white rounded-md text-sm font-semibold hover:bg-blue-800 focus:outline-none focus:ring-2 focus:ring-blue-400">
+                <svg class="w-4 h-4 mr-2" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" d="M14 5l7 7m0 0l-7 7m7-7H3"/>
+                </svg>
+                <%= link_to "Enviar Relatório", student_send_report_path(id: @pending_report.id), data: { confirm: "Are you sure?", turbo_confirm: "Are you sure?" } %>
+            </button>
+        </div>
+      </section>
+  </div>
 
-      Informações do Período
+<% else %>
+  <p class="font-bold"> Sem relatórios para responder por enquanto :) </p>
 
-    </h2>
-
-    <div class="grid grid-cols-1 sm:grid-cols-3 gap-4 mb-6">
-      <div>
-        <p class="block mb-1 text-sm font-medium text-blue-700">Semestre</p>
-        <p class="w-full px-3 py-2 border border-blue-300 rounded-md bg-blue-50 text-blue-800 text-sm focus:ring-2 focus:ring-blue-400 focus:outline-none">
-          <%= @pending_report&.report.semester %>º Semestre
-        </p>
-      </div>
-      <div>
-        <p class="block mb-1 text-sm font-medium text-blue-700">Ano</p>
-        <p class="w-full px-3 py-2 border border-blue-300 rounded-md bg-blue-50 text-blue-800 text-sm focus:ring-2 focus:ring-blue-400 focus:outline-none">
-          <%= @pending_report&.report.year %>
-        </p>
-      </div>
-    </div>
-
-    <%= render "students/tabs/report_sheet", student: @student, data: { turbo: false } %>
-
-    <div class="pt-4 flex justify-end space-x-3 border-t border-blue-100">
-        <button type="submit" name="commit" value="save_draft" class="inline-flex items-center px-4 py-2 border border-orange-400 text-orange-700 rounded-md text-sm font-medium hover:bg-orange-50 focus:outline-none focus:ring-2 focus:ring-orange-300">
-            <svg class="w-4 h-4 mr-2" fill="currentColor" stroke="currentColor" stroke-width="1" viewBox="0 0 24 24">
-                <path d="M8 6H5c-.553 0-1-.448-1-1s.447-1 1-1h3c.553 0 1 .448 1 1s-.447 1-1 1zM13 10H5c-.553 0-1-.448-1-1s.447-1 1-1h8c.553 0 1 .448 1 1s-.447 1-1 1zM13 14H5c-.553 0-1-.448-1-1s.447-1 1-1h8c.553 0 1 .448 1 1s-.447 1-1 1z"></path> 
-                <path d="M18 2v8c0 .55-.45 1-1 1s-1-.45-1-1V2.5c0-.28-.22-.5-.5-.5h-13c-.28 0-.5.22-.5.5v19c0 .28.22.5.5.5h13c.28 0 .5-.22.5-.5V21c0-.55.45-1 1-1s1 .45 1 1v1c0 1.1-.9 2-2 2H2c-1.1 0-2-.9-2-2V2C0 .9.9 0 2 0h14c1.1 0 2 .9 2 2z"></path> 
-                <path d="M23.71 8.817c.44.438.372 1.212-.148 1.732l-7.835 7.84c-.07.068-.148.126-.227.173l-2.382 1.317c-.33.183-.7.152-.927-.075-.226-.227-.25-.603-.07-.923l1.328-2.373c.042-.085.1-.153.162-.216 0-.012.007-.018.007-.018l7.835-7.84c.52-.52 1.294-.587 1.73-.15l.53.53z"></path>
-            </svg>
-            Salvar Rascunho
-        </button>
-        <button type="submit" name="commit" value="submit" class="inline-flex items-center px-5 py-2 bg-blue-700 text-white rounded-md text-sm font-semibold hover:bg-blue-800 focus:outline-none focus:ring-2 focus:ring-blue-400">
-            <svg class="w-4 h-4 mr-2" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
-                <path stroke-linecap="round" stroke-linejoin="round" d="M14 5l7 7m0 0l-7 7m7-7H3"/>
-            </svg>
-            Enviar Relatório
-        </button>
-    </div>
-  </section>
-</div>
+<% end %>

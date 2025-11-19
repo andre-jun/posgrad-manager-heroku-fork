@@ -4,8 +4,8 @@ class ReportsController < ApplicationController
   before_action :check_permissions, only: %i[ create ]
 
   def show
-    @reports_returned = @report.report_infos.where(owner: "Administrator")
-    @reports_pending = @report.report_infos.excluding(@reports_returned)
+    @reports_done = @report.report_infos.where(owner: "Administrator")  # add "ou archived" pra filtrar melhor
+    @reports_pending = @report.report_infos.excluding(@reports_done).where.not(status: "Archived")  # aí da pra remover esse .where.not()
   end
 
   def index
@@ -68,7 +68,7 @@ class ReportsController < ApplicationController
   private
 
   def set_report
-    @report = Report.find_by(params[:id])
+    @report = Report.find(params[:id])
   end
 
   # TODO: edit these + add other report controllers

@@ -36,7 +36,7 @@ class ContactInfosController < ApplicationController
   private
 
   def set_contact_info
-    @contact_info = ContactInfo.find_by(params[:id])
+    @contact_info = ContactInfo.find(params[:id])
   end
 
   def contact_info_params

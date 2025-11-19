@@ -18,10 +18,10 @@
     </div>
 
     <!-- deixa conseguir esconder isso aqui -->
-    <h2 class="text-lg font-bold"> Alunos que responderam (<%= @reports_returned&.count %>/<%= @report.report_infos&.count %>): </h2>
+    <h2 class="text-lg font-bold"> Alunos que responderam (<%= @reports_done&.count %>/<%= @report.report_infos&.count %>): </h2>
     <div class="outline spacing-y-3">
-        <% if @reports_returned.any? %>
-            <%= render partial: "/administrators/detailed_info/reports_info", collection: @reports_returned, as: :report %>
+        <% if @reports_done.any? %>
+            <%= render partial: "/administrators/detailed_info/reports_info", collection: @reports_done, as: :report %>
         <% else %>
             <p class="text-gray-500 italic">Nenhuma resposta ainda.</p>
         <% end %>

@@ -7,12 +7,15 @@ class AdministratorsController < ApplicationController
   before_action :set_reports, only: %i[home]
   before_action :set_pending_reports, only: %i[home]
 
+  def home
+  end
+
   def show
   end
 
   def update
     if @administrator.update(administrator_params)
-      redirect_to administrator_home_path, notice: 'Profile was successfully updated!'
+      redirect_to adm_home_path, notice: 'Profile was successfully updated!'
     else
       render :home, status: :unprocessable_entity
     end
@@ -31,6 +34,15 @@ class AdministratorsController < ApplicationController
                margin: { top: 10, bottom: 10, left: 10, right: 10 },
                disposition: 'attachment'
       end
+    end
+  end
+
+  def send_report
+    @send = ReportInfo.find(params[:id])
+    if @send.update(owner: "Student", status: "Archived")
+      redirect_to adm_home_path, notice: 'Relatório avaliado!'
+    else
+      redirect_to adm_home_path, notice: 'Ocorreu algum erro e o relatório não pode ser avaliado.'
     end
   end
 
@@ -53,7 +65,7 @@ class AdministratorsController < ApplicationController
   end
 
   def set_reports
-    @reports = Report.all
+    @reports = Report.all.order(year: :desc, semester: :desc)
   end
 
   def set_pending_reports

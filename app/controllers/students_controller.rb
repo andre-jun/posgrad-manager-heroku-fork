@@ -31,6 +31,15 @@ class StudentsController < ApplicationController
     ProfessorMentorsStudent.create!(student: @student, professor: @professor)
   end
 
+  def send_report
+    @send = ReportInfo.find(params[:id])
+    if @send.update(owner: "Professor", date_sent: Date.current, status: "Sent")
+      redirect_to student_home_path, notice: 'Relatório enviado!'
+    else
+      redirect_to student_home_path, notice: 'Ocorreu algum erro e o relatório não pode ser enviado.'
+    end
+  end
+
   def calculate_credits
     @courses = Course.where(id: TakesOnCourse.where(student: @student).pluck(:course_id))
     @credits = @courses.sum { |course| course.credits.to_i }

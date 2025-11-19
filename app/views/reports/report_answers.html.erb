@@ -4,9 +4,15 @@
     <%= link_to "home", adm_home_path, class: "border border-red-500" %>
     </div>
 
-    <div>
-        <%= link_to "Dar parecer", "", class: "border border-orange-500" %>
-    </div>
+    <% if @report.status == "Review" %>
+        <p> aqui tbm teria um lugar pra adicionar comentarios do admin </p>
+        <button type="submit" name="commit" value="submit" class="inline-flex items-center px-5 py-2 bg-blue-700 text-white rounded-md text-sm font-semibold hover:bg-blue-800 focus:outline-none focus:ring-2 focus:ring-blue-400">
+            <svg class="w-4 h-4 mr-2" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" d="M14 5l7 7m0 0l-7 7m7-7H3"/>
+            </svg>
+            <%= link_to "Enviar Parecer", administrator_send_report_path(id: @report.id), data: { confirm: "Are you sure?", turbo_confirm: "Are you sure?" } %>
+        </button>
+    <% end %>
 
     <div class="outline spacing-3-y">
         <h1> Info </h1>

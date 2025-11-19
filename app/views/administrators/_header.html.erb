@@ -18,7 +18,7 @@
   </button>
   <div class="text-right text-xs text-gray-500">
     <p>Logado como:</p>
-    <p class="font-semibold text-blue-700"><%= @administrator.user.name || 'N/a'%></p>
+    <p class="font-semibold text-blue-700"><%= @administrator&.user&.name || 'N/A' %></p>
   </div>
 
   <%= link_to 'Editar Perfil', edit_admin_administrator_path(@administrator), data: { turbo: false }, class: "bg-blue-600 hover:bg-blue-700 text-white text-sm font-semibold px-4 py-2 rounded-md" %>
