@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[8.1].define(version: 2025_11_17_214443) do
+ActiveRecord::Schema[8.1].define(version: 2025_11_20_215655) do
   create_table "administrators", force: :cascade do |t|
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
@@ -91,14 +91,14 @@ ActiveRecord::Schema[8.1].define(version: 2025_11_17_214443) do
     t.string "coordinator_comments"
     t.datetime "created_at", null: false
     t.date "date_sent"
-    t.string "owner", default: "Student"    # Outros são "Professor" e "Administrator"
+    t.string "owner", default: "Student"
     t.string "professor_comments"
     t.integer "report_id", null: false
     t.string "review_administrator", default: "Pendente"
     t.datetime "review_date"
     t.string "review_professor", default: "Pendente"
     t.integer "reviewer_id"
-    t.string "status", default: "Draft"   # Outros são "Sent"(professor), "Review"(admin), "Archived"(retornou ao student)
+    t.string "status", default: "Draft"
     t.integer "student_id", null: false
     t.datetime "updated_at", null: false
     t.index ["report_id", "student_id"], name: "index_report_infos_on_report_id_and_student_id", unique: true
@@ -147,6 +147,7 @@ ActiveRecord::Schema[8.1].define(version: 2025_11_17_214443) do
     t.string "current_sign_in_ip"
     t.string "email", default: ""
     t.string "encrypted_password"
+    t.boolean "first_login", default: false
     t.datetime "last_sign_in_at"
     t.string "last_sign_in_ip"
     t.string "login_id"

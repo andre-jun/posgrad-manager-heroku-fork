@@ -11,10 +11,9 @@ module Admin
       ActiveRecord::Base.transaction do
         @user = User.new(user_params)
 
-        if @user.password.blank?
-          @user.password = @user.nusp
-          @user.password_confirmation = @user.nusp
-        end
+        @user.first_login = true
+        @user.password = @user.nusp
+        @user.password_confirmation = @user.nusp
 
         @user.save!
 
@@ -55,11 +54,7 @@ module Admin
 
     def professor_params
       params.require(:professor).permit(
-        :research_area,
-        :department,
-        :user_id,
-        :publications_count,
-        :students_count
+        :department
       )
     end
 
@@ -69,10 +64,7 @@ module Admin
         :surname,
         :email,
         :nusp,
-        :pronoun,
-        :status,
-        :password,
-        :password_confirmation
+        :status
       )
     end
   end

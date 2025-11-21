@@ -1,5 +1,7 @@
 Rails.application.routes.draw do
-  #Depois a gente tem que reorganizar aqui tudo
+  # Depois a gente tem que reorganizar aqui tudo
+
+  resource :complete_registration, only: %i[show update]
 
   namespace :admin do
     resources :students,       only: %i[new create edit update]
@@ -36,7 +38,6 @@ Rails.application.routes.draw do
   get 'professor_send_report', to: 'professors#send_report', as: 'professor_send_report'
   get 'administrator_send_report', to: 'administrators#send_report', as: 'administrator_send_report'
   # get 'administrator_send_report', to: 'reports#send_report', as: 'administrator_send_report'
-
 
   # esse aqui é só pra simular uma aba, dps vai virar só um parcial eu acho
   get 'professor_report_temp', to: 'professors#temp_report', as: 'prof_temp'
