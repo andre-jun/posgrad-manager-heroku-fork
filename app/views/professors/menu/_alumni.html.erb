@@ -1,0 +1,28 @@
+<!-- aqui fica um menu dos alunos e os dados deles -->
+<div class="rounded-lg bg-white p-4 shadow-sm border border-gray-200 max-h-[420px] overflow-y-auto">
+  <h2 class="font-semibold text-lg mb-4 flex items-center space-x-2">
+    <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 text-gray-700" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="0" stroke-linejoin="round" >
+      <path d="M12 4C9.79 4 8 5.79 8 8C8 10.21 9.79 12 12 12C14.21 12 16 10.21 16 8C16 5.79 14.21 4 12 4Z" fill="#000000"> </path> 
+      <path d="M4 18C4 15.34 9.33 14 12 14C14.67 14 20 15.34 20 18V20H4V18Z" fill="#000000"></path>
+    </svg>
+    <span>Meus Orientandos</span>
+  </h2>
+  <% if @students.any? %>
+    <%= render partial: "professors/user_info/student", collection: @students, as: :student %>
+  <% else %>
+    <p class="text-gray-500 italic">Nenhum orientando ainda.</p>
+  <% end %>
+</div>
+<!-- Depois divide naquele jeito de conseguir visualizar só o que selecionar, n sei fazer isso // ainda tenho q ver como faz isso-->
+<div class="lg:col-span-2 rounded-lg bg-white p-6 shadow-sm border border-gray-200 min-h-[420px]">
+  <turbo-frame id="student-info-panel">
+    <div class="flex flex-col items-center justify-center h-full text-gray-500">
+      <svg width="60" height="60" xmlns="http://www.w3.org/2000/svg" class="h-20 w-20 mb-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="0" stroke-linejoin="round" stroke-linecap="round">
+        <path d="M12 4C9.79 4 8 5.79 8 8C8 10.21 9.79 12 12 12C14.21 12 16 10.21 16 8C16 5.79 14.21 4 12 4Z" fill="#000000"> </path> 
+        <path d="M4 18C4 15.34 9.33 14 12 14C14.67 14 20 15.34 20 18V20H4V18Z" fill="#000000"></path>
+      </svg>
+      <h3 class="text-lg font-semibold mb-1">Selecione um orientando</h3>
+      <p>Escolha um orientando da lista para ver seus detalhes e histórico acadêmico</p>
+    </div>
+  </turbo-frame>
+</div>

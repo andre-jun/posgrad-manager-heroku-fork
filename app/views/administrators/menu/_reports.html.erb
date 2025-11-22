@@ -1,0 +1,23 @@
+<div>
+    ----------- RELATÓRIOS ------------
+</div>
+
+<div>
+    <!-- > Menu pra criar relatorio novo vai ficar aqui < -->
+    <p>
+        <%= link_to "Criar relatório", new_report_options_path, class:"text-red-500 border border-red-500 hover:bg-red-500 hover:text-white px-3 py-1 rounded text-xs" %>
+    </p>
+    -------------------------
+</div>
+
+<div class="space-y-3">
+    <p> Relatórios </p>
+    <!-- Adicionar um jeito de filtrar os reports aqui -->
+    <!-- Por status, orientador, aluno, período -->
+    <!-- Mesma coisa para filtros (e com ano/semestre aqui tbm) -->
+    <% if @reports.any? %>
+        <%= render partial: "/administrators/detailed_info/reports", collection: @reports, as: :report %>
+    <% else %>
+        <p class="text-gray-500 italic">Nenhum relatório ainda.</p>
+    <% end %>
+</div>

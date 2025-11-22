@@ -1,0 +1,7 @@
+<div class="outline border border-red-500 hover:bg-red-500 p-3">
+    <!-- seria mais legal ser "link_to" aqui, mas n tava conseguindo fazer "method: :post" funcionar -->
+    <%= button_to copy_and_create_path(id: report.id) do %>
+        <p> Data: <%= report.year %> / <%= report.semester %>o Sem. </p>
+    <% end %>
+    <%= link_to "editar esse", edit_report_path(report) %>
+</div>

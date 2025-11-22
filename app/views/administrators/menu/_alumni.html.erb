@@ -1,0 +1,24 @@
+<div class="p-6 bg-white rounded-lg border border-gray-200">
+  <h2 class="text-blue-700 font-semibold mb-1">Gerenciar Alunos</h2>
+  <p class="text-gray-600 text-sm mb-4">Lista de todos os alunos cadastrados no programa</p>
+  <% if @students.any? %>
+    <div class="rounded-md overflow-hidden border border-blue-300">
+      <table class="w-full table-auto border-collapse text-left text-sm rounded-md">
+        <thead>
+          <tr class="bg-blue-100 rounded-t-md">
+            <th class="border-b border-gray-300 px-3 py-2 font-semibold text-gray-700">Nome</th>
+            <th class="border-b border-gray-300 px-3 py-2 font-semibold text-gray-700">E-mail</th>
+            <th class="border-b border-gray-300 px-3 py-2 font-semibold text-gray-700">Nº USP</th>
+            <th class="border-b border-gray-300 px-3 py-2 font-semibold text-gray-700">Curso</th>
+            <th class="border-b border-gray-300 px-3 py-2 font-semibold text-gray-700">Orientador</th>
+            <th class="border-b border-gray-300 px-3 py-2 font-semibold text-gray-700">Status</th>
+            <th class="border-b border-gray-300 px-3 py-2 font-semibold text-gray-700">Ações</th>
+          </tr>
+        </thead>
+        <%= render partial: "/administrators/detailed_info/student", collection: @students, as: :student %>
+      </table>
+    </div>
+  <% else %>
+    <p class="text-gray-500 italic">Nenhum aluno ainda.</p>
+  <% end %>
+</div>

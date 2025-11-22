@@ -1,0 +1,19 @@
+<% if notice %>
+  <div class="bg-green-100 border border-green-400 text-green-700 px-4 py-2 rounded mb-4">
+    <%= notice %>
+  </div>
+<% end %>
+
+<div class="min-h-screen bg-gray-50 p-6 font-sans text-gray-800">
+  <header class="flex items-center justify-between mb-6">
+    <%= render "header", professor: @professor %>
+  </header>
+
+  <section class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-6 mb-6">
+    <%= render "professors/menu/stats", professor: @professor %>
+  </section>
+
+  <div class="grid grid-cols-1 lg:grid-cols-3 gap-6">
+    <%= render "/professors/menu/alumni", professor: @professor %>
+  </div>
+</div>

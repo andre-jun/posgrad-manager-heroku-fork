@@ -1,0 +1,45 @@
+<!-- aqui é a view que mostra a ReportInfo + renderiza as respostas em si -->
+<div class="p-3 flex-column space-y-4">
+    <div>
+    <%= link_to "home", adm_home_path, class: "border border-red-500" %>
+    </div>
+
+    <% if @report.status == "Review" %>
+        <p> aqui tbm teria um lugar pra adicionar comentarios do admin </p>
+        <button type="submit" name="commit" value="submit" class="inline-flex items-center px-5 py-2 bg-blue-700 text-white rounded-md text-sm font-semibold hover:bg-blue-800 focus:outline-none focus:ring-2 focus:ring-blue-400">
+            <svg class="w-4 h-4 mr-2" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" d="M14 5l7 7m0 0l-7 7m7-7H3"/>
+            </svg>
+            <%= link_to "Enviar Parecer", administrator_send_report_path(id: @report.id), data: { confirm: "Are you sure?", turbo_confirm: "Are you sure?" } %>
+        </button>
+    <% end %>
+
+    <div class="outline spacing-3-y">
+        <h1> Info </h1>
+        <p> Aluno: <%= @report.student.user.name %> <%= @report.student.user.surname %> </p>
+        <p> Data de Envio: <%= @report.date_sent %> </p>
+        <!-- super otimizado confia -->
+        <p> Orientador: <%= Professor.find_by(id: @report.reviewer_id).user.name %> <%= Professor.find_by(id: @report.reviewer_id).user.surname %> </p>
+        <p> Status: <%= @report.status %> </p>
+        <p> Responsável: <%= @report.owner %> </p>
+        <p> Data da Avaliação: <%= @report.review_date&.strftime("%d de %B, %Y") %> </p>
+    </div>
+
+    <p class="text-red-500"> Questões obrigatórias não respondidas </p>
+    <!-- [Bookmark]: adicionar envio de email de aviso aqui nesse botão -->
+    <%= link_to "Notificar aluno para responder", "", class: "border border-purple-500"%>
+    <div class="outline spacing-3-y">
+        <% if @r_unanswereds.any? %>
+            <%= render partial: "report_unanswered", collection: @r_unanswereds, as: :report %>
+        <% end %>
+    </div>
+
+    <p class="text-green-500"> Questões respondidas </p>
+    <div class="outline spacing-3-y">
+        <% if @r_answers.any? %>
+            <%= render partial: "report_qa", collection: @r_answers, as: :report %>
+        <% else %>
+            <p class="text-gray-500 italic">Nenhuma resposta ainda.</p>
+        <% end %>
+    </div>
+</div>

@@ -1,0 +1,34 @@
+<div class="flex space-x-2 bg-gray-100 rounded-md overflow-hidden text-sm font-medium text-gray-600 mt-2">
+    <% tabs = {
+            'geral' => { label: 'Visão Geral', color: 'blue' },
+            'academico' => { label: 'Acadêmico', color: 'orange' },
+            'historico' => { label: 'Histórico', color: 'purple' }
+        } %>
+
+        <% color_classes = {
+            "blue" => {
+                active: "bg-blue-600 text-white shadow flex-1 py-2 px-4 rounded-l-md shadow-inner text-center",
+                inactive: "bg-blue-50 text-blue-700 hover:bg-blue-100 flex-1 py-2 px-4 rounded-l-md shadow-inner text-center"
+            },
+            "orange" => {
+                active: "bg-orange-600 text-white shadow flex-1 py-2 px-4 rounded-l-md shadow-inner text-center",
+                inactive: "bg-orange-50 text-orange-700 hover:bg-orange-100 flex-1 py-2 px-4 rounded-l-md shadow-inner text-center"
+            },
+            "purple" => {
+                active: "bg-purple-600 text-white shadow flex-1 py-2 px-4 rounded-l-md shadow-inner text-center",
+                inactive: "bg-purple-50 text-purple-700 hover:bg-purple-100 flex-1 py-2 px-4 rounded-l-md shadow-inner text-center"
+            }
+        } %>
+
+        <% tabs.each do |key, tab| %>
+            <% color = tab[:color] %>
+            <% active_tab = params[:tab].presence || "geral" %>
+            <% classes = active_tab == key ? color_classes[color][:active] : color_classes[color][:inactive] %>
+
+            <%= link_to url_for(controller: 'professors', action: 'student_info', id: student.id, tab: key),
+                data: { turbo_frame: "student-info-panel" },
+                class: "px-4 py-2 rounded-md font-medium text-sm transition-colors duration-150 #{classes}" do %>
+                <%= tab[:label] %>
+            <% end %>
+        <% end %>
+</div>

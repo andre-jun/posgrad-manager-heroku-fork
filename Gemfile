@@ -1,67 +1,61 @@
-source "https://rubygems.org"
+source 'https://rubygems.org'
 
-ruby "3.0.2"
+gem 'propshaft'
+gem 'rails', '~> 8.1.0'
 
-# Bundle edge Rails instead: gem "rails", github: "rails/rails", branch: "main"
-gem "rails", "~> 7.1.5", ">= 7.1.5.2"
+# Desenvolvimento e Teste com SQLite
+group :development, :test do
+  gem 'sqlite3', '>= 2.1'
+end
 
-# The original asset pipeline for Rails [https://github.com/rails/sprockets-rails]
-gem "sprockets-rails"
+# Produção com Postgres (Heroku)
+group :production do
+  gem 'pg'
+end
 
-# Use sqlite3 as the database for Active Record
-gem "sqlite3", ">= 1.4"
+gem 'importmap-rails'
+gem 'jbuilder'
+gem 'puma', '>= 5.0'
+gem 'stimulus-rails'
+gem 'turbo-rails'
 
-# Use the Puma web server [https://github.com/puma/puma]
-gem "puma", ">= 5.0"
+gem 'devise', github: 'heartcombo/devise', branch: 'main'
 
-# Use JavaScript with ESM import maps [https://github.com/rails/importmap-rails]
-gem "importmap-rails"
+gem 'tzinfo-data', platforms: %i[windows jruby]
 
-# Hotwire's SPA-like page accelerator [https://turbo.hotwired.dev]
-gem "turbo-rails"
+gem 'solid_cable'
+gem 'solid_cache'
+gem 'solid_queue'
 
-# Hotwire's modest JavaScript framework [https://stimulus.hotwired.dev]
-gem "stimulus-rails"
+gem 'bootsnap', require: false
+gem 'thruster', require: false
 
-# Build JSON APIs with ease [https://github.com/rails/jbuilder]
-gem "jbuilder"
+gem 'active_storage_validations'
+gem 'image_processing', '~> 1.2'
+gem 'rails_autolink'
 
-# Use Redis adapter to run Action Cable in production
-# gem "redis", ">= 4.0.1"
-
-# Use Kredis to get higher-level data types in Redis [https://github.com/rails/kredis]
-# gem "kredis"
-
-# Use Active Model has_secure_password [https://guides.rubyonrails.org/active_model_basics.html#securepassword]
-# gem "bcrypt", "~> 3.1.7"
-
-# Windows does not include zoneinfo files, so bundle the tzinfo-data gem
-gem "tzinfo-data", platforms: %i[ mswin mswin64 mingw x64_mingw jruby ]
-
-# Reduces boot times through caching; required in config/boot.rb
-gem "bootsnap", require: false
-
-# Use Active Storage variants [https://guides.rubyonrails.org/active_storage_overview.html#transforming-images]
-# gem "image_processing", "~> 1.2"
+gem 'tailwindcss-rails', '~> 4.4'
+gem 'wicked_pdf'
+# gem 'wkhtmltopdf-binary'
+gem "deep_cloneable"
 
 group :development, :test do
-  # See https://guides.rubyonrails.org/debugging_rails_applications.html#debugging-with-the-debug-gem
-  gem "debug", platforms: %i[ mri mswin mswin64 mingw x64_mingw ]
+  gem 'brakeman', require: false
+  gem 'debug', platforms: %i[mri windows], require: 'debug/prelude'
+  gem 'factory_bot_rails'
+  gem 'rubocop-rails-omakase', require: false
 end
 
 group :development do
-  # Use console on exceptions pages [https://github.com/rails/web-console]
-  gem "web-console"
-
-  # Add speed badges [https://github.com/MiniProfiler/rack-mini-profiler]
-  # gem "rack-mini-profiler"
-
-  # Speed up commands on slow machines / big apps [https://github.com/rails/spring]
-  # gem "spring"
+  gem 'web-console'
 end
 
 group :test do
-  # Use system testing [https://guides.rubyonrails.org/testing.html#system-testing]
-  gem "capybara"
-  gem "selenium-webdriver"
+  gem 'capybara'
+  gem 'cucumber'
+  gem 'database_cleaner-active_record'
+  gem 'rails-controller-testing'
+  gem 'rspec-rails'
+  gem 'selenium-webdriver'
+  gem 'shoulda-matchers', '~> 6.0'
 end

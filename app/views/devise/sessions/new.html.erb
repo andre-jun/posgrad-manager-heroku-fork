@@ -1,0 +1,51 @@
+<div class="min-h-screen flex flex-col justify-center items-center bg-gradient-to-br from-blue-50 to-white px-4">
+  <div class="flex flex-col items-center mb-10">
+    <div class="rounded-full p-4 mb-4">
+      <%= image_tag "Logo_EACH-USP.svg", class: "h-30 w-20" %>
+    </div>
+    <h1 class="text-xl text-blue-700 font-semibold">
+      Sistema PPgSI <span class="text-red-600 font-normal">EACH-USP</span>
+    </h1>
+    <p class="text-gray-600 mt-1">Faça login para acessar o sistema</p>
+  </div>
+
+  <div class="w-full max-w-md bg-white border border-blue-300 rounded-lg p-6 shadow-sm">
+    <h2 class="flex items-center text-blue-700 font-medium mb-2">
+      <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 mr-1" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+        <path stroke-linecap="round" stroke-linejoin="round" d="M13 7l5 5m0 0l-5 5m5-5H6" />
+      </svg>
+      Acesso ao Sistema
+    </h2>
+    <p class="text-gray-500 mb-4">Digite suas credenciais institucionais</p>
+
+    <%= form_for(resource, as: resource_name, url: session_path(resource_name)) do |f| %>
+      <div class="mb-4">
+        <%= f.label :login, "E-mail ou Nusp", class: "block text-sm font-semibold text-gray-700 mb-1" %>
+        <%= f.text_field :login, autofocus: true, autocomplete: "email", placeholder: "seu.email@usp.br ou Nusp", class: "w-full px-3 py-2 border border-blue-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent" %>
+      </div>
+
+      <div class="mb-6">
+        <%= f.label :password, "Senha", class: "block text-sm font-semibold text-gray-700 mb-1" %>
+        <%= f.password_field :password, autocomplete: "current-password", placeholder: "Digite sua senha", class: "w-full px-3 py-2 border border-blue-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent" %>
+      </div>
+
+      <% if devise_mapping.rememberable? %>
+        <div class="flex items-center mb-6">
+          <%= f.check_box :remember_me, class: "h-4 w-4 text-blue-600 focus:ring-blue-500 border-gray-300 rounded" %>
+          <%= f.label :remember_me, "Lembrar-me", class: "ml-2 block text-sm text-gray-700" %>
+        </div>
+      <% end %>
+
+      <div>
+        <%= f.submit "Entrar", class: "w-full bg-blue-600 text-white rounded-md py-2 hover:bg-blue-700 transition" %>
+      </div>
+    <% end %>
+  </div>
+
+  <p class="text-gray-500 text-sm mt-6 max-w-md text-center">
+    Problemas para acessar?<br>
+    Entre em contato com a coordenação do programa<br>
+    Temporario, tem q ver como vai fazer aqui
+    <%= render "devise/shared/links" %>
+  </p>
+</div>

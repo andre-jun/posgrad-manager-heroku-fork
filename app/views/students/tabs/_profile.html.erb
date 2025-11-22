@@ -1,0 +1,24 @@
+<section class="flex items-center justify-between bg-white border border-blue-200 rounded-md px-4 py-3 shadow-sm">
+    <div class="flex items-center space-x-4">
+    <div class="bg-blue-600 text-white rounded-full w-12 h-12 flex items-center justify-center font-semibold uppercase">
+        <%= student.user.name.capitalize[0] || 'N/A' %>
+    </div>
+    <div>
+        <h2 class="font-semibold text-lg text-blue-900"><%= student.user.name + " " + student.user.surname  || 'N/A' %></h2>
+        <p class="text-sm text-gray-700">
+        <% if @student.program_level == "Doutorado" %>
+            Doutorando 
+        <% else %>
+            Mestrando 
+        <% end %> - PPgSI EACH-USP
+        </p>
+    </div>
+    <span class="ml-4 inline-block px-3 py-1 rounded-full bg-green-100 text-green-700 text-xs font-semibold">Perfil Completo</span>
+    </div>
+    <%= link_to 'Editar Perfil', edit_student_path(@student), data: { turbo: false }, class: "bg-blue-600 hover:bg-blue-700 text-white text-sm font-semibold px-4 py-2 rounded-md" %>
+</section>
+<div>
+    <%= render "/students/menu/info", student: @student %>
+    <%= render "/students/menu/report_notice", student: @student %>
+    <%= render "/students/tabs/history", student: @student %>
+</div>
