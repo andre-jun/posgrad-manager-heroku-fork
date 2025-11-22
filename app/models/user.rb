@@ -1,8 +1,13 @@
 class User < ApplicationRecord
   # Include default devise modules. Others available are:
   # :confirmable, :lockable, :timeoutable, :trackable and :omniauthable
+  attr_accessor :login
+
   devise :database_authenticatable, :registerable,
-         :recoverable, :rememberable, :validatable
+         :recoverable, :rememberable, authentication_keys: [:login]
+
+  validates :nusp, presence: true, uniqueness: true
+  validates :email, uniqueness: true, allow_nil: true
 
   # esses daqui tem que ser excludentes
   has_one :administrator
@@ -31,5 +36,14 @@ class User < ApplicationRecord
 
   def student?
     student.present?
+  end
+
+  def self.find_for_database_authentication(warden_conditions)
+    conditions = warden_conditions.dup
+    login = conditions.delete(:login)
+
+    where(conditions).where(
+      ['nusp = :value OR email = :value', { value: login }]
+    ).first
   end
 end

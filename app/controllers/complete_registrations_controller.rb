@@ -7,6 +7,10 @@ class CompleteRegistrationsController < ApplicationController
     @user = current_user
     @user.build_professor if @user.professor.nil? && params[:role] == 'professor'
     @user.build_student if @user.student.nil? && params[:role] == 'student'
+
+    respond_to do |format|
+      format.html
+    end
   end
 
   def update

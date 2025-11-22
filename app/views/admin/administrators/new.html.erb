@@ -1,11 +1,27 @@
-<% content_for :title, "Novo Administrador" %>
+<h1 class="text-2xl font-semibold mb-6">Criar Administrador</h1>
 
-<h1 class="text-3xl font-bold mb-6 text-center">Novo Administrador</h1>
+<%= form_with model: @administrator,
+              url: admin_administrators_path,
+              local: true do |f| %>
 
-<div class="max-w-3xl mx-auto bg-white shadow-md rounded-lg p-6 mb-6">
-  <%= render "form", administrator: @administrator, user: @user %>
-</div>
+  <div class="mb-4">
+    <%= f.label :professor_id, "Selecione um professor", class: "block mb-1 font-medium" %>
 
-<div class="flex justify-center">
-  <%= link_to "Voltar ao painel", adm_home_path, class: "bg-gray-200 hover:bg-gray-300 text-gray-800 font-medium px-4 py-2 rounded shadow transition duration-200" %>
-</div>
+    <%= f.collection_select :professor_id,
+                            @professors,
+                            :id,
+                            :full_name,
+                            { prompt: "Escolha um professor" },
+                            class: "border rounded px-3 py-2 w-full" %>
+  </div>
+
+  <div class="space-x-4">
+    <%= f.submit "Criar",
+        class: "px-4 py-2 bg-green-600 text-white rounded" %>
+
+    <%= link_to "Cancelar",
+        adm_home_path,
+        class: "px-4 py-2 bg-gray-400 text-white rounded" %>
+  </div>
+
+<% end %>

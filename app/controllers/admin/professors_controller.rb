@@ -11,7 +11,7 @@ module Admin
       ActiveRecord::Base.transaction do
         @user = User.new(user_params)
 
-        @user.first_login = true
+        @user.first_login = false
         @user.password = @user.nusp
         @user.password_confirmation = @user.nusp
 

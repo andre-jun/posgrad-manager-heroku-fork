@@ -1,32 +1,29 @@
 module Admin
   class AdministratorsController < Admin::BaseController
-    before_action :set_administrator, only: %i[edit update]
+    before_action :set_administrator, only: %i[edit update destroy]
+
+    def index
+      @administrators = Administrator.includes(user: :professor)
+    end
 
     def new
       @administrator = Administrator.new
-      @user = User.new
+      load_professors
     end
 
     def create
-      ActiveRecord::Base.transaction do
-        @user = User.new(user_params)
+      professor = Professor.find(admin_params[:professor_id])
+      user = professor.user
 
-        if @user.password.blank?
-          @user.password = @user.nusp
-          @user.password_confirmation = @user.nusp
-        end
+      @administrator = Administrator.new(user: user)
 
-        @user.save!
-
-        @administrator = Administrator.new(user: @user)
-        @administrator.save!
+      if @administrator.save
+        redirect_to adm_home_path, notice: 'Administrador criado com sucesso!'
+      else
+        load_professors
+        flash.now[:alert] = @administrator.errors.full_messages.to_sentence
+        render :new, status: :unprocessable_entity
       end
-
-      redirect_to adm_home_path, notice: 'Administrador criado com sucesso!'
-    rescue StandardError => e
-      flash.now[:alert] = "Erro: #{e.message}"
-      @administrator ||= Administrator.new
-      render :new, status: :unprocessable_entity
     end
 
     def edit
@@ -34,16 +31,19 @@ module Admin
     end
 
     def update
-      @user = @administrator.user
-
-      ActiveRecord::Base.transaction do
-        @user.update!(user_params)
+      if @administrator.update(update_params)
+        redirect_to adm_home_path, notice: 'Administrador atualizado!'
+      else
+        flash.now[:alert] = @administrator.errors.full_messages.to_sentence
+        render :edit, status: :unprocessable_entity
       end
+    end
 
-      redirect_to adm_home_path, notice: 'Administrador atualizado!'
+    def destroy
+      @administrator.destroy
+      redirect_to adm_home_path, notice: 'Administrador removido com sucesso!'
     rescue StandardError => e
-      flash.now[:alert] = "Erro: #{e.message}"
-      render :edit, status: :unprocessable_entity
+      redirect_to adm_home_path, alert: "Erro ao remover administrador: #{e.message}"
     end
 
     private
@@ -52,17 +52,18 @@ module Admin
       @administrator = Administrator.find(params[:id])
     end
 
-    def user_params
-      params.require(:user).permit(
-        :name,
-        :surname,
-        :email,
-        :nusp,
-        :pronoun,
-        :status,
-        :password,
-        :password_confirmation
-      )
+    def load_professors
+      current_admin_user_ids = Administrator.pluck(:user_id)
+      @professors = Professor.includes(:user)
+                             .where.not(user_id: current_admin_user_ids)
+    end
+
+    def admin_params
+      params.require(:administrator).permit(:professor_id)
+    end
+
+    def update_params
+      params.require(:administrator).permit
     end
   end
 end
