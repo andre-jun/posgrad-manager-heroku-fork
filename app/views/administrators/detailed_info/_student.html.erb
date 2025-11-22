@@ -32,7 +32,7 @@
           </svg>
         <% end %>
 
-        <%= link_to "https://www.youtube.com/watch?v=2_opjVlYhi4", class: "inline-flex items-center justify-center w-8 h-8 rounded-md border border-gray-300 hover:bg-gray-100 text-gray-600 hover:text-gray-900 transition", title: "Editar" do %>
+        <%= link_to edit_admin_student_path(student), data: { turbo: false }, class: "inline-flex items-center justify-center w-8 h-8 rounded-md border border-gray-300 hover:bg-gray-100 text-gray-600 hover:text-gray-900 transition", title: "Editar" do %>
           <span class="sr-only">Editar</span>
           <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" viewBox="0 0 24 24" fill="currentColor">
             <path d="M8 6H5c-.553 0-1-.448-1-1s.447-1 1-1h3c.553 0 1 .448 1 1s-.447 1-1 1zM13 10H5c-.553 0-1-.448-1-1s.447-1 1-1h8c.553 0 1 .448 1 1s-.447 1-1 1zM13 14H5c-.553 0-1-.448-1-1s.447-1 1-1h8c.553 0 1 .448 1 1s-.447 1-1 1z"></path> 

@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[8.1].define(version: 2025_11_20_215655) do
+ActiveRecord::Schema[8.1].define(version: 2025_11_22_141328) do
   create_table "administrators", force: :cascade do |t|
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
@@ -145,7 +145,7 @@ ActiveRecord::Schema[8.1].define(version: 2025_11_20_215655) do
     t.datetime "created_at", null: false
     t.datetime "current_sign_in_at"
     t.string "current_sign_in_ip"
-    t.string "email", default: ""
+    t.string "email"
     t.string "encrypted_password"
     t.boolean "first_login", default: false
     t.datetime "last_sign_in_at"

@@ -11,10 +11,9 @@ module Admin
       ActiveRecord::Base.transaction do
         @user = User.new(user_params)
 
-        if @user.password.blank?
-          @user.password = @user.nusp
-          @user.password_confirmation = @user.nusp
-        end
+        @user.first_login = false
+        @user.password = @user.nusp
+        @user.password_confirmation = @user.nusp
 
         @user.save!
 
@@ -49,7 +48,7 @@ module Admin
 
     private
 
-    def student
+    def set_student
       @student = Student.find(params[:id])
     end
 

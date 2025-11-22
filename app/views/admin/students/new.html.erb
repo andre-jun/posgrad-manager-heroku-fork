@@ -1,11 +1,36 @@
-<% content_for :title, "New student" %>
+<div class="max-w-xl mx-auto p-6 bg-white rounded-xl shadow-md space-y-4">
 
-<h1 class="text-3xl font-bold mb-6 text-center">New student</h1>
+  <h2 class="text-2xl font-semibold text-gray-700 mb-4">
+    Criar Novo Aluno
+  </h2>
 
-<div class="max-w-3xl mx-auto bg-white shadow-md rounded-lg p-6 mb-6">
-  <%= render "form", student: @student, user: @user %>
-</div>
+  <% if flash[:alert] %>
+    <div class="p-3 mb-4 rounded bg-red-100 text-red-700">
+      <%= flash[:alert] %>
+    </div>
+  <% end %>
 
-<div class="flex justify-center">
-  <%= link_to "Back to feed", root_path, class: "bg-gray-200 hover:bg-gray-300 text-gray-800 font-medium px-4 py-2 rounded shadow transition duration-200" %>
+  <%= form_with model: @student, url: admin_students_path, local: true do |f| %>
+
+    <div class="space-y-1">
+      <%= label_tag "user[nusp]", "NUSP", class: "block font-medium text-gray-700" %>
+      <%= number_field_tag "user[nusp]", nil,
+            class: "w-full p-2 border border-gray-300 rounded-lg",
+            required: true %>
+    </div>
+
+    <div class="space-y-1 mt-4">
+      <%= f.label :program_level, "Nível do Programa", class: "block font-medium text-gray-700" %>
+      <%= f.select :program_level,
+            [["Mestrado"], ["Doutorado"]],
+            {}, class: "w-full p-2 border border-gray-300 rounded-lg" %>
+    </div>
+
+    <div class="mt-6">
+      <%= f.submit "Criar Aluno",
+            class: "w-full bg-blue-600 hover:bg-blue-700 text-white py-2 rounded-lg cursor-pointer" %>
+    </div>
+
+  <% end %>
+
 </div>
