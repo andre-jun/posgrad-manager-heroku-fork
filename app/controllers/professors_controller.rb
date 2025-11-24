@@ -1,6 +1,6 @@
 class ProfessorsController < ApplicationController
   before_action :authenticate_user!
-  before_action :set_professor, only: %i[home show edit update]
+  before_action :set_professor, only: %i[home edit update]
   before_action :check_permissions, only: %i[home edit]
   before_action :set_students, only: %i[home]
 
@@ -12,6 +12,11 @@ class ProfessorsController < ApplicationController
   def home
     @reports_due = Report.where(id: ReportInfo.where(owner: "Professor",reviewer_id: @professor.id).pluck(:report_id))
     @next_due_date = @reports_due&.order(due_date_professor: :asc)&.first&.due_date_professor
+    # tem que filtrar pro estudante especifico esse aqui de baixo V
+    @report_due_student = Report.where(id: ReportInfo.where(owner: "Student", reviewer_id: @professor.id).pluck(:report_id))
+    @next_due_date_student  = @report_due_student&.order(due_date_student: :asc)&.first&.due_date_student
+    # esse aqui tambem falta filtrar V
+    @reproval_count = ReportInfo.where(student: Student.first, review_administrator: "Adequado com Ressalvas" || "Insatisfatório").count
   end
 
   def temp_report
@@ -19,6 +24,7 @@ class ProfessorsController < ApplicationController
   end
 
   def show
+    @professor = Professor.find(params[:id])
   end
 
   def edit

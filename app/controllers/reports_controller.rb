@@ -4,8 +4,25 @@ class ReportsController < ApplicationController
   before_action :check_permissions, only: %i[ create ]
 
   def show
-    @reports_done = @report.report_infos.where(owner: "Administrator")  # add "ou archived" pra filtrar melhor
-    @reports_pending = @report.report_infos.excluding(@reports_done).where.not(status: "Archived")  # aí da pra remover esse .where.not()
+    if current_user.administrator?
+      @reports_done = @report.report_infos # add "ou archived" pra filtrar melhor
+      @reports_to_review = @reports_done.where(owner: "Administrator", review_administrator: "Pendente")
+      @reports_in_progress = @reports_done.where(review_professor: "Pendente")
+      @reports_pending = @report.report_infos.excluding(@reports_to_review).where(status: "Draft")  # aí da pra remover esse .where.not()
+    elsif current_user.professor?
+      # por enquanto igual
+      @reports_done = @report.report_infos.where(owner: "Administrator")
+      @reports_pending = @report.report_infos.excluding(@reports_done).where.not(status: "Archived")
+    else 
+      redirect_to student_show_path
+    end
+  end
+  
+  def student_show
+    @report = Report.find_by(params[:id])
+      # esse aqui assume que não da pra ter enviado >1 pro mesmo relatorio (pelo menos n deveria dar)
+    @report_info = @report.report_infos.where(student: current_user.student).first
+    @r_answers = ReportFieldAnswer.where(report_info: @report_info)
   end
 
   def index

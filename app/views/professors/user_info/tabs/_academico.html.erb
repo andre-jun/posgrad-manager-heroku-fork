@@ -1,21 +1,24 @@
 <div class="max-w-4xl mx-auto bg-white rounded-xl border border-gray-200 p-6 space-y-4 text-gray-900 mt-4">
     <div class="grid grid-cols-2 gap-4">
+
+      <!-- nenhum dos @ ta renderizando?? -->
       <div class="border border-gray-200 rounded p-4 space-y-1">
         <div class="flex items-center space-x-1 text-green-600 font-semibold">
           <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" stroke="currentColor" stroke-width="2"  viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M9 12l2 2 4-4"/></svg>
-          <h3>Exame de Qualificação: Aprovado (EDIT)</h3>
+          <h3>Reprovações passadas</h3>
         </div>
-        <span class="inline-block bg-green-100 text-green-700 text-xs font-semibold rounded px-2 py-0.5">aprovado</span>
+        <!-- muda a cor desse conforme for de 0->3  (verde, amarelo, laranja, vermelho) -->
+        <p class="text text-gray-500"><%= @reproval_count || 0%>/3 </p>
       </div>
 
       <div class="border border-gray-200 rounded p-4 space-y-1">
-        <!-- adicionar as datas do prof e do aluno -->
         <div class="flex items-center space-x-1 text-red-600 font-semibold">
           <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" stroke="currentColor" stroke-width="2"  viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M12 8v4m0 4h.01"/></svg>
-          <h3> Próximo prazo: (edit)</h3>
+          <h3> Próximo prazo:</h3>
         </div>
-        <p class="text-red-600 font-semibold">data (mudar)</p>
-        <p class="text-xs text-gray-500">Relatório Semestral</p>
+        <!-- formata bonitinho aqui -->
+        <p class="text-red-600 font-semibold">Professor: <%= @next_due_date&.strftime("%d/%b/%Y") || "Já entregue" %></p>
+        <p class="text-xs text-gray-500">Aluno: <%= @next_due_date_student || "Já entregue"%> </p>
       </div>
     </div>
   </div>

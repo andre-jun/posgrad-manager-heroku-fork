@@ -1,6 +1,6 @@
 class StudentsController < ApplicationController
   before_action :authenticate_user!
-  before_action :set_student, only: %i[home show edit update change_professor]
+  before_action :set_student, only: %i[home edit update change_professor]
   before_action :check_permissions, only: %i[home edit]
   before_action :set_professor, only: %i[home]
   before_action :list_professors, only: %i[home]
@@ -21,6 +21,7 @@ class StudentsController < ApplicationController
   end
 
   def show
+    @student = Student.find_by(params[:id])
   end
 
   def change_professor

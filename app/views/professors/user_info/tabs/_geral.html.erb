@@ -25,16 +25,6 @@
             <p class="font-semibold"> Nenhum entregue ainda </p>
           <% end %>
         </div>
-
-        <div>
-          <p class="text-sm text-gray-600">Reprovações passadas</p>
-          <!-- editar aqui pra mostrar qnts reprovacoes o aluno ja teve -->
-          <% if @last_report&.exists? %>
-            <p class="font-semibold"><%= @last_report&.semester %>o Sem. <%= @last_report&.year%></p>
-          <% else %>
-            <p class="font-semibold"> Nenhum entregue ainda </p>
-          <% end %>
-        </div>
       </div>
     </div>
 </div>

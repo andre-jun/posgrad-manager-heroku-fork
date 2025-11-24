@@ -18,10 +18,19 @@
     </div>
 
     <!-- deixa conseguir esconder isso aqui -->
-    <h2 class="text-lg font-bold"> Alunos que responderam (<%= @reports_done&.count %>/<%= @report.report_infos&.count %>): </h2>
+    <h2 class="text-lg font-bold"> Alunos que precisam avaliar (<%= @reports_to_review&.count %>/<%= @reports_done&.count %>): </h2>
     <div class="outline spacing-y-3">
-        <% if @reports_done.any? %>
-            <%= render partial: "/administrators/detailed_info/reports_info", collection: @reports_done, as: :report %>
+        <% if @reports_to_review&.any? %>
+            <%= render partial: "/administrators/detailed_info/reports_info", collection: @reports_to_review, as: :report %>
+        <% else %>
+            <p class="text-gray-500 italic">Nenhuma resposta ainda.</p>
+        <% end %>
+    </div>
+    <!-- esse aqui também -->
+    <h2 class="text-lg font-bold"> Alunos com avaliação do professor pendente (<%= @reports_in_progress&.count %>/<%= @report.report_infos&.count %>): </h2>
+    <div class="outline spacing-y-3">
+        <% if @reports_in_progress&.any? %>
+            <%= render partial: "/administrators/detailed_info/reports_info", collection: @reports_in_progress, as: :report %>
         <% else %>
             <p class="text-gray-500 italic">Nenhuma resposta ainda.</p>
         <% end %>
