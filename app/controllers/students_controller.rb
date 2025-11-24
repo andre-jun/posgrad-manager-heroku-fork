@@ -2,7 +2,6 @@ class StudentsController < ApplicationController
   before_action :authenticate_user!
   before_action :set_student, only: %i[home show edit update change_professor]
   before_action :check_permissions, only: %i[home edit]
-  before_action :calculate_credits, only: %i[home]
   before_action :set_professor, only: %i[home]
   before_action :list_professors, only: %i[home]
 
@@ -38,11 +37,6 @@ class StudentsController < ApplicationController
     else
       redirect_to student_home_path, notice: 'Ocorreu algum erro e o relatório não pode ser enviado.'
     end
-  end
-
-  def calculate_credits
-    @courses = Course.where(id: TakesOnCourse.where(student: @student).pluck(:course_id))
-    @credits = @courses.sum { |course| course.credits.to_i }
   end
 
   def edit

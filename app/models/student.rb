@@ -12,8 +12,14 @@ class Student < ApplicationRecord
   # attr_accessible :user_attributes, :contact_info_attributes
 
   def calculate_progress
-    if credits_needed > 0
-      return (100* credits/credits_needed)
+    if user.status == "Graduado"
+      return 100
+    elsif semester > 0
+      if program_level == "Doutorado"
+        return (100* semester/8)
+      else 
+        return (100* semester/4)
+      end
     else
       return 0
     end

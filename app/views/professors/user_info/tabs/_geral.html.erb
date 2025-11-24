@@ -25,15 +25,15 @@
             <p class="font-semibold"> Nenhum entregue ainda </p>
           <% end %>
         </div>
-      </div>
 
-      <div class="mb-3">
-        <div class="flex justify-between text-sm font-medium mb-1">
-          <span>Progresso da Pesquisa</span>
-          <span><%= student.credits %>/<%= student.credits_needed %></span>
-        </div>
-        <div class="w-full h-2 bg-gray-200 rounded-full">
-          <div class="h-2 bg-blue-700 rounded-full" style="width: <%= student.credits %>/<%= student.credits_needed %>;"></div>
+        <div>
+          <p class="text-sm text-gray-600">Reprovações passadas</p>
+          <!-- editar aqui pra mostrar qnts reprovacoes o aluno ja teve -->
+          <% if @last_report&.exists? %>
+            <p class="font-semibold"><%= @last_report&.semester %>o Sem. <%= @last_report&.year%></p>
+          <% else %>
+            <p class="font-semibold"> Nenhum entregue ainda </p>
+          <% end %>
         </div>
       </div>
     </div>

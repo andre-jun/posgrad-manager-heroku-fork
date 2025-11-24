@@ -9,17 +9,17 @@
     <div class="space-y-4" autocomplete="off">
         <div>
             <label for="full_name" class="block text-gray-700 font-semibold mb-1">Nome Completo</label>
-            <p class="w-full border border-gray-300 rounded-md bg-gray-50 px-3 py-2 text-gray-700 text-sm"> <%= student.user.name %> <%= student.user.surname %></p>
+            <p class="w-full border border-gray-300 rounded-md bg-gray-50 px-3 py-2 text-gray-700 text-sm"> <%= student.user&.name %> <%= student.user&.surname %></p>
         </div>
 
         <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
             <div>
                 <label for="email" class="block text-gray-700 font-semibold mb-1">E-mail</label>
-                <p class="w-full border border-gray-300 rounded-md bg-gray-50 px-3 py-2 text-gray-700 text-sm"> <%= student.user.email %> </p>
+                <p class="w-full border border-gray-300 rounded-md bg-gray-50 px-3 py-2 text-gray-700 text-sm"> <%= student.user&.email %> </p>
             </div>
             <div>
                 <label for="usp_number" class="block text-gray-700 font-semibold mb-1">Número USP</label>
-                <p class="w-full border border-gray-300 rounded-md bg-gray-50 px-3 py-2 text-gray-700 text-sm"> <%= student.user.nusp %> </p>
+                <p class="w-full border border-gray-300 rounded-md bg-gray-50 px-3 py-2 text-gray-700 text-sm"> <%= student.user&.nusp %> </p>
             </div>
         </div>
 
@@ -33,28 +33,28 @@
             <div>
                 <label for="curriculum_link" class="block text-gray-700 font-semibold mb-1 flex items-center space-x-1">
                     <span>Currículo Lattes</span>
-                    <%= link_to 'Visualizar Lattes', student.lattes_link, target: "_blank", rel: "noopener", class: "text-blue-600 text-sm underline ml-2" %>
+                    <%= link_to 'Visualizar Lattes', student&.lattes_link, target: "_blank", rel: "noopener", class: "text-blue-600 text-sm underline ml-2" %>
                 </label>
             </div>
             <div>
                 <label for="last_update" class="block text-gray-700 font-semibold mb-1">Última Atualização do Lattes </label>
-                <p class="w-full border border-gray-300 rounded-md bg-gray-50 px-3 py-2 text-gray-700 text-sm"> <%= student.lattes_last_update || 'Missing'%> </p>
+                <p class="w-full border border-gray-300 rounded-md bg-gray-50 px-3 py-2 text-gray-700 text-sm"> <%= student&.lattes_last_update || 'Sem Lattes conectado'%> </p>
             </div>
         </div>
 
         <div>
             <label for="course_type" class="block text-gray-700 font-semibold mb-1">Tipo de Curso </label>
-            <p class="inline-block bg-orange-200 text-orange-700 text-xs px-3 py-1 rounded font-semibold"> <%= student.program_level || 'missing'%> </p>
+            <p class="inline-block bg-orange-200 text-orange-700 text-xs px-3 py-1 rounded font-semibold"> <%= student&.program_level || 'Ainda não definido'%> </p>
         </div>
 
         <div>
             <label for="career_plan" class="block text-gray-700 font-semibold mb-1">Carreira Pretendida após a Defesa</label>
-            <p class="w-full border border-gray-300 rounded-md bg-gray-50 px-3 py-2 text-gray-700 text-sm"> <%= student.pretended_career || 'missing'%> </p>
+            <p class="w-full border border-gray-300 rounded-md bg-gray-50 px-3 py-2 text-gray-700 text-sm"> <%= student&.pretended_career || 'Ainda não definida'%> </p>
         </div>
 
         <div>
             <label for="admission_date" class="block text-gray-700 font-semibold mb-1">Data de Ingresso </label>
-            <p class="w-full border border-gray-300 rounded-md bg-gray-50 px-3 py-2 text-gray-700 text-sm"> <%= student.join_date || 'missing'%> </p>
+            <p class="w-full border border-gray-300 rounded-md bg-gray-50 px-3 py-2 text-gray-700 text-sm"> <%= student&.join_date || 'Ainda não definida'%> </p>
         </div>
     </div>
 </section>
