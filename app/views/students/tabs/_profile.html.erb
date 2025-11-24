@@ -4,7 +4,7 @@
         <%= student.user&.name.capitalize[0] || 'N/A' %>
     </div>
     <div>
-        <h2 class="font-semibold text-lg text-blue-900"><%= student&.user&.name + " " + student&.user&.surname  || 'N/A' %></h2>
+        <h2 class="font-semibold text-lg text-blue-900"><%= student&.user&.name   || 'N/A' %></h2>
         <p class="text-sm text-gray-700">
         <% if @student&.program_level == "Doutorado" %>
             Doutorando 
