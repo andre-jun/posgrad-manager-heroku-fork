@@ -1,10 +1,22 @@
 <div class="mb-4 last:mb-0 border border-gray-200 rounded p-3 hover:bg-gray-100">
   <%= link_to student_info_professor_path(student), data: { turbo_frame: "student-info-panel" }, class: "block" do %>
     <div class="flex justify-between items-center mb-1">
-      <p class="font-semibold text-gray-800"><%= student.user.name %> <%= student.user.surname %></p>
-      <span class="inline-block bg-green-100 text-green-700 text-xs font-semibold mr-2 px-2.5 py-0.5 rounded">
-        <p> Ativo <%#= student.active %> </p>
-      </span>
+      <% if student.user.first_login == false %>
+        <p class="font-semibold text-orange-300">Conta ainda não configurada</p>
+
+        <span class="inline-block bg-yellow-100 text-yellow-700 text-xs font-semibold mr-2 px-2.5 py-0.5 rounded">
+          Falta configurar
+        </span>
+
+      <% else %>
+        <p class="font-semibold text-gray-800">
+          <%= student.user.name %> <%= student.user.surname %>
+        </p>
+
+        <span class="inline-block bg-green-100 text-green-700 text-xs font-semibold mr-2 px-2.5 py-0.5 rounded">
+          Ativo
+        </span>
+      <% end %>
     </div>
     <p class="text-sm text-gray-600 mb-1"><%= student.program_level %> &bull; Sem. <%= student.semester %></p>
   <% end %>

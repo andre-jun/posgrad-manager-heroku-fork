@@ -6,17 +6,7 @@ class ProfessorsController < ApplicationController
 
   def student_info
     @student = Student.find(params[:id])
-
-    respond_to do |format|
-      format.turbo_stream do
-        render turbo_stream: turbo_stream.replace(
-          'student-info-panel',
-          partial: 'professors/user_info/student_info',
-          locals: { student: @student }
-        )
-      end
-      format.html { redirect_to professor_path }
-    end
+    render partial: 'professors/user_info/student_info', locals: { student: @student }
   end
 
   def home
