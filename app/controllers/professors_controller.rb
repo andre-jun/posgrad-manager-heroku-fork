@@ -8,7 +8,17 @@ class ProfessorsController < ApplicationController
 
   def student_info
     @student = Student.find(params[:id])
-    render partial: 'professors/user_info/student_info', locals: { student: @student }
+
+    respond_to do |format|
+      format.turbo_stream do
+        render turbo_stream: turbo_stream.replace(
+          'student-info-panel',
+          partial: 'professors/user_info/student_info',
+          locals: { student: @student }
+        )
+      end
+      format.html { redirect_to professor_path }
+    end
   end
 
   def home
@@ -47,7 +57,9 @@ class ProfessorsController < ApplicationController
 
   def next_due_date
     # especificar que é DESTE professor
-    @next_due_date = Report.all.order(due_date_professor: :asc).first&.due_date_professor
+    return unless Report.any?
+
+    @next_due_date = Report.all.order(due_date_professor: :asc).first.due_date_professor
   end
 
   def calculate_reports_due

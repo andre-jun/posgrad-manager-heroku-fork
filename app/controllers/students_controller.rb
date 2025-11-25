@@ -89,8 +89,7 @@ class StudentsController < ApplicationController
 
   def student_params
     params.require(:student).permit(:name, :student_id, :role, :email, :lattes_link, :lattes_last_update,
-                                    :pretended_career, :join_date,
-                                    )
+                                    :pretended_career, :join_date)
   end
 
   def check_permissions
