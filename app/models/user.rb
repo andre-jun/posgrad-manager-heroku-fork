@@ -23,10 +23,12 @@ class User < ApplicationRecord
   # attr_accessible :password, :password_confirmation
 
   validates :password, confirmation: true
-  validates :name, presence: true, length: { minimum: 2, maximum: 800 }
-  validates :email, uniqueness: { case_sensitive: false }
-  validates :email, format: { with: URI::MailTo::EMAIL_REGEXP }, message: 'Endereço de email inválido!'
-  validates :email, inclusion: { in: %w[@usp.br] }, message: 'Por favor, use um email usp.'
+  validates :name, presence: true, length: { minimum: 2, maximum: 800 }, if: :first_login?
+  validates :email, uniqueness: { case_sensitive: false }, if: :first_login?
+  validates :email, format: { with: URI::MailTo::EMAIL_REGEXP, message: 'Endereço de email inválido!' },
+                    if: :first_login?
+  validates :email, format: { with: /\A[\w+\-.]+@(?:[\w-]+\.)?usp\.br\z/i, message: 'Por favor, use um email usp.' },
+                    if: :first_login?
   def full_name
     "#{name} #{surname}"
   end
