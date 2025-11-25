@@ -52,7 +52,7 @@
 </div>
 
 <nav class="mb-4 border border-gray-300 rounded-md bg-gray-100 flex gap-1 text-gray-700 text-sm overflow-auto select-none">
-  <% tabs = { 'overview' => { label: 'Acoes necessarias?', icon: 'user-group' }, 'alumni' => { label: 'Alunos', icon: 'user-group' }, 'faculty' => { label: 'Docentes', icon: 'academic-cap' }, 'reports' => { label: 'Relatórios', icon: 'document-text' }, 'register' => { label: 'Cadastrar', icon: 'user-add' } } %>
+  <% tabs = { 'alumni' => { label: 'Alunos', icon: 'user-group' }, 'faculty' => { label: 'Docentes', icon: 'academic-cap' }, 'reports' => { label: 'Relatórios', icon: 'document-text' }, 'register' => { label: 'Cadastrar', icon: 'user-add' } } %>
     <% tabs.each do |key, tab| %>
       <%= link_to adm_home_path(tab: key), data: { turbo_frame: "tab_content" }, class: "mx-auto flex items-center gap-2 px-3 py-1 rounded-md whitespace-nowrap #{params[:tab] == key ? 'bg-white shadow text-purple-700 font-semibold' : 'hover:bg-white'}" do %>
 

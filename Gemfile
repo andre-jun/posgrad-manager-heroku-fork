@@ -39,6 +39,12 @@ gem 'wicked_pdf'
 # gem 'wkhtmltopdf-binary'
 gem "deep_cloneable"
 
+# gemas que tão nos slides de esi e parecem legais pra testar metrica
+gem 'railroady'
+gem 'metric_fu'
+gem 'flog'
+gem 'saikuro'
+
 group :development, :test do
   gem 'brakeman', require: false
   gem 'debug', platforms: %i[mri windows], require: 'debug/prelude'
