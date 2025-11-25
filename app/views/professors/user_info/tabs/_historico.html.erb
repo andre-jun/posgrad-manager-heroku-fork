@@ -1,7 +1,7 @@
 <div class="max-w-4xl mx-auto bg-white rounded-xl border border-gray-200 p-6 space-y-4 text-gray-900 mt-4" id="historico-tab">
-      <% if Report.where(id: @student.report_infos.pluck(:report_id)).any? %>
-          <%= render partial: "reports/professor", collection: Report.where(id: @student.report_infos.pluck(:report_id)), as: :report %>
+      <% if @student.report_infos.where.not(status: "Draft" || "Sent").any? %>
+          <%= render partial: "reports/professor", collection: @student.report_infos, as: :report %>
       <% else %>
-          <p class="text-gray-500 italic">Nenhum relatório ainda ainda.</p>
+          <p class="text-gray-500 italic">Nenhum relatório avaliado ainda.</p>
       <% end %>
 </div>

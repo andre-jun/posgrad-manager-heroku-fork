@@ -8,4 +8,8 @@ class Professor < ApplicationRecord
   accepts_nested_attributes_for :user
   # V por algum motivo n ta aparecendo no forms V
   accepts_nested_attributes_for :contact_info
+
+  def full_name
+    user.full_name
+  end
 end

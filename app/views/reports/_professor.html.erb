@@ -1,7 +1,9 @@
 <div>
-    <p> Período: <%= report.semester %>o Sem. <%= report.year %> </p>
-
+    <p> Período: <%= report.report.semester %>o Sem. <%= report.report.year %> </p>
+    <p> Entregue em: <%= report.date_sent&.strftime("%d de %B, %Y")%> </p>
+    <p> Sua avaliação: <%= report.review_professor %> </p>
+    <p> Avaliação da Coordenação: <%= report.review_administrator %> </p>
 
     <p> <%= link_to "Visualizar", report_path(report) %> </p>
-    <p> <%= link_to "Avaliar", "" %> </p>
+    <p> <%= link_to "Avaliar", prof_temp_path(id: report.id) %> </p>
 </div>

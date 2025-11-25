@@ -1,10 +1,8 @@
 class ProfessorsController < ApplicationController
   before_action :authenticate_user!
-  before_action :set_professor, only: %i[home show edit update]
+  before_action :set_professor, only: %i[home edit update]
   before_action :check_permissions, only: %i[home edit]
-  before_action :next_due_date, only: %i[home]
-  before_action :set_students, only: %i[home calculate_reports_due]
-  before_action :calculate_reports_due, only: %i[home]
+  before_action :set_students, only: %i[home]
 
   def student_info
     @student = Student.find(params[:id])
@@ -22,36 +20,43 @@ class ProfessorsController < ApplicationController
   end
 
   def home
+    @reports_due = Report.where(id: ReportInfo.where(owner: 'Professor', reviewer_id: @professor.id).pluck(:report_id))
+    @next_due_date = @reports_due&.order(due_date_professor: :asc)&.first&.due_date_professor
+    # tem que filtrar pro estudante especifico esse aqui de baixo V
+    @report_due_student = Report.where(id: ReportInfo.where(owner: 'Student',
+                                                            reviewer_id: @professor.id).pluck(:report_id))
+    @next_due_date_student = @report_due_student&.order(due_date_student: :asc)&.first&.due_date_student
+    # esse aqui tambem falta filtrar V
+    @reproval_count = ReportInfo.where(student: Student.first,
+                                       review_administrator: 'Adequado com Ressalvas' || 'Insatisfatório').count
+  end
+
+  def temp_report
+    @report = ReportInfo.find(params[:id])
   end
 
   def show
+    @professor = Professor.find(params[:id])
   end
 
   def edit
-    return unless !@professor.id == current_user.id
-
-    redirect_to root_path, notice: "You're not the correct user to edit this."
+    redirect_to root_path, notice: "You're not authorized." unless @professor.user == current_user
   end
 
   def update
     if @professor.update(professor_params)
       redirect_to professor_home_path, notice: 'Profile was successfully updated!'
     else
-      render :edit
+      render :edit, status: :unprocessable_entity
     end
   end
 
-  def new
-    @professor = Professor.new
-  end
-
-  def create
-    @professor = current_user.build_professor(professor_params)
-    if @professor.save
-      redirect_to root_path, notice: 'Professor created!'
+  def send_report
+    @send = ReportInfo.find(params[:id])
+    if @send.update(owner: 'Administrator', status: 'Review', review_date: Date.current)
+      redirect_to professor_home_path, notice: 'Relatório avaliado!'
     else
-      format.html { render :new, status: :unprocessable_entity }
-      format.json { render json: @professor.errors, status: :unprocessable_entity }
+      redirect_to professor_home_path, notice: 'Ocorreu algum erro e o relatório não pode ser avaliado.'
     end
   end
 
@@ -72,21 +77,21 @@ class ProfessorsController < ApplicationController
   private
 
   def set_professor
-    @professor = Professor.find_by(params[:id])
+    # @professor = Professor.find_by(params[:id])
+    @professor = current_user.professor
   end
 
   def set_students
-    # change to students related to the professor
-    @students = Student.where(id: ProfessorMentorsStudent.where(professor: @professor).pluck(:student_id))
+    # estudantes que este professor orienta
+    student_ids = ProfessorMentorsStudent.where(professor: @professor).pluck(:student_id)
+    @students = Student.where(id: student_ids)
   end
 
   def check_permissions
-    return if Professor.where(user_id: current_user.id).exists?
-
-    redirect_to root_path, notice: "You're not a professor."
+    redirect_to root_path, notice: "You're not a professor." unless current_user.professor?
   end
 
   def professor_params
-    params.require(:professor).permit(:name, :professor_id, :research_area)
+    params.require(:professor).permit(:research_area)
   end
 end

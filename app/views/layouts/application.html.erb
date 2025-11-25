@@ -16,10 +16,6 @@
     <p class="notice"><%= notice %></p>
     <p class="alert"><%= alert %></p>
 
-    <% if user_signed_in? %>
-      <%= render "layouts/navbar" %>
-    <% end %>
-
     <%= yield %>
   </body>
 </html>

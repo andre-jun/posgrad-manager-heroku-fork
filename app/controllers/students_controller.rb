@@ -1,49 +1,47 @@
 class StudentsController < ApplicationController
   before_action :authenticate_user!
-  before_action :set_student, only: %i[home show edit update change_professor]
+  before_action :set_student, only: %i[home edit update change_professor]
   before_action :check_permissions, only: %i[home edit]
-  before_action :find_professor, only: %i[change_professor]
-  before_action :calculate_credits, only: %i[home]
   before_action :set_professor, only: %i[home]
   before_action :list_professors, only: %i[home]
 
   def navigation
-    @student = Student.find(params[:id])
-
     respond_to do |format|
       format.html
       format.turbo_stream do
-        render partial: "students/tabs/#{params[:tab] || 'profile'}", locals: { student: @student }
+        render partial: "students/tabs/#{params[:tab] || 'profile'}",
+               locals: { student: @student }
       end
     end
   end
 
   def home
     @reports = Report.where(id: @student.report_infos.pluck(:report_id)).all.order(year: :asc, semester: :asc)
+    @pending_report = @student.report_infos.where(owner: 'Student').order(created_at: :asc).last
   end
 
   def show
+    @student = Student.find_by(params[:id])
   end
 
   def change_professor
     return if ProfessorMentorsStudent.where(student: @student, professor: @professor).exists?
 
-    ProfessorMentorsStudent.where(sutdent: @student).delete_all
+    ProfessorMentorsStudent.where(student: @student).delete_all
     ProfessorMentorsStudent.create!(student: @student, professor: @professor)
   end
 
-  def calculate_credits
-    @courses = Course.where(id: TakesOnCourse.where(student: @student).pluck(:course_id))
-    @credits = 0
-    for course in @courses do
-      @credits += course.credits if course.credits >= 0
+  def send_report
+    @send = ReportInfo.find(params[:id])
+    if @send.update(owner: "Professor", date_sent: Date.current, status: "Sent")
+      redirect_to student_home_path, notice: 'Relatório enviado!'
+    else
+      redirect_to student_home_path, notice: 'Ocorreu algum erro e o relatório não pode ser enviado.'
     end
   end
 
   def edit
-    return unless !@student.id == current_user.id
-
-    redirect_to root_path, notice: "You're not the correct user to edit this."
+    redirect_to root_path, notice: "You're not authorized." unless @student.user == current_user
   end
 
   def update
@@ -54,33 +52,15 @@ class StudentsController < ApplicationController
     end
   end
 
-  def new
-    @student = Student.new
-  end
-
-  def create
-    @student = current_user.build_student(student_params)
-    if @student.save
-      @contact_info = ContactInfo.create!(user: @student.user)
-      redirect_to root_path, notice: 'Student created!'
-    else
-      format.html { render :new, status: :unprocessable_entity }
-      format.json { render json: @student.errors, status: :unprocessable_entity }
-    end
-  end
-
   private
 
   def set_student
-    @student = Student.find_by(params[:id])
-  end
-
-  def find_professor
-    @professor = Professor.find_by(params[:professor_id])
+    @student = current_user.student
   end
 
   def set_professor
-    @professor = Professor.find_by(id: ProfessorMentorsStudent.where(student: @student).pluck(:professor_id))
+    professor_id = ProfessorMentorsStudent.where(student: @student).pluck(:professor_id).first
+    @professor = Professor.find_by(id: professor_id)
   end
 
   def list_professors
@@ -89,12 +69,11 @@ class StudentsController < ApplicationController
 
   def student_params
     params.require(:student).permit(:name, :student_id, :role, :email, :lattes_link, :lattes_last_update,
-                                    :pretended_career, :join_date)
+                                    :pretended_career, :join_date,
+                                    )
   end
 
   def check_permissions
-    return if Student.where(user_id: current_user.id).exists?
-
-    redirect_to root_path, notice: "You're not a student."
+    redirect_to root_path, notice: "You're not a student." unless current_user.student?
   end
 end

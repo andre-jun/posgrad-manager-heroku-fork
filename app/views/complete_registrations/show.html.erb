@@ -1,0 +1,50 @@
+<div class="max-w-lg mx-auto mt-10 bg-white p-8 rounded shadow">
+  <h1 class="text-2xl font-semibold mb-6 text-center">
+    Complete seu cadastro
+  </h1>
+
+  <% if @user.errors.any? %>
+    <div class="mb-4 p-4 bg-red-100 text-red-700 rounded">
+      <h2 class="font-bold mb-2">Erros encontrados:</h2>
+      <ul class="list-disc ml-5">
+        <% @user.errors.full_messages.each do |msg| %>
+          <li><%= msg %></li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <%= form_with model: @user, url: complete_registration_path, method: :patch, class: "space-y-5" do |f| %>
+    <div>
+      <%= f.label :email, "E-mail", class: "block font-medium" %>
+      <%= f.email_field :email, class: "w-full mt-1 p-2 border rounded" %>
+    </div>
+
+    <div>
+      <%= f.label :password, "Senha", class: "block font-medium" %>
+      <%= f.password_field :password, class: "w-full mt-1 p-2 border rounded" %>
+    </div>
+
+    <div>
+      <%= f.label :password_confirmation, "Confirme a senha", class: "block font-medium" %>
+      <%= f.password_field :password_confirmation, class: "w-full mt-1 p-2 border rounded" %>
+    </div>
+
+    <div>
+      <%= f.label :name, "Nome completo", class: "block font-medium" %>
+      <%= f.text_field :name, class: "w-full mt-1 p-2 border rounded" %>
+    </div>
+
+    <%= f.fields_for :professor do |p| %>
+      <div>
+        <%= p.label :department, "Departamento", class: "block font-medium" %>
+        <%= p.text_field :department, class: "w-full mt-1 p-2 border rounded" %>
+      </div>
+    <% end %>
+
+    <div>
+      <%= f.submit "Salvar e continuar",
+          class: "w-full bg-blue-600 hover:bg-blue-700 text-white py-2 rounded font-semibold" %>
+    </div>
+  <% end %>
+</div>

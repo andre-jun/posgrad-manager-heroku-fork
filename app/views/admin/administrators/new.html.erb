@@ -1,0 +1,29 @@
+<%= turbo_frame_tag "tab_content" do %>
+  <h1 class="text-2xl font-semibold mb-6">Criar Administrador</h1>
+
+  <%= form_with model: @administrator,
+                url: admin_administrators_path,
+                local: true do |f| %>
+
+    <div class="mb-4">
+      <%= f.label :professor_id, "Selecione um professor", class: "block mb-1 font-medium" %>
+
+      <%= f.collection_select :professor_id,
+                              @professors,
+                              :id,
+                              :full_name,
+                              { prompt: "Escolha um professor" },
+                              class: "border rounded px-3 py-2 w-full" %>
+    </div>
+
+    <div class="space-x-4">
+      <%= f.submit "Criar",
+          class: "px-4 py-2 bg-green-600 text-white rounded" %>
+
+      <%= link_to "Cancelar",
+          adm_home_path,
+          class: "px-4 py-2 bg-gray-400 text-white rounded" %>
+    </div>
+
+  <% end %>
+<% end %>

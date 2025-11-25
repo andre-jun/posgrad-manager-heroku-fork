@@ -1,0 +1,27 @@
+<div>
+    <h1> Perfil do Aluno </h1>
+
+    <!-- coisas de User -->
+    <div>
+        <p> Nome: <%= @student.user&.name %> <%= @student.user&.surname %> </p>
+        <p> Pronomes: <%= @student.user&.pronoun %> </p>
+        <p> NUSP: <%= @student.user&.nusp %> </p>
+        <p> Email: <%= @student.user&.email %> </p>
+        <p> Status: <%= @student.user&.status %> </p>
+    </div>
+
+    <!-- coisas de Student -->
+    <div>
+        <p> Link lattes: <%= @student.lattes_link %>, último update em <%= @student.lattes_last_update %> </p>
+        <p> Carreira pretendida: <%= @student.pretended_career %> </p>
+        <p> Curso: <%= @student.program_level %> </p>
+        <p> Semestre: <%= @student.semester %> </p>
+    </div>
+
+    <!-- outras métricas -->
+    <div>
+
+
+    </div>
+
+</div>

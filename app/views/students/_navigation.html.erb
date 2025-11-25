@@ -4,7 +4,7 @@
         <path d="M12 12c2 0 2-2 4-2H8c0 2 2 2 4 2z"></path>
         <circle cx="12" cy="12" r="10" stroke="none"></circle>
         </svg>
-        <p><strong>Bem-vindo, <%= student.user.name %>!</strong> Navegue entre seu perfil e relatórios</p>
+        <p><strong>Bem-vindo, <%= student&.user&.name %>!</strong> Navegue entre seu perfil e relatórios</p>
     </div>
     <nav class="flex space-x-4 float-right">
         <% tabs = {

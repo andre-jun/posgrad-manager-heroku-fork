@@ -14,8 +14,14 @@ class Student < ApplicationRecord
   validates :name, length: { minimum: 2, maximum: 800 }
 
   def calculate_progress
-    if credits_needed > 0
-      100 * credits / credits_needed
+    if user.status == 'Graduado'
+      100
+    elsif semester > 0
+      if program_level == 'Doutorado'
+        100 * semester / 8
+      else
+        100 * semester / 4
+      end
     else
       0
     end

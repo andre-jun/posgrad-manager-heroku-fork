@@ -66,16 +66,19 @@
         <th>ID</th>
         <th>Name</th>
         <th>Email</th>
-        <th>Role</th>
+        <th>Status</th>
+        <th>Program Level</th>
+        <th>Lattes</th>
       </tr>
     </thead>
     <tbody>
       <% @students.each do |student| %>
         <tr>
           <td><%= student.id %></td>
-          <td><%= student.name %></td>
+          <td><%= student.user.name %></td>
           <td><%= student.user.email %></td>
-          <td><%= student.role %></td>
+          <td><%= student.user.status %></td>
+          <td><%= student.lattes_link %></td>
         </tr>
       <% end %>
     </tbody>
