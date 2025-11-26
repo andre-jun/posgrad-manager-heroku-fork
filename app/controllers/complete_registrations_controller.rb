@@ -1,5 +1,4 @@
 class CompleteRegistrationsController < ApplicationController
-  skip_before_action :check_first_login
   before_action :authenticate_user!
   before_action :redirect_if_completed
 

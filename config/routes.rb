@@ -44,9 +44,5 @@ Rails.application.routes.draw do
   get 'professor_report_temp', to: 'professors#temp_report', as: 'prof_temp'
 
   # tem que fazer o root directionar pra home certa dependendo do tipo de usuario
-  authenticated :user do
-    root to: 'pages#home', as: :authenticated_user_root
-  end
-
-  root 'pages#home'
+  root to: 'application#root_redirect'
 end

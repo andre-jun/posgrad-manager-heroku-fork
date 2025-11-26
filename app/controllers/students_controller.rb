@@ -9,7 +9,7 @@ class StudentsController < ApplicationController
     respond_to do |format|
       format.html
       format.turbo_stream do
-        render partial: "students/tabs/#{params[:tab] || 'profile'}",
+        render partial: "students/tabs/#{params[:tab] || 'report'}",
                locals: { student: @student }
       end
     end
@@ -33,7 +33,7 @@ class StudentsController < ApplicationController
 
   def send_report
     @send = ReportInfo.find(params[:id])
-    if @send.update(owner: "Professor", date_sent: Date.current, status: "Sent")
+    if @send.update(owner: 'Professor', date_sent: Date.current, status: 'Sent')
       redirect_to student_home_path, notice: 'Relatório enviado!'
     else
       redirect_to student_home_path, notice: 'Ocorreu algum erro e o relatório não pode ser enviado.'
@@ -69,8 +69,7 @@ class StudentsController < ApplicationController
 
   def student_params
     params.require(:student).permit(:name, :student_id, :role, :email, :lattes_link, :lattes_last_update,
-                                    :pretended_career, :join_date,
-                                    )
+                                    :pretended_career, :join_date)
   end
 
   def check_permissions

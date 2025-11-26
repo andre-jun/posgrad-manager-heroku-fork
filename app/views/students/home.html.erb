@@ -15,7 +15,7 @@
 
   <main class="max-w-6xl mx-auto space-y-6 bg-white rounded-md shadow p-6  mt-4">
     <%= turbo_frame_tag "student_tab" do %> 
-      <%= render "students/tabs/#{params[:tab] || 'profile'}", student: @student %> 
+      <%= render "students/tabs/#{params[:tab] || 'report'}", student: @student %> 
     <% end %>
   </main>
 </div>

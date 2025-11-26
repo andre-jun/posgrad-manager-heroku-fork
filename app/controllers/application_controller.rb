@@ -1,21 +1,20 @@
 class ApplicationController < ActionController::Base
   before_action :configure_permitted_parameters, if: :devise_controller?
-  before_action :check_first_login
 
-  private
+  def root_redirect
+    return redirect_to new_user_session_path unless user_signed_in?
 
-  def check_first_login
-    return unless user_signed_in?
+    return redirect_to complete_registration_path unless current_user.first_login?
 
-    return if params[:controller].start_with?('admin/')
-
-    return if devise_controller?
-
-    return if %w[complete_registrations complete_registration].include?(params[:controller])
-
-    return if current_user.first_login?
-
-    redirect_to complete_registration_path
+    if current_user.administrator?
+      redirect_to adm_home_path
+    elsif current_user.professor?
+      redirect_to professor_home_path
+    elsif current_user.student?
+      redirect_to student_home_path
+    else
+      raise "User #{current_user.id} has no valid role (admin/professor/student)"
+    end
   end
 
   protected

@@ -22,7 +22,7 @@
   </div>
 
   <%= link_to 'Editar Perfil', edit_professor_path(@professor), data: { turbo: false }, class: "bg-blue-600 hover:bg-blue-700 text-white text-sm font-semibold px-4 py-2 rounded-md" %>
-  <% if user.administrator? %>
+  <% if current_user.administrator? %>
     <%= link_to "Visão de admnistrador", adm_home_path, data: { turbo: false }, class: "bg-green-600 hover:bg-green-700 text-white text-sm font-semibold px-4 py-2 rounded-md" %>
   <% end %>
   <%= button_to destroy_user_session_path, method: :delete, class: "ml-4 px-4 py-1 border border-red-500 text-red-500 hover:bg-red-100 rounded flex items-center space-x-1" do %>

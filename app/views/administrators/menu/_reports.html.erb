@@ -24,7 +24,7 @@
   </div>
 </div>
 
-<div class="space-y-4">
+<div class="space-y-4 w-full max-w-4xl mx-auto">
   <% if @reports.any? %>
     <%= render partial: "/administrators/detailed_info/reports", collection: @reports, as: :report %>
   <% else %>

@@ -8,16 +8,12 @@
     </div>
     <nav class="flex space-x-4 float-right">
         <% tabs = {
-            'profile' => { label: 'Perfil', color: 'blue' },
             'report' => { label: 'Relatório', color: 'orange' },
-            'history' => { label: 'Histórico', color: 'purple' }
+            'history' => { label: 'Histórico', color: 'purple' },
+            'profile' => { label: 'Perfil', color: 'blue' }
         } %>
 
         <% color_classes = {
-            "blue" => {
-                active: "bg-blue-600 text-white shadow",
-                inactive: "bg-blue-50 text-blue-700 hover:bg-blue-100"
-            },
             "orange" => {
                 active: "bg-orange-600 text-white shadow",
                 inactive: "bg-orange-50 text-orange-700 hover:bg-orange-100"
@@ -25,12 +21,16 @@
             "purple" => {
                 active: "bg-purple-600 text-white shadow",
                 inactive: "bg-purple-50 text-purple-700 hover:bg-purple-100"
+            },
+            "blue" => {
+                active: "bg-blue-600 text-white shadow",
+                inactive: "bg-blue-50 text-blue-700 hover:bg-blue-100"
             }
         } %>
 
         <% tabs.each do |key, tab| %>
             <% color = tab[:color] %>
-            <% active_tab = params[:tab].presence || "profile" %>
+            <% active_tab = params[:tab].presence || "report" %>
             <% classes = active_tab == key ? color_classes[color][:active] : color_classes[color][:inactive] %>
 
             <%= link_to student_home_path(tab: key),
