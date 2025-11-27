@@ -4,7 +4,7 @@
 
         <!-- coisas de User -->
         <div>
-            <p> Nome: <%= @professor.user&.name %> <%= @professor.user&.surname %> </p>
+            <p> Nome: <%= @professor.user&.full_name %> </p>
             <p> Pronomes: <%= @professor.user&.pronoun %> </p>
             <p> NUSP: <%= @professor.user&.nusp %> </p>
             <p> Email: <%= @professor.user&.email %> </p>
@@ -17,10 +17,22 @@
             <p> Área de Pesquisa: <%= @professor.research_area %> </p>
         </div>
 
-        <!-- outras métricas -->
+        <!-- Outras métricas -->
         <div>
+            <p> Telefone: <%= @professor.contact_info&.phone_number %> </p>
+            <p> Sala: <%= @professor.contact_info&.room_number %> </p>
+        </div>
 
-
+        <!-- coisas de Publications -->
+        <div>
+            <p> Publicações: </p>
+            <% @professor.publications.each do |pub| %>
+                <p> Título: <%= pub.title %> </p>
+                <p> Resumo: <%= pub.abstract %> </p>
+                <p> Data: <%= pub.publication_date %> </p>
+                <p> Link: <%= pub.link %> </p>
+                <p> Aluno: <%= pub.student&.user&.full_name %> </p>
+            <% end %>
         </div>
 
     </div>

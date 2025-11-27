@@ -8,7 +8,7 @@
           <h3>Reprovações passadas</h3>
         </div>
         <!-- muda a cor desse conforme for de 0->3  (verde, amarelo, laranja, vermelho) -->
-        <p class="text text-gray-500"><%= @reproval_count || 0%>/3 </p>
+        <p class="text text-gray-500"><%= ReportInfo.where(student: student, review_administrator: 'Adequado com Ressalvas' || 'Insatisfatório').count || 0%>/3 </p>
       </div>
 
       <div class="border border-gray-200 rounded p-4 space-y-1">
@@ -16,9 +16,9 @@
           <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" stroke="currentColor" stroke-width="2"  viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M12 8v4m0 4h.01"/></svg>
           <h3> Próximo prazo:</h3>
         </div>
-        <!-- formata bonitinho aqui -->
-        <p class="text-red-600 font-semibold">Professor: <%= @next_due_date&.strftime("%d/%b/%Y") || "Já entregue" %></p>
-        <p class="text-xs text-gray-500">Aluno: <%= @next_due_date_student || "Já entregue"%> </p>
+        <!-- [Bookmark] ta bugado o @professor resolva jun-->
+        <p class="text-red-600 font-semibold">Professor: <%= Report.where(id: ReportInfo.where(status: 'Sent', reviewer_id: @professor&.id, student_id: @student.id).pluck(:report_id))&.order(due_date_professor: :asc)&.first&.due_date_professor || "Já entregue" %></p>
+        <p class="text-xs text-gray-500">Aluno: <%= Report.where(id: ReportInfo.where(status: 'Draft', reviewer_id: @professor&.id, student_id: @student.id).pluck(:report_id))&.order(due_date_student: :asc)&.first&.due_date_student || "Já entregue" %> </p>
       </div>
     </div>
   </div>

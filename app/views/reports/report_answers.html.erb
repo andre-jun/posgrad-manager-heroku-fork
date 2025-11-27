@@ -16,10 +16,10 @@
 
     <div class="outline spacing-3-y">
         <h1> Info </h1>
-        <p> Aluno: <%= @report.student.user.name %> <%= @report.student.user.surname %> </p>
+        <p> Aluno: <%= @report.student.user&.full_name %> </p>
         <p> Data de Envio: <%= @report.date_sent %> </p>
         <!-- super otimizado confia -->
-        <p> Orientador: <%= Professor.find_by(id: @report.reviewer_id).user.name %> <%= Professor.find_by(id: @report.reviewer_id).user.surname %> </p>
+        <p> Orientador: <%= Professor.find_by(id: @report.reviewer_id).user&.full_name %> </p>
         <p> Status: <%= @report.status %> </p>
         <p> Responsável: <%= @report.owner %> </p>
         <p> Data da Avaliação: <%= @report.review_date&.strftime("%d de %B, %Y") %> </p>

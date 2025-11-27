@@ -17,6 +17,7 @@ Rails.application.routes.draw do
   end
 
   resources :reports
+  resources :publications
 
   devise_for :users, skip: [:registrations], controllers: {
     sessions: 'users/sessions'

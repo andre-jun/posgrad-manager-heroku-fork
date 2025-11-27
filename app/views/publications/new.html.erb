@@ -1,0 +1,14 @@
+<% content_for :title, "Nova publicação" %>
+
+<h1 class="text-4xl font-extrabold mb-8 text-center text-indigo-900">
+  Nova publicação
+</h1>
+
+<div class="max-w-4xl mx-auto bg-white shadow-lg rounded-2xl p-8 mb-10">
+  <%= render "form", publication: @publication %>
+</div>
+
+<div class="flex justify-center">
+  <%= link_to "Voltar à home", root_path,
+    class: "bg-indigo-100 hover:bg-indigo-200 text-indigo-800 font-semibold px-6 py-3 rounded-lg shadow-md transition duration-300" %>
+</div>

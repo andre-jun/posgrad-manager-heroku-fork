@@ -13,6 +13,10 @@ class Student < ApplicationRecord
 
   validates :name, length: { minimum: 2, maximum: 800 }
 
+  def full_name
+    user.full_name
+  end
+
   def calculate_progress
     if user.status == 'Graduado'
       100

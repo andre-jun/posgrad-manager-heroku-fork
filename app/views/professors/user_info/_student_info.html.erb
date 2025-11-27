@@ -1,7 +1,7 @@
 <turbo-frame id="student-info-panel">
   <div class="flex justify-between items-start">
       <div>
-        <h2 class="font-semibold text-lg"><%= student.user.name %> <%= student.user.surname %></h2>
+        <h2 class="font-semibold text-lg"><%= student.user&.full_name %></h2>
         <p class="text-sm text-gray-600">USP: <%= student.user.nusp %></p>
       </div>
       <div class="flex space-x-2">

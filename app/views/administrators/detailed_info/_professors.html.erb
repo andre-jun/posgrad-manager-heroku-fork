@@ -1,6 +1,6 @@
 <tbody>
     <tr>
-      <td class="border-b border-gray-200 px-3 py-2 font-semibold text-gray-900"><%= professor.user.name || 'N/a'%> <%= professor.user.surname %></td>
+      <td class="border-b border-gray-200 px-3 py-2 font-semibold text-gray-900"><%= professor.user&.full_name || 'N/a'%></td>
       <td class="border-b border-gray-200 px-3 py-2 text-gray-600"><%= professor.user.email %></td>
       <td class="border-b border-gray-200 px-3 py-2 text-gray-600"><%= professor.user.nusp %></td>
       <td class="border-b border-gray-200 px-3 py-2 text-gray-600"><%= professor.department || 'SI'%></td>

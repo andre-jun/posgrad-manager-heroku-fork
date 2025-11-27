@@ -1,7 +1,7 @@
 <div>
-    <p> Aluno: <%= report.student.user.name %> <%= report.student.user.surname %> </p>
+    <p> Aluno: <%= report.student.user.full_name %></p>
     <p> Data de Envio: <%= report.date_sent&.strftime("%d de %B, %Y")  %> </p>
-    <p> Orientador: <%= Professor.find_by(id: report.reviewer_id).user.name %> <%= Professor.find_by(id: report.reviewer_id).user.surname %> </p>
+    <p> Orientador: <%= Professor.find_by(id: report.reviewer_id).user.full_name %></p>
     <p> Status: <%= report.status %> </p>
     <p> Responsável atual: <%= report.owner %> </p>
     <p> Avaliação do Orientador: <%= report.review_professor %> </p>
