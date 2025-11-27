@@ -1,38 +1,51 @@
-<table class="min-w-full text-sm text-left text-gray-700">
-    <thead class="bg-blue-50 text-blue-700">
-        <tr>
-        <th scope="col" class="px-4 py-2 whitespace-nowrap border-b border-blue-200">Período</th>
-        <th scope="col" class="px-4 py-2 whitespace-nowrap border-b border-blue-200">Data de Envio</th>
-        <th scope="col" class="px-4 py-2 whitespace-nowrap border-b border-blue-200">Status</th>
-        <th scope="col" class="px-4 py-2 whitespace-nowrap border-b border-blue-200">Avaliado em</th>
-        <th scope="col" class="px-4 py-2 whitespace-nowrap border-b border-blue-200">Avaliado por</th>
-        <th scope="col" class="px-4 py-2 whitespace-nowrap border-b border-blue-200">Visualizar</th>
-        </tr>
-    </thead>
-    <tbody>
-        <tr class="border-b border-blue-100 hover:bg-blue-50">
-            <td class="px-4 py-2 whitespace-nowrap"><%= report.semester %>o Sem. <%= report.year %> </td>
-            <td class="px-4 py-2 whitespace-nowrap"><%= report.report_infos.first.date_sent %></td>
-            <td class="px-4 py-2 whitespace-nowrap">
-            <% status_color = case report.report_infos.first.status.downcase
-                when 'aprovado' then 'bg-green-100 text-green-800'
-                when 'aprovado com ressalvas' then 'bg-yellow-100 text-yellow-800'
-                when 'pendente' then 'bg-gray-100 text-gray-700'
-                else 'bg-red-100 text-red-800'
-                end %>
-            <span class="inline-block px-2 py-1 rounded text-xs font-semibold <%= status_color %>"><%= report.report_infos.first.status %></span>
-            </td>
-            <td class="px-4 py-2 whitespace-nowrap"><%= report.report_infos.first.review_date %> </td>
-            <td class="px-4 py-2 whitespace-nowrap"><%= Professor.find_by(id: report.report_infos.first.reviewer_id)&.user&.name || "Não revisado" %></td>
-            <td class="px-4 py-2 whitespace-nowrap">
-                <%= link_to student_show_path(id: report.id), data: { turbo: false }, class: "inline-flex items-center justify-center w-8 h-8 rounded-md border border-gray-300 hover:bg-gray-100 text-gray-600 hover:text-gray-900 transition", title: "Visualizar" do %>
-                    <span class="sr-only">Visualizar</span>
-                    <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
-                        <path d="M15.0007 12C15.0007 13.6569 13.6576 15 12.0007 15C10.3439 15 9.00073 13.6569 9.00073 12C9.00073 10.3431 10.3439 9 12.0007 9C13.6576 9 15.0007 10.3431 15.0007 12Z" stroke-linecap="round" stroke-linejoin="round"></path> 
-                        <path d="M12.0012 5C7.52354 5 3.73326 7.94288 2.45898 12C3.73324 16.0571 7.52354 19 12.0012 19C16.4788 19 20.2691 16.0571 21.5434 12C20.2691 7.94291 16.4788 5 12.0012 5Z" stroke-linecap="round" stroke-linejoin="round"></path>
-                    </svg>
-                <% end %>
-            </td>
-        </tr>
-    </tbody>
-</table>
+  <tbody>
+    <% info = report.report_infos.first %>
+
+    <tr class="border-b hover:bg-blue-50">
+      <td class="px-4 py-2 whitespace-nowrap">
+        <%= report.semester %>º Sem. <%= report.year %>
+      </td>
+
+      <td class="px-4 py-2 whitespace-nowrap">
+        <%= info.date_sent&.strftime("%d/%m/%Y") || "-" %>
+      </td>
+
+      <td class="px-4 py-2 whitespace-nowrap">
+        <% status_color =
+            case info.status.to_s.downcase
+            when 'aprovado' then 'bg-green-100 text-green-800'
+            when 'aprovado com ressalvas' then 'bg-yellow-100 text-yellow-800'
+            when 'pendente' then 'bg-gray-100 text-gray-700'
+            else 'bg-red-100 text-red-800'
+            end
+        %>
+
+        <span class="px-2 py-1 rounded text-xs font-semibold <%= status_color %>">
+          <%= info.status %>
+        </span>
+      </td>
+
+      <td class="px-4 py-2 whitespace-nowrap">
+        <%= info.review_date&.strftime("%d/%m/%Y") || "-" %>
+      </td>
+
+      <td class="px-4 py-2 whitespace-nowrap">
+        <%= info.reviewer&.user&.name || "Não revisado" %>
+      </td>
+
+      <td class="px-4 py-2 whitespace-nowrap">
+        <% info = report.report_infos.find_by(student_id: @student.id) %>
+
+        <%= link_to report_info_path(info),
+                    data: { turbo: false },
+                    class: "inline-flex items-center justify-center w-8 h-8 rounded-md border hover:bg-gray-100" do %>
+
+          <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none"
+               viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+            <path d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" />
+            <path d="M2.46 12C3.73 7.94 7.52 5 12 5s8.27 2.94 9.54 7c-1.27 4.06-5.06 7-9.54 7S3.73 16.06 2.46 12z" />
+          </svg>
+        <% end %>
+      </td>
+    </tr>
+  </tbody>

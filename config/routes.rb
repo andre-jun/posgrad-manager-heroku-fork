@@ -16,7 +16,14 @@ Rails.application.routes.draw do
     end
   end
 
-  resources :reports
+  resources :reports do
+    collection do
+      get :options
+    end
+
+    post :duplicate, on: :member
+  end
+  resources :report_infos, only: %i[show edit update]
   resources :publications
 
   devise_for :users, skip: [:registrations], controllers: {
@@ -39,7 +46,6 @@ Rails.application.routes.draw do
   get 'professor_send_report', to: 'professors#send_report', as: 'professor_send_report'
   get 'administrator_send_report', to: 'administrators#send_report', as: 'administrator_send_report'
   # get 'administrator_send_report', to: 'reports#send_report', as: 'administrator_send_report'
-  get 'student_show', to: 'reports#student_show', as: 'student_show'
 
   # esse aqui é só pra simular uma aba, dps vai virar só um parcial eu acho
   get 'professor_report_temp', to: 'professors#temp_report', as: 'prof_temp'

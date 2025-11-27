@@ -10,10 +10,18 @@ class ProfessorsController < ApplicationController
   end
 
   def home
-    @reports_due = Report.where(id: ReportInfo.where(status: 'Sent', reviewer_id: @professor.id).pluck(:report_id))
-    @next_due_date = @reports_due&.order(due_date_professor: :asc)&.first&.due_date_professor
+    student_ids = @students.pluck(:id)
 
-    @reproval_count = ReportInfo.where(student: Student.first, review_administrator: 'Adequado com Ressalvas' || 'Insatisfatório').count
+    report_ids = ReportInfo.where(student_id: student_ids).pluck(:report_id)
+
+    @reports_due = Report.where(id: report_ids)
+
+    @next_due_date = @reports_due.order(due_date_professor: :asc).first&.due_date_professor
+
+    @reproval_count = ReportInfo.where(
+      student_id: student_ids,
+      review_administrator: ['Adequado com Ressalvas', 'Insatisfatório']
+    ).count
   end
 
   def temp_report
@@ -46,10 +54,8 @@ class ProfessorsController < ApplicationController
   end
 
   def next_due_date
-    # especificar que é DESTE professor
-    return unless Report.any?
-
-    @next_due_date = Report.all.order(due_date_professor: :asc).first.due_date_professor
+    infos = ReportInfo.where(reviewer_id: @professor.id, status: 'Sent')
+    @next_due_date = infos.order(due_date_professor: :asc).first&.due_date_professor
   end
 
   def calculate_reports_due

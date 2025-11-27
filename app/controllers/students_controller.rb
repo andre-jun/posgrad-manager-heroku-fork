@@ -16,8 +16,20 @@ class StudentsController < ApplicationController
   end
 
   def home
-    @reports = Report.where(id: @student.report_infos.pluck(:report_id)).all.order(year: :asc, semester: :asc)
-    @pending_report = @student.report_infos.where(owner: 'Student').order(created_at: :asc).last
+    @reports = @student.reports.order(year: :asc, semester: :asc)
+
+    @pending_report_info = @student.report_infos
+                                   .where(owner: 'Student', status: 'Draft')
+                                   .order(created_at: :asc)
+                                   .last
+
+    @pending_report = @pending_report_info&.report
+
+    return unless @pending_report_info && @pending_report
+
+    @pending_report.report_fields.each do |field|
+      @pending_report_info.report_field_answers.find_or_initialize_by(report_field_id: field.id)
+    end
   end
 
   def show

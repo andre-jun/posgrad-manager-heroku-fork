@@ -1,0 +1,51 @@
+<div class="p-6 bg-white rounded-md shadow border border-gray-200 space-y-6">
+
+  <%= link_to "← Voltar", student_home_path(tab: 'history'),
+      class: "text-blue-600 hover:underline text-sm" %>
+
+  <h1 class="text-2xl font-bold text-gray-800">
+    Relatório - <%= @report.semester %>º Semestre / <%= @report.year %>
+  </h1>
+
+  <div class="text-gray-700 space-y-1">
+    <p><strong>Aluno:</strong> <%= @student.user.name %></p>
+
+    <p>
+      <strong>Enviado em:</strong>
+      <%= @report_info.date_sent&.strftime("%d/%m/%Y") || "-" %>
+    </p>
+
+    <p>
+      <strong>Status:</strong>
+      <%= @report_info.status %>
+    </p>
+
+    <p>
+      <strong>Avaliado por:</strong>
+      <%= @report_info.reviewer&.user&.name || "Ainda não avaliado" %>
+    </p>
+
+    <p>
+      <strong>Avaliado em:</strong>
+      <%= @report_info.review_date&.strftime("%d/%m/%Y") || "-" %>
+    </p>
+  </div>
+
+  <hr>
+
+  <h2 class="text-xl font-semibold text-gray-800">Respostas enviadas</h2>
+
+  <div class="space-y-4">
+    <% @answers.each do |ans| %>
+      <div class="p-4 border rounded-md bg-gray-50">
+        <p class="font-semibold text-gray-800 mb-1">
+          <%= ans.report_field.question %>
+        </p>
+
+        <p class="text-gray-700 whitespace-pre-line">
+          <%= ans.answer.presence || "— Sem resposta —" %>
+        </p>
+      </div>
+    <% end %>
+  </div>
+</div>

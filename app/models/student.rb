@@ -4,8 +4,9 @@ class Student < ApplicationRecord
   has_one :professor, through: :professor_mentors_student
   has_one :contact_info, through: :user
   has_many :publications, dependent: :destroy
-  has_many :report_infos
-  has_many :report_field_answers, through: :report_info
+  has_many :report_infos, dependent: :destroy
+  has_many :reports, through: :report_infos
+  has_many :report_field_answers, through: :report_infos
 
   accepts_nested_attributes_for :user
   accepts_nested_attributes_for :contact_info

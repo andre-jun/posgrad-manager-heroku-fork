@@ -3,7 +3,7 @@
 </div>
 
 <div class="flex items-center justify-between mb-6">
-  <%= link_to "Criar relatório", new_report_options_path, data: { turbo_frame: "tab_content" },
+  <%= link_to "Criar relatório", options_reports_path, data: { turbo_frame: "tab_content" },
     class: "inline-block bg-red-600 text-white px-4 py-2 rounded-md text-sm font-semibold shadow hover:bg-red-700 transition" %>
 
   <!-- ver como fazer -->
@@ -12,10 +12,6 @@
       <option value="">Status</option>
       <option>Em andamento</option>
       <option>Concluído</option>
-    </select>
-    <select class="border border-gray-300 rounded-md px-2 py-1 focus:outline-none focus:ring-1 focus:ring-red-500" aria-label="Filtrar por Orientador">
-      <option value="">Orientador</option>
-      <option>ver como fazer</option>
     </select>
     <select class="border border-gray-300 rounded-md px-2 py-1 focus:outline-none focus:ring-1 focus:ring-red-500" aria-label="Filtrar por Período">
       <option value="">Período</option>
