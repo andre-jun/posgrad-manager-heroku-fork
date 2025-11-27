@@ -41,15 +41,9 @@ gem 'deep_cloneable'
 
 # gemas que tão nos slides de esi e parecem legais pra testar metrica
 gem 'railroady'
-<<<<<<< Updated upstream
 # gem 'metric_fu'
 gem 'flog'
 # gem 'saikuro'
-=======
-#gem 'metric_fu'
-gem 'flog'
-#gem 'saikuro'
->>>>>>> Stashed changes
 
 group :development, :test do
   gem 'brakeman', require: false
@@ -61,6 +55,8 @@ end
 group :development do
   gem 'web-console'
 end
+
+gem 'rubyzip'
 
 group :test do
   gem 'capybara'
