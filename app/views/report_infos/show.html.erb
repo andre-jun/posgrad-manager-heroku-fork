@@ -1,7 +1,7 @@
 <div class="p-6 bg-white rounded-md shadow border border-gray-200 space-y-6">
-
-  <%= link_to "← Voltar", student_home_path(tab: 'history'),
-      class: "text-blue-600 hover:underline text-sm" %>
+  <%= link_to "← Voltar",
+    current_user.student? ? student_home_path(tab: 'history') : professor_home_path,
+    class: "text-blue-600 hover:underline text-sm" %>
 
   <h1 class="text-2xl font-bold text-gray-800">
     Relatório - <%= @report.semester %>º Semestre / <%= @report.year %>
@@ -30,6 +30,11 @@
       <%= @report_info.review_date&.strftime("%d/%m/%Y") || "-" %>
     </p>
   </div>
+
+    <% if current_user.professor? && @report_info.review_professor == 'Pendente' %>
+      <%= link_to "Avaliar", professor_submit_review_report_info_path(@report_info), 
+        class: "px-4 py-2 bg-teal-600 hover:bg-teal-700 text-white rounded transition duration-300" %>
+    <% end %>
 
   <hr>
 

@@ -23,7 +23,13 @@ Rails.application.routes.draw do
 
     post :duplicate, on: :member
   end
-  resources :report_infos, only: %i[show edit update]
+  resources :report_infos, only: %i[show edit update] do
+    member do
+      get :professor_submit_review
+      get :administrator_submit_review
+      post :submit_review
+    end
+  end
   resources :publications
 
   devise_for :users, skip: [:registrations], controllers: {

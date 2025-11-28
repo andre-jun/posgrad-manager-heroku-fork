@@ -1,7 +1,8 @@
 class ReportInfosController < ApplicationController
   before_action :authenticate_user!
-  before_action :set_report_info, only: %i[edit update show]
+  before_action :set_report_info, only: %i[edit update show professor_submit_review submit_review]
   before_action :ensure_student_access, only: %i[edit update]
+  before_action :ensure_professor_access, only: %i[professor_submit_review]
 
   def show
     @report_info = ReportInfo.find(params[:id])
@@ -35,6 +36,25 @@ class ReportInfosController < ApplicationController
     end
   end
 
+  def professor_submit_review
+    @report = @report_info.report
+    @student = @report_info.student
+    @answers = @report_info.report_field_answers.includes(:report_field)
+  end
+
+  def submit_review
+    if @report_info.update(
+      review_professor: params[:report_info][:review_professor],
+      professor_comments: params[:report_info][:professor_comments],
+      review_date: Time.current,
+      reviewer_id: current_user.professor.id
+    )
+      redirect_to report_info_path(@report_info), notice: 'Avaliação enviada com sucesso!'
+    else
+      redirect_to professor_submit_review_report_info_path(@report_info), alert: 'Erro ao enviar avaliação.'
+    end
+  end
+
   private
 
   def set_report_info
@@ -45,6 +65,12 @@ class ReportInfosController < ApplicationController
     return if current_user.student? && current_user.student.id == @report_info.student_id
 
     redirect_to root_path, alert: 'Você não tem permissão para editar este relatório.'
+  end
+
+  def ensure_professor_access
+    return if current_user.professor?
+
+    redirect_to root_path, alert: 'Você não tem permissão para avaliar este relatório.'
   end
 
   def report_info_params
