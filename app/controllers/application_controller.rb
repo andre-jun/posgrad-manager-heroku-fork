@@ -13,7 +13,7 @@ class ApplicationController < ActionController::Base
     elsif current_user.student?
       redirect_to student_home_path
     else
-      raise "User #{current_user.id} has no valid role (admin/professor/student)"
+      raise "Usuário #{current_user.id} não tem um papel válido (administrador/professor/aluno)!"
     end
   end
 

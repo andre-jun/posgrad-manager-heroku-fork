@@ -458,6 +458,7 @@ DEPENDENCIES
   rails_autolink
   rspec-rails
   rubocop-rails-omakase
+  rubyzip
   selenium-webdriver
   shoulda-matchers (~> 6.0)
   solid_cable

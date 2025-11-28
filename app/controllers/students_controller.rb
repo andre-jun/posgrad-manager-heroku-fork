@@ -53,12 +53,12 @@ class StudentsController < ApplicationController
   end
 
   def edit
-    redirect_to root_path, notice: "You're not authorized." unless @student.user == current_user
+    redirect_to root_path, notice: 'Você não possui autorização para essa ação.' unless @student.user == current_user
   end
 
   def update
     if @student.update(student_params)
-      redirect_to student_home_path, notice: 'Profile was successfully updated!'
+      redirect_to student_home_path, notice: 'Perfil atualizado com sucesso!'
     else
       render :edit
     end
@@ -85,6 +85,6 @@ class StudentsController < ApplicationController
   end
 
   def check_permissions
-    redirect_to root_path, notice: "You're not a student." unless current_user.student?
+    redirect_to root_path, notice: 'Você não é um aluno.' unless current_user.student?
   end
 end

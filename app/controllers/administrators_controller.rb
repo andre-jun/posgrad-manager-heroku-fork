@@ -17,7 +17,7 @@ class AdministratorsController < ApplicationController
 
   def update
     if @administrator.update(administrator_params)
-      redirect_to adm_home_path, notice: 'Profile was successfully updated!'
+      redirect_to adm_home_path, notice: 'Perfil foi atualizado com sucesso!'
     else
       render :home, status: :unprocessable_entity
     end
@@ -55,7 +55,7 @@ class AdministratorsController < ApplicationController
   end
 
   def check_permissions
-    redirect_to root_path, notice: "You're not an administrator." unless current_user.administrator?
+    redirect_to root_path, notice: 'Você não é um administrador.' unless current_user.administrator?
   end
 
   def set_students

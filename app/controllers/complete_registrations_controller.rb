@@ -16,7 +16,7 @@ class CompleteRegistrationsController < ApplicationController
     @user = current_user
 
     if @user.update(complete_params.merge(first_login: true))
-      redirect_to root_path, notice: 'Cadastro completado!'
+      redirect_to root_path, notice: 'Cadastro completo'
     else
       render :show, status: :unprocessable_entity
     end
