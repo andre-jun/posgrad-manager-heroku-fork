@@ -1,5 +1,21 @@
-<div>
-    <%= @user.email %>
-    <%= @user.contact_info&.phone_number %>
-    <%= @user.contact_info&.room_number %>
+<div class="p-5 center flex-column mx-auto spacing-y-5 border border-radius-rounded border-2 border-purple-700">
+    <div class="text-center spacing-y-5 md-5">
+        <h1 class="font-bold text-xl"> Meios de Contato de <%= @user.full_name %> </h1>
+    </div>
+
+    <div class="text-center">
+        <% if @user&.email != nil %>
+            <p><strong>Email: </strong> <%= @user.email %></p>
+        <% end%>
+        <% if @user.contact_info&.phone_number != nil %>
+            <p><strong>Telefone: </strong> <%= @user.contact_info&.phone_number %> </p>
+        <% end%>
+        <% if @user.contact_info&.room_number != nil %>
+            <p><strong>Número da Sala: </strong><%= @user.contact_info&.room_number %></p>
+        <% end%>
+    </div>
+
+    <div class="text-center m-5">
+        <%= link_to "Voltar", root_path, data: { turbo: false }, class: "bg-blue-600 hover:bg-blue-700 text-white text-sm font-semibold px-4 py-2 rounded-md" %>
+    </div>
 </div>

@@ -7,7 +7,7 @@
     Relatório - <%= @report.semester %>º Semestre / <%= @report.year %>
   </h1>
 
-  <%= button_to "Baixar em PDF", export_pdf_path(id: @report_info.id)%>
+  <!-- <%= link_to "Baixar em PDF", export_pdf_path(id: @report_info.id)%> -->
 
   <div class="text-gray-700 space-y-1">
     <p><strong>Aluno:</strong> <%= @student.user.name %></p>

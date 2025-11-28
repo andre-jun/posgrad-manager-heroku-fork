@@ -70,6 +70,29 @@ class ReportsController < ApplicationController
     redirect_to adm_home_path, notice: 'Relatório removido!'
   end
 
+  # def export_pdf
+  #   @report_info = ReportInfo.find(params[:id])
+  #   @report = @report_info.report
+  #   @answers = @report_info.report_field_answers.includes(:report_field)
+  #   @student = @report_info.student
+  #   Prawn::Document.generate("relatorio.pdf") do
+  #     text @student.user&.full_name
+  #     text @student.user&.email
+  #     text @student.program_level
+  #     text @student.professor&.user&.full_name
+  #     text Time.current.strftime("%d/%m/%Y às %I:%M %p")
+  #     text "respostas:"
+  #     @answers.each do |ans|
+  #           text ans.report_field.question
+  #           text ans.answer.presence
+  #           text ans.report_field.required
+  #           text "----------"
+  #     end
+
+  #     text "Hello World!"
+  #   end
+  # end
+
   def export_pdf
     @report_info = ReportInfo.find(params[:id])
     @report = @report_info.report

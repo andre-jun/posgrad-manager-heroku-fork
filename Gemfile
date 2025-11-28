@@ -38,6 +38,7 @@ gem 'tailwindcss-rails', '~> 4.4'
 gem 'wicked_pdf'
 # gem 'wkhtmltopdf-binary'
 gem 'deep_cloneable'
+# gem 'prawn'
 
 # gemas que tão nos slides de esi e parecem legais pra testar metrica
 gem 'railroady'

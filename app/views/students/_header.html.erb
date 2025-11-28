@@ -21,7 +21,7 @@
     <p class="font-semibold text-blue-700"><%= @student.user&.name %></p>
   </div>
 
-  <%= link_to 'Editar Perfil', edit_student_path(@student), data: { turbo: false }, class: "bg-blue-600 hover:bg-blue-700 text-white text-sm font-semibold px-4 py-2 rounded-md" %>
+  <!-- <%= link_to 'Editar Perfil', edit_student_path(@student), data: { turbo: false }, class: "bg-blue-600 hover:bg-blue-700 text-white text-sm font-semibold px-4 py-2 rounded-md" %> -->
   <% if current_user.professor? %>
     <%= link_to "Visão de Professor", professor_home_path, data: { turbo: false }, class: "bg-green-600 hover:bg-green-700 text-white text-sm font-semibold px-4 py-2 rounded-md" %>
   <% end %>
