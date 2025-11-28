@@ -12,7 +12,7 @@
 
     <p>
       <strong>Enviado em:</strong>
-      <%= l(report_info.date_sent, format: :numeric, default: "-") %>
+      <%= l(@report_info.date_sent, format: :numeric, default: "-") %>
     </p>
 
     <p>
@@ -27,7 +27,7 @@
 
     <p>
       <strong>Avaliado em:</strong>
-      <%= l(report_info.review_date, format: :numeric, default: "-") %>
+      <%= l(@report_info.review_date, format: :numeric, default: "-") %>
     </p>
   </div>
   <div>
@@ -35,7 +35,7 @@
     <%= @report_info.professor_comments || "-" %>
   </div>
 
-    <% if current_user.professor? && @report_info.review_professor == 'Pendente' %>
+    <% if current_user.professor? && @report_info.status == 'Sent' %>
       <%= link_to "Avaliar", professor_submit_review_report_info_path(@report_info), 
         class: "px-4 py-2 bg-teal-600 hover:bg-teal-700 text-white rounded transition duration-300" %>
     <% end %>

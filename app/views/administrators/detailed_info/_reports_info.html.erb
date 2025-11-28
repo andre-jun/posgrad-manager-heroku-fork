@@ -35,8 +35,7 @@
   <div class="flex gap-3 mt-2">
 
     <!-- Visualizar respostas -->
-    <%= link_to "Visualizar",
-        report_answers_path(report_info_id: report.id),
+    <%= link_to "Visualizar", report_info_path(report),  data: { turbo: false},
         class: "px-3 py-1 bg-purple-600 text-white rounded hover:bg-purple-700" %>
 
     <!-- Baixar PDF -->
