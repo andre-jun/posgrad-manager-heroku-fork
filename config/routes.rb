@@ -44,7 +44,7 @@ Rails.application.routes.draw do
   get 'up' => 'rails/health#show', as: :rails_health_check
 
   post :change_professor, to: 'students#change_professor'
-  get 'export_pdf', to: 'administrators#export_pdf', as: 'export_pdf'
+  get 'export_pdf', to: 'reports#export_pdf', as: 'export_pdf'
   get 'contact_info', to: 'users#contact_info', as: 'contact_info'
   get 'new_report_options', to: 'reports#new_report_options', as: 'new_report_options'
   post :copy_and_create, to: 'reports#copy_and_create', as: 'copy_and_create'
@@ -52,12 +52,9 @@ Rails.application.routes.draw do
   get 'student_send_report', to: 'students#send_report', as: 'student_send_report'
   get 'professor_send_report', to: 'professors#send_report', as: 'professor_send_report'
   get 'administrator_send_report', to: 'administrators#send_report', as: 'administrator_send_report'
-  # get 'administrator_send_report', to: 'reports#send_report', as: 'administrator_send_report'
 
   # esse aqui é só pra simular uma aba, dps vai virar só um parcial eu acho
   get 'professor_report_temp', to: 'professors#temp_report', as: 'prof_temp'
-
-  get 'export_pdf_view', to: 'reports#export_pdf_view', as: 'export_pdf_view'
 
   # tem que fazer o root directionar pra home certa dependendo do tipo de usuario
   root to: 'application#root_redirect'

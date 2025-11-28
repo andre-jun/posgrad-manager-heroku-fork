@@ -23,21 +23,6 @@ class AdministratorsController < ApplicationController
     end
   end
 
-  # Exportar PDF com listas, relatórios etc.
-  def export_pdf
-    respond_to do |format|
-      format.html
-      format.pdf do
-        render pdf: 'students_list',
-               template: 'reports/export_pdf',
-               formats: %i[html pdf],
-               layout: false,
-               page_size: 'A4',
-               margin: { top: 10, bottom: 10, left: 10, right: 10 },
-               disposition: 'attachment'
-      end
-    end
-  end
 
   def send_report
     @send = ReportInfo.find(params[:id])

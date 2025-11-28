@@ -1,0 +1,127 @@
+<%# Aqui é só um template que eu achei genericão, pode mudar o quanto quiser (inclusive o nome que salva) %>
+
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <title>Students List</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      margin: 20px;
+    }
+    h3 {
+      color: #fb9212ff;
+      text-align: center;
+      margin-bottom: 10px;
+    }
+    h1 {
+      color: #2563eb;
+      text-align: center;
+      margin-bottom: 10px;
+    }
+    h2 {
+      color: #0c2762ff;
+      text-align: center;
+      margin-bottom: 20px;
+    }
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      margin-top: 20px;
+    }
+    th {
+      background-color: #2563eb;
+      color: white;
+      padding: 12px;
+      text-align: left;
+      font-weight: bold;
+    }
+    td {
+      padding: 10px;
+      border-bottom: 1px solid #ddd;
+    }
+    tr:nth-child(even) {
+      background-color: #f9fafb;
+    }
+    tr:hover {
+      background-color: #f3f4f6;
+    }
+    .footer {
+      margin-top: 30px;
+      text-align: center;
+      color: #6b7280;
+      font-size: 12px;
+    }
+    .result {
+      text-align: center;
+      margin-bottom: 20px;
+    }
+    .final-grade{
+      color: #f200ffff;
+      font-size: 20px;
+    }
+    .summary {
+      margin-bottom: 20px;
+      padding: 10px;
+      background-color: #eff6ff;
+      border-left: 4px solid #2563eb;
+    }
+  </style>
+</head>
+<body>
+  <h3>EACH-USP SI</h3>
+  <h1>Relatório Semestral</h1>
+  <h2><%= @report.semester %>º Semestre <%= @report.year %></h2>
+
+  <div class="result">
+    <p>Resultado:</p>
+    <div class="final-grade">
+      <p><strong><%= @report_info.review_administrator %></strong></p>
+    </div>
+    <p><strong>Comentário da CCP:</strong> <%= @report_info.administrator_comments %></p>
+    <p><strong>Avaliação do Orientador:</strong> <%= @report_info.review_professor %></p>
+    <p><strong>Comentário do Orientador:</strong> <%= @report_info.professor_comments %></p>
+    <p><strong>Avaliado pelo Orientador em:</strong> <%= @report_info.review_date.strftime("%d/%m/%Y às %I:%M %p") %></p>
+  </div>
+  
+  <div class="summary">
+    <p><strong>Aluno:</strong> <%= @student.user&.full_name %></p>
+    <p><strong>Email:</strong> <%= @student.user&.email %></p>
+    <p><strong>Curso:</strong> <%= @student.program_level %></p>
+    <p><strong>Orientador:</strong> <%= @student.professor&.user&.full_name %></p>
+    <p><strong>Gerado em:</strong> <%= Time.current.strftime("%d/%m/%Y às %I:%M %p") %></p>
+  </div>
+
+  <table>
+    <thead>
+      <tr>
+        <th>Questão</th>
+        <th>Resposta</th>
+        <th>Obrigatória?</th>
+
+      </tr>
+    </thead>
+    <tbody>
+        <% @answers.each do |ans| %>
+        <tr>
+          <td><%= ans.report_field.question %></td>
+          <td><%= ans.answer.presence %></td>
+          <% required = 
+            case ans.report_field.required.to_s.downcase
+            when 'false' then 'Falso'
+            when 'true' then 'Verdadeiro'
+            else 'Erro ao renderizar'
+            end
+          %>
+          <td><%= required  %></td>
+        </tr>
+        <%end%>
+    </tbody>
+  </table>
+
+  <div class="footer">
+    <p>Este documento foi gerado automaticamente pelo Sistema de Relatórios Semestrais</p>
+  </div>
+</body>
+</html>

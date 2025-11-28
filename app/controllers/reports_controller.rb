@@ -3,9 +3,12 @@ class ReportsController < ApplicationController
   before_action :set_report, only: %i[show edit update destroy]
   before_action :check_permissions, only: %i[new create]
 
-  def export_pdf_view
-    @student = Student.first
-  end
+  # def export_pdf
+  #   @report_info = ReportInfo.find(params[:id])
+  #   @report = @report_info.report
+  #   @answers = @report_info.report_field_answers.includes(:report_field)
+  #   @student = @report_info.student
+  # end
 
   def show
     @report = Report.find(params[:id])
@@ -65,6 +68,26 @@ class ReportsController < ApplicationController
   def destroy
     @report.destroy
     redirect_to adm_home_path, notice: 'Relatório removido!'
+  end
+
+  def export_pdf
+    @report_info = ReportInfo.find(params[:id])
+    @report = @report_info.report
+    @answers = @report_info.report_field_answers.includes(:report_field)
+    @student = @report_info.student
+    
+    respond_to do |format|
+      format.html
+      format.pdf do
+        render pdf: 'relatorio_semestral',
+               template: 'reports/export_pdf',
+               formats: %i[html pdf],
+               layout: false,
+               page_size: 'A4',
+               margin: { top: 10, bottom: 10, left: 10, right: 10 },
+               disposition: 'attachment'
+      end
+    end
   end
 
   private

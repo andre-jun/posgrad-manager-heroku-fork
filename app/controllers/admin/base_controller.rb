@@ -1,7 +1,6 @@
 module Admin
   class BaseController < ApplicationController
     before_action :authenticate_user!
-    skip_before_action :check_first_login
 
     before_action :ensure_admin!
 
