@@ -93,6 +93,8 @@
   <div class="pt-6 text-center flex-center space-x-10">
     <%= form.submit "Adicionar questão", class: "bg-orange-500 hover:bg-blue-700 text-white font-semibold px-8 py-3 rounded-lg shadow-lg transition duration-200" %>
 
-    <%= form.submit "Confirmar", class: "bg-blue-600 hover:bg-blue-700 text-white font-semibold px-8 py-3 rounded-lg shadow-lg transition duration-200" %>
+    <%= form.submit "Confirmar", 
+      class: "bg-blue-600 hover:bg-blue-700 text-white font-semibold px-8 py-3 rounded-lg shadow-lg transition duration-200",
+      onclick: "alert('Rascunho salvo com sucesso!')" %>
   </div>
 <% end %>
