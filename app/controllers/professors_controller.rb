@@ -47,7 +47,7 @@ class ProfessorsController < ApplicationController
 
   def send_report
     @send = ReportInfo.find(params[:id])
-    if @send.update(owner: 'Administrator', status: 'Review', review_date: Date.current)
+    if @send.update(status: 'Review', review_date: Date.current)
       redirect_to professor_home_path, notice: 'Relatório avaliado!'
     else
       redirect_to professor_home_path, notice: 'Ocorreu algum erro e o relatório não pode ser avaliado.'
@@ -61,8 +61,7 @@ class ProfessorsController < ApplicationController
 
   def calculate_reports_due
     # é due pra esse professor fazer ou os estudantes que tão devendo??
-    # trocar owner?
-    @reports_due = Report.where(owner: 'Professor',
+    @reports_due = Report.where(status: 'Sent',
                                 id: ReportInfo.where(reviewer_id: Professor.first.id).pluck(:report_id))
   end
 

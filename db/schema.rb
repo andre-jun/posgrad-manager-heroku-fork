@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[8.1].define(version: 2025_11_26_221019) do
+ActiveRecord::Schema[8.1].define(version: 2025_11_28_031218) do
   create_table "administrators", force: :cascade do |t|
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
@@ -79,10 +79,9 @@ ActiveRecord::Schema[8.1].define(version: 2025_11_26_221019) do
   end
 
   create_table "report_infos", force: :cascade do |t|
-    t.string "coordinator_comments"
+    t.string "administrator_comments"
     t.datetime "created_at", null: false
     t.date "date_sent"
-    t.string "owner", default: "Student"
     t.string "professor_comments"
     t.integer "report_id", null: false
     t.string "review_administrator", default: "Pendente"

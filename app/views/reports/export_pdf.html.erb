@@ -10,10 +10,20 @@
       font-family: Arial, sans-serif;
       margin: 20px;
     }
+    h3 {
+      color: #fb9212ff;
+      text-align: center;
+      margin-bottom: 10px;
+    }
     h1 {
       color: #2563eb;
       text-align: center;
-      margin-bottom: 30px;
+      margin-bottom: 10px;
+    }
+    h2 {
+      color: #0c2762ff;
+      text-align: center;
+      margin-bottom: 20px;
     }
     table {
       width: 100%;
@@ -43,6 +53,14 @@
       color: #6b7280;
       font-size: 12px;
     }
+    .result {
+      text-align: center;
+      margin-bottom: 20px;
+    }
+    .final-grade{
+      color: #f200ffff;
+      font-size: 20px;
+    }
     .summary {
       margin-bottom: 20px;
       padding: 10px;
@@ -52,40 +70,58 @@
   </style>
 </head>
 <body>
-  <h1>Students List</h1>
-  <h1>AQUI É COMPLETAMENTE TEMPORÁRIO</h1>
+  <h3>EACH-USP SI</h3>
+  <h1>Relatório Semestral</h1>
+  <h2><%= @report.semester %>º Semestre <%= @report.year %></h2>
+
+  <div class="result">
+    <p>Resultado:</p>
+    <div class="final-grade">
+      <p><strong><%= @report_info.review_administrator %></strong></p>
+    </div>
+    <p><strong>Comentário da CCP:</strong> <%= @report_info.administrator_comments %></p>
+    <p><strong>Avaliação do Orientador:</strong> <%= @report_info.review_professor %></p>
+    <p><strong>Comentário do Orientador:</strong> <%= @report_info.professor_comments %></p>
+    <p><strong>Avaliado pelo Orientador em:</strong> <%= @report_info.review_date.strftime("%d/%m/%Y às %I:%M %p") %></p>
+  </div>
   
   <div class="summary">
-    <p><strong>Total Students:</strong> <%= @students.count %></p>
-    <p><strong>Generated:</strong> <%= Time.current.strftime("%B %d, %Y at %I:%M %p") %></p>
+    <p><strong>Aluno:</strong> <%= @student.user&.full_name %></p>
+    <p><strong>Email:</strong> <%= @student.user&.email %></p>
+    <p><strong>Curso:</strong> <%= @student.program_level %></p>
+    <p><strong>Orientador:</strong> <%= @student.professor&.user&.full_name %></p>
+    <p><strong>Gerado em:</strong> <%= Time.current.strftime("%d/%m/%Y às %I:%M %p") %></p>
   </div>
 
   <table>
     <thead>
       <tr>
-        <th>ID</th>
-        <th>Name</th>
-        <th>Email</th>
-        <th>Status</th>
-        <th>Program Level</th>
-        <th>Lattes</th>
+        <th>Questão</th>
+        <th>Resposta</th>
+        <th>Obrigatória?</th>
+
       </tr>
     </thead>
     <tbody>
-      <% @students.each do |student| %>
+        <% @answers.each do |ans| %>
         <tr>
-          <td><%= student.id %></td>
-          <td><%= student.user.name %></td>
-          <td><%= student.user.email %></td>
-          <td><%= student.user.status %></td>
-          <td><%= student.lattes_link %></td>
+          <td><%= ans.report_field.question %></td>
+          <td><%= ans.answer.presence %></td>
+          <% required = 
+            case ans.report_field.required.to_s.downcase
+            when 'false' then 'Falso'
+            when 'true' then 'Verdadeiro'
+            else 'Erro ao renderizar'
+            end
+          %>
+          <td><%= required  %></td>
         </tr>
-      <% end %>
+        <%end%>
     </tbody>
   </table>
 
   <div class="footer">
-    <p>This document was automatically generated from the Students Management System</p>
+    <p>Este documento foi gerado automaticamente pelo Sistema de Relatórios Semestrais</p>
   </div>
 </body>
 </html>
