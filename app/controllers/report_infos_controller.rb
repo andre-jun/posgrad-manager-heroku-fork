@@ -1,6 +1,8 @@
 class ReportInfosController < ApplicationController
   before_action :authenticate_user!
-  before_action :set_report_info, only: %i[edit update show professor_submit_review submit_review]
+  before_action :set_report_info,
+                only: %i[edit update show professor_submit_review submit_review administrator_submit_review
+                         submit_admin_review]
   before_action :ensure_student_access, only: %i[edit update]
   before_action :ensure_professor_access, only: %i[professor_submit_review]
 
@@ -42,17 +44,33 @@ class ReportInfosController < ApplicationController
     @answers = @report_info.report_field_answers.includes(:report_field)
   end
 
+  def administrator_submit_review
+    @report_info = ReportInfo.find(params[:id])
+  end
+
   def submit_review
     if @report_info.update(
       review_professor: params[:report_info][:review_professor],
       professor_comments: params[:report_info][:professor_comments],
       review_date: Time.current,
       reviewer_id: current_user.professor.id,
-      status: 'reviewed'
+      status: 'Reviewed'
     )
       redirect_to report_info_path(@report_info), notice: 'Avaliação enviada com sucesso!'
     else
       redirect_to professor_submit_review_report_info_path(@report_info), alert: 'Erro ao enviar avaliação.'
+    end
+  end
+
+  def submit_admin_review
+    if @report_info.update(
+      review_administrator: params[:report_info][:review_administrator],
+      coordinator_comments: params[:report_info][:coordinator_comments],
+      status: 'Completed'
+    )
+      redirect_to report_info_path(@report_info), notice: 'Avaliação do administrador enviada com sucesso!'
+    else
+      redirect_to administrator_submit_review_report_info_path(@report_info), alert: 'Erro ao enviar avaliação.'
     end
   end
 

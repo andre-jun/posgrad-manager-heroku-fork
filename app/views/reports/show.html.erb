@@ -30,41 +30,6 @@
   </div>
   -->
 
-  <!-- Alunos que precisam avaliar -->
-  <div class="space-y-3">
-    <h2 class="text-xl font-bold text-indigo-700">
-      Alunos que precisam avaliar (<%= @reports_to_review&.count || 0 %>/<%= @reports_done&.count || 0 %>)
-    </h2>
-
-    <div class="space-y-3 border rounded-md p-4">
-      <% if @reports_to_review.present? %>
-        <%= render partial: "/administrators/detailed_info/reports_info",
-                   collection: @reports_to_review,
-                   as: :report %>
-      <% else %>
-        <p class="text-gray-500 italic">Nenhuma resposta ainda.</p>
-      <% end %>
-    </div>
-  </div>
-
-  <!-- Avaliação do professor pendente -->
-  <div class="space-y-3">
-    <h2 class="text-xl font-bold text-yellow-700">
-      Avaliação do professor pendente (<%= @reports_in_progress&.count || 0 %>/<%= @report.report_infos&.count %>)
-    </h2>
-
-    <div class="space-y-3 border rounded-md p-4">
-      <% if @reports_in_progress.present? %>
-        <%= render partial: "/administrators/detailed_info/reports_info",
-                   collection: @reports_in_progress,
-                   as: :report %>
-      <% else %>
-        <p class="text-gray-500 italic">Nenhuma pendência :)</p>
-      <% end %>
-    </div>
-  </div>
-
-  <!-- Alunos que ainda não responderam -->
   <div class="space-y-3">
     <h2 class="text-xl font-bold text-red-700">
       Alunos que ainda não responderam (<%= @reports_pending.count %>)
@@ -76,7 +41,55 @@
                    collection: @reports_pending,
                    as: :report %>
       <% else %>
-        <p class="text-gray-500 italic">Todos já responderam :)</p>
+        <p class="text-gray-500 italic">Todos já enviaram :)</p>
+      <% end %>
+    </div>
+  </div>
+
+  <div class="space-y-3">
+    <h2 class="text-xl font-bold text-yellow-700">
+      Avaliação do professor pendente (<%= @reports_to_review.count %>)
+    </h2>
+
+    <div class="space-y-3 border rounded-md p-4">
+      <% if @reports_to_review.present? %>
+        <%= render partial: "/administrators/detailed_info/reports_info",
+                   collection: @reports_to_review,
+                   as: :report %>
+      <% else %>
+        <p class="text-gray-500 italic">Nenhuma pendência :)</p>
+      <% end %>
+    </div>
+  </div>
+
+  <div class="space-y-3">
+    <h2 class="text-xl font-bold text-indigo-700">
+      Avaliação do administrador pendente (<%= @reports_in_progress.count %>)
+    </h2>
+
+    <div class="space-y-3 border rounded-md p-4">
+      <% if @reports_in_progress.present? %>
+        <%= render partial: "/administrators/detailed_info/reports_info",
+                   collection: @reports_in_progress,
+                   as: :report %>
+      <% else %>
+        <p class="text-gray-500 italic">Nenhuma avaliação registrada ainda.</p>
+      <% end %>
+    </div>
+  </div>
+
+  <div class="space-y-3">
+    <h2 class="text-xl font-bold text-green-700">
+      Avaliados pelo administrador (<%= @reports_done.count %>)
+    </h2>
+
+    <div class="space-y-3 border rounded-md p-4">
+      <% if @reports_done.present? %>
+        <%= render partial: "/administrators/detailed_info/reports_info",
+                   collection: @reports_done,
+                   as: :report %>
+      <% else %>
+        <p class="text-gray-500 italic">Nenhum relatório finalizado ainda.</p>
       <% end %>
     </div>
   </div>

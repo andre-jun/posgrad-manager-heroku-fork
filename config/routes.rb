@@ -28,6 +28,7 @@ Rails.application.routes.draw do
       get :professor_submit_review
       get :administrator_submit_review
       post :submit_review
+      post :submit_admin_review
     end
   end
   resources :publications

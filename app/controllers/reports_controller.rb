@@ -6,10 +6,13 @@ class ReportsController < ApplicationController
   def show
     @report = Report.find(params[:id])
 
-    @reports_done = @report.report_infos.where(status: %w[Completed Aprovado])
-    @reports_to_review = @report.report_infos.where(status: 'Sent') # aluno enviou
-    @reports_in_progress = @report.report_infos.where(status: 'Sent') # prof pendente
-    @reports_pending = @report.report_infos.where(status: 'Draft') # aluno não respondeu
+    @reports_pending = @report.report_infos.where(status: 'Draft')
+
+    @reports_to_review = @report.report_infos.where(status: 'Sent')
+
+    @reports_in_progress = @report.report_infos.where(status: 'Reviewed')
+
+    @reports_done = @report.report_infos.where(status: %w[Completed Approved])
   end
 
   def index
