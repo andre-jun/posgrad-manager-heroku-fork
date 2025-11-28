@@ -1,7 +1,7 @@
 <div class="outline p-6 bg-white rounded-md shadow-md w-full space-y-6">
 
   <div class="flex justify-between items-center w-full">
-    <%= link_to "Visualizar", report, class: "text-blue-600 hover:underline font-semibold" %>
+    <%= link_to "Visualizar", report,  data: { turbo: false}, class: "text-blue-600 hover:underline font-semibold" %>
     <%= button_to "Deletar relatório", report, method: :delete, 
           class: "text-red-600 hover:text-red-800 font-semibold", 
           data: { confirm: "Are you sure?" } %>

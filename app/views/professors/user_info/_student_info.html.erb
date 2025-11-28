@@ -5,8 +5,7 @@
         <p class="text-sm text-gray-600">USP: <%= student.user.nusp %></p>
       </div>
       <div class="flex space-x-2">
-        <!-- por favor arruma esse link T_T -->
-        <%= link_to contact_info_path(user_id: student.user),
+        <%= link_to contact_info_path(user_id: student.user), data: { turbo: false},
           class: "flex items-center space-x-1 text-gray-700 bg-white
             hover:bg-gray-100 hover:text-gray-900
             border border-gray-300 rounded px-3 py-1 text-sm
