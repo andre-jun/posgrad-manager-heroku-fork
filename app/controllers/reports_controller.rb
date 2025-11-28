@@ -12,7 +12,7 @@ class ReportsController < ApplicationController
 
     @reports_in_progress = @report.report_infos.where(status: 'Reviewed')
 
-    @reports_done = @report.report_infos.where(status: %w[Completed Approved])
+    @reports_done = @report.report_infos.where(status: 'Archived')
   end
 
   def index

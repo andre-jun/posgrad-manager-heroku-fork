@@ -21,7 +21,7 @@ class ProfessorsController < ApplicationController
 
     @reproval_count = ReportInfo.where(
       student_id: student_ids,
-      review_administrator: ['Adequado com Ressalvas', 'Insatisfatório']
+      review_administrator: ['ADEQUADO COM RESSALVAS', ' INSATISFATÓRIO']
     ).count
   end
 

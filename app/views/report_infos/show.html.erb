@@ -34,6 +34,10 @@
     <strong>Comentario do professor:</strong>
     <%= @report_info.professor_comments || "-" %>
   </div>
+  <div>
+    <strong>Comentario da Coordenacao:</strong>
+    <%= @report_info.coordinator_comments || "-" %>
+  </div>
 
     <% if current_user.professor? && @report_info.status == 'Sent' %>
       <%= link_to "Avaliar", professor_submit_review_report_info_path(@report_info), 
