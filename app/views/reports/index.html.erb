@@ -1,12 +1,14 @@
-<div class="grid">
-    <h1 class="text-xl font-bold"> Relatórios antigos </h1>
+<%= turbo_frame_tag "tab_content" do %>
+    <div class="grid">
+        <h1 class="text-xl font-bold"> Relatórios antigos </h1>
 
-    <div class="space-y-3">
-        <% if @reports.any? %>
-            <%= render partial: "mini_report", collection: @reports, as: :report %>
-        <% else %>
-            <p class="text-gray-500 italic">Nenhum relatório ainda.</p>
-        <% end %>
+        <div class="space-y-3">
+            <% if @reports.any? %>
+                <%= render partial: "mini_report", collection: @reports, as: :report %>
+            <% else %>
+                <p class="text-gray-500 italic">Nenhum relatório ainda.</p>
+            <% end %>
+        </div>
+
     </div>
-
-</div>
+<% end %>

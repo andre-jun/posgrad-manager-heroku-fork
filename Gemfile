@@ -37,7 +37,13 @@ gem 'rails_autolink'
 gem 'tailwindcss-rails', '~> 4.4'
 gem 'wicked_pdf'
 # gem 'wkhtmltopdf-binary'
-gem "deep_cloneable"
+gem 'deep_cloneable'
+
+# gemas que tão nos slides de esi e parecem legais pra testar metrica
+gem 'railroady'
+# gem 'metric_fu'
+gem 'flog'
+# gem 'saikuro'
 
 group :development, :test do
   gem 'brakeman', require: false
@@ -49,6 +55,10 @@ end
 group :development do
   gem 'web-console'
 end
+
+gem 'devise-i18n'
+gem 'rails-i18n'
+gem 'rubyzip'
 
 group :test do
   gem 'capybara'

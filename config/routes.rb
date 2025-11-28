@@ -9,14 +9,29 @@ Rails.application.routes.draw do
     resources :administrators, only: %i[new create edit update]
   end
 
-  resources :students, only: %i[edit update]
-  resources :professors, only: %i[edit update] do
+  resources :students, only: %i[show edit update]
+  resources :professors, only: %i[show edit update] do
     member do
       get :student_info
     end
   end
 
-  resources :reports
+  resources :reports do
+    collection do
+      get :options
+    end
+
+    post :duplicate, on: :member
+  end
+  resources :report_infos, only: %i[show edit update] do
+    member do
+      get :professor_submit_review
+      get :administrator_submit_review
+      post :submit_review
+      post :submit_admin_review
+    end
+  end
+  resources :publications
 
   devise_for :users, skip: [:registrations], controllers: {
     sessions: 'users/sessions'
@@ -43,9 +58,5 @@ Rails.application.routes.draw do
   get 'professor_report_temp', to: 'professors#temp_report', as: 'prof_temp'
 
   # tem que fazer o root directionar pra home certa dependendo do tipo de usuario
-  authenticated :user do
-    root to: 'pages#home', as: :authenticated_user_root
-  end
-
-  root 'pages#home'
+  root to: 'application#root_redirect'
 end

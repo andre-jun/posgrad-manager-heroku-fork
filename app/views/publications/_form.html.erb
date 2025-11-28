@@ -1,0 +1,46 @@
+<%= form_with(model: publication, local: true, class: "space-y-10 max-w-3xl mx-auto") do |form| %>
+  <% if publication.errors.any? %>
+    <div class="bg-red-100 border border-red-400 text-red-700 px-6 py-4 rounded-lg">
+      <h2 class="font-semibold mb-3 text-lg">
+        <%= pluralize(publication.errors.count, "error") %> proibiu esta publicação de ser salva:
+      </h2>
+      <ul class="list-disc list-inside space-y-1 ml-4">
+        <% publication.errors.full_messages.each do |message| %>
+          <li><%= message %></li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="grid grid-cols-1 sm:grid-cols-2 gap-6">
+    <div>
+      <%= form.label :title, "Título", class: "block text-gray-800 font-semibold mb-2" %>
+      <%= form.text_field :title, class: "w-full border border-gray-300 rounded-lg px-4 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500" %>
+    </div>
+
+    <div>
+      <%= form.label :abstract, "Resumo", class: "block text-gray-800 font-semibold mb-2" %>
+      <%= form.text_field :abstract, class: "w-full border border-gray-300 rounded-lg px-4 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500" %>
+    </div>
+
+    <div>
+      <%= form.label :link, "Link", class: "block text-gray-800 font-semibold mb-2" %>
+      <%= form.url_field :link, class: "w-full border border-gray-300 rounded-lg px-4 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500" %>
+    </div>
+
+    <div>
+      <%= form.label :publication_date, "Data de Publicação", class: "block text-gray-800 font-semibold mb-2" %>
+      <%= form.date_field :publication_date, class: "w-full border border-gray-300 rounded-lg px-4 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500" %>
+    </div>
+
+    <div>
+      <%= form.label :professor_id, "Orientador", class: "block text-gray-800 font-semibold mb-2" %>
+      <%= form.collection_select :professor_id, Professor.includes(:user), :id, :full_name, { prompt: "Escolha um professor" }, class: "border rounded px-3 py-2 w-full" %>
+    </div>
+  </div>
+
+
+  <div class="pt-6 text-center flex-center space-x-10">
+    <%= form.submit "Confirmar", class: "bg-blue-600 hover:bg-blue-700 text-white font-semibold px-8 py-3 rounded-lg shadow-lg transition duration-200" %>
+  </div>
+<% end %>

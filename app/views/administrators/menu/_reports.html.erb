@@ -1,23 +1,32 @@
-<div>
-    ----------- RELATÓRIOS ------------
+<div class="mb-6 border-b border-gray-300 pb-3">
+  <h2 class="text-3xl font-extrabold text-gray-900">Relatórios</h2>
 </div>
 
-<div>
-    <!-- > Menu pra criar relatorio novo vai ficar aqui < -->
-    <p>
-        <%= link_to "Criar relatório", new_report_options_path, class:"text-red-500 border border-red-500 hover:bg-red-500 hover:text-white px-3 py-1 rounded text-xs" %>
-    </p>
-    -------------------------
+<div class="flex items-center justify-between mb-6">
+  <%= link_to "Criar relatório", options_reports_path, data: { turbo_frame: "tab_content" },
+    class: "inline-block bg-red-600 text-white px-4 py-2 rounded-md text-sm font-semibold shadow hover:bg-red-700 transition" %>
+
+  <!-- ver como fazer -->
+  <!-- [bookmark] -->
+  <div class="flex space-x-4 text-sm text-gray-600">
+    <!-- 
+    <select class="border border-gray-300 rounded-md px-2 py-1 focus:outline-none focus:ring-1 focus:ring-red-500" aria-label="Filtrar por Status">
+      <option value="">Status</option>
+      <option>Em andamento</option>
+      <option>Concluído</option>
+    </select>
+    <select class="border border-gray-300 rounded-md px-2 py-1 focus:outline-none focus:ring-1 focus:ring-red-500" aria-label="Filtrar por Período">
+      <option value="">Período</option>
+      <option>ver como fazer</option>
+    </select>
+      -->
+  </div>
 </div>
 
-<div class="space-y-3">
-    <p> Relatórios </p>
-    <!-- Adicionar um jeito de filtrar os reports aqui -->
-    <!-- Por status, orientador, aluno, período -->
-    <!-- Mesma coisa para filtros (e com ano/semestre aqui tbm) -->
-    <% if @reports.any? %>
-        <%= render partial: "/administrators/detailed_info/reports", collection: @reports, as: :report %>
-    <% else %>
-        <p class="text-gray-500 italic">Nenhum relatório ainda.</p>
-    <% end %>
+<div class="space-y-4 w-full max-w-4xl mx-auto">
+  <% if @reports.any? %>
+    <%= render partial: "/administrators/detailed_info/reports", collection: @reports, as: :report %>
+  <% else %>
+    <p class="text-gray-500 italic text-center py-10">Nenhum relatório encontrado.</p>
+  <% end %>
 </div>

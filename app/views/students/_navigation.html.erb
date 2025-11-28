@@ -1,23 +1,15 @@
 <section class="bg-blue-50 border border-blue-200 rounded-md px-4 py-3 text-blue-800 flex items-center justify-between space-x-2">
     <div class="flex items-center space-x-2">
-        <svg class="w-6 h-6" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
-        <path d="M12 12c2 0 2-2 4-2H8c0 2 2 2 4 2z"></path>
-        <circle cx="12" cy="12" r="10" stroke="none"></circle>
-        </svg>
-        <p><strong>Bem-vindo, <%= student.user.name %>!</strong> Navegue entre seu perfil e relatórios</p>
+        <p><strong>Bem-vindo, <%= student&.user&.name %>!</strong> Navegue entre seu perfil e relatórios</p>
     </div>
     <nav class="flex space-x-4 float-right">
         <% tabs = {
-            'profile' => { label: 'Perfil', color: 'blue' },
             'report' => { label: 'Relatório', color: 'orange' },
-            'history' => { label: 'Histórico', color: 'purple' }
+            'history' => { label: 'Histórico', color: 'purple' },
+            'profile' => { label: 'Perfil', color: 'blue' }
         } %>
 
         <% color_classes = {
-            "blue" => {
-                active: "bg-blue-600 text-white shadow",
-                inactive: "bg-blue-50 text-blue-700 hover:bg-blue-100"
-            },
             "orange" => {
                 active: "bg-orange-600 text-white shadow",
                 inactive: "bg-orange-50 text-orange-700 hover:bg-orange-100"
@@ -25,12 +17,16 @@
             "purple" => {
                 active: "bg-purple-600 text-white shadow",
                 inactive: "bg-purple-50 text-purple-700 hover:bg-purple-100"
+            },
+            "blue" => {
+                active: "bg-blue-600 text-white shadow",
+                inactive: "bg-blue-50 text-blue-700 hover:bg-blue-100"
             }
         } %>
 
         <% tabs.each do |key, tab| %>
             <% color = tab[:color] %>
-            <% active_tab = params[:tab].presence || "profile" %>
+            <% active_tab = params[:tab].presence || "report" %>
             <% classes = active_tab == key ? color_classes[color][:active] : color_classes[color][:inactive] %>
 
             <%= link_to student_home_path(tab: key),

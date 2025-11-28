@@ -1,0 +1,64 @@
+<div class="p-6 bg-white rounded-md shadow border border-gray-200 space-y-6">
+  <%= link_to "← Voltar",
+    current_user.student? ? student_home_path(tab: 'history') : professor_home_path,
+    class: "text-blue-600 hover:underline text-sm" %>
+
+  <h1 class="text-2xl font-bold text-gray-800">
+    Relatório - <%= @report.semester %>º Semestre / <%= @report.year %>
+  </h1>
+
+  <div class="text-gray-700 space-y-1">
+    <p><strong>Aluno:</strong> <%= @student.user.name %></p>
+
+    <p>
+      <strong>Enviado em:</strong>
+      <%= l(@report_info.date_sent, format: :numeric, default: "-") %>
+    </p>
+
+    <p>
+      <strong>Status:</strong>
+      <%= @report_info.status %>
+    </p>
+
+    <p>
+      <strong>Avaliado por:</strong>
+      <%= @report_info.reviewer&.user&.name || "Ainda não avaliado" %>
+    </p>
+
+    <p>
+      <strong>Avaliado em:</strong>
+      <%= l(@report_info.review_date, format: :numeric, default: "-") %>
+    </p>
+  </div>
+  <div>
+    <strong>Comentario do professor:</strong>
+    <%= @report_info.professor_comments || "-" %>
+  </div>
+  <div>
+    <strong>Comentario da Coordenacao:</strong>
+    <%= @report_info.coordinator_comments || "-" %>
+  </div>
+
+    <% if current_user.professor? && @report_info.status == 'Sent' %>
+      <%= link_to "Avaliar", professor_submit_review_report_info_path(@report_info), 
+        class: "px-4 py-2 bg-teal-600 hover:bg-teal-700 text-white rounded transition duration-300" %>
+    <% end %>
+
+  <hr>
+
+  <h2 class="text-xl font-semibold text-gray-800">Respostas enviadas</h2>
+
+  <div class="space-y-4">
+    <% @answers.each do |ans| %>
+      <div class="p-4 border rounded-md bg-gray-50">
+        <p class="font-semibold text-gray-800 mb-1">
+          <%= ans.report_field.question %>
+        </p>
+
+        <p class="text-gray-700 whitespace-pre-line">
+          <%= ans.answer.presence || "— Sem resposta —" %>
+        </p>
+      </div>
+    <% end %>
+  </div>
+</div>

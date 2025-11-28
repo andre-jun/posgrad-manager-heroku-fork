@@ -1,0 +1,43 @@
+<%= turbo_frame_tag "tab_content" do %>
+    <div>
+        <h1> Perfil do Docente </h1>
+
+        <!-- coisas de User -->
+        <div>
+            <p> Nome: <%= @professor.user&.full_name %> </p>
+            <p> Pronomes: <%= @professor.user&.pronoun %> </p>
+            <p> NUSP: <%= @professor.user&.nusp %> </p>
+            <p> Email: <%= @professor.user&.email %> </p>
+            <p> Status: <%= @professor.user&.status %> </p>
+        </div>
+
+        <!-- coisas de Professor -->
+        <div>
+            <p> Departamento: <%= @professor.department %> </p>
+            <p> Área de Pesquisa: <%= @professor.research_area %> </p>
+        </div>
+
+        <!-- Outras métricas -->
+        <div>
+            <p> Telefone: <%= @professor.contact_info&.phone_number %> </p>
+            <p> Sala: <%= @professor.contact_info&.room_number %> </p>
+        </div>
+
+        <!-- coisas de Publications -->
+        <div>
+            <p> Publicações: </p>
+            <% @professor.publications.each do |pub| %>
+                <p> Título: <%= pub.title %> </p>
+                <p> Resumo: <%= pub.abstract %> </p>
+                <p> Data: <%= pub.publication_date %> </p>
+                <p> Link: <%= pub.link %> </p>
+                <p> Aluno: <%= pub.student&.user&.full_name %> </p>
+            <% end %>
+        </div>
+
+    </div>
+    <%= link_to "Voltar",
+        adm_home_path(tab: 'faculty'),
+        data: { turbo_frame: "tab_content" },
+        class: "px-3 py-1 bg-gray-200 rounded hover:bg-gray-300" %>
+<% end %>

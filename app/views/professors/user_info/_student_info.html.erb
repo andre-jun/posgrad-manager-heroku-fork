@@ -1,24 +1,28 @@
 <turbo-frame id="student-info-panel">
   <div class="flex justify-between items-start">
       <div>
-        <h2 class="font-semibold text-lg"><%= student.user.name %> <%= student.user.surname %></h2>
+        <h2 class="font-semibold text-lg"><%= student.user&.full_name %></h2>
         <p class="text-sm text-gray-600">USP: <%= student.user.nusp %></p>
       </div>
       <div class="flex space-x-2">
-        <!-- por favor arruma esse link T_T -->
-        <%= link_to contact_info_path(user_id: student.user) do %>
-        <button type="button" class="flex items-center space-x-1 text-gray-700 hover:text-gray-900 focus:outline-none border border-gray-300 rounded px-3 py-1 text-sm">
-          <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M17 8h2a2 2 0 0 1 2 2v6a2 2 0 0 1-2 2h-2M7 8H5a2 2 0 0 0-2 2v6a2 2 0 0 0 2 2h2m5-11v4m0 4h.01"/></svg>
+        <%= link_to contact_info_path(user_id: student.user), data: { turbo: false},
+          class: "flex items-center space-x-1 text-gray-700 bg-white
+            hover:bg-gray-100 hover:text-gray-900
+            border border-gray-300 rounded px-3 py-1 text-sm
+            transition-colors duration-200" do %>
+
+          <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5"
+              fill="none" stroke="currentColor" stroke-width="2"
+              viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round"
+                  d="M17 8h2a2 2 0 0 1 2 2v6a2 2 0 0 1-2 2h-2M7 8H5a2 2 0 0 0-2 2v6a2 2 0 0 0 2 2h2m5-11v4m0 4h.01"/>
+          </svg>
+
           <span>Contatar</span>
-        </button>
         <% end %>
-        <button type="button" class="flex items-center space-x-1 text-gray-700 hover:text-gray-900 focus:outline-none border border-gray-300 rounded px-3 py-1 text-sm">
-          <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M12 4v16m8-8H4"/></svg>
-          <span>Gerar PDF</span>
-        </button>
       </div>
   </div>
   <%= render "professors/user_info/navigation", student: @student %>
   <% selected_tab = %w[geral academico historico].include?(params[:tab]) ? params[:tab] : 'geral' %>
-  <%= render "professors/user_info/tabs/#{selected_tab}", student: @student %>
+  <%= render "professors/user_info/tabs/#{selected_tab}", student: @student, professor: @professor  %>
 </turbo-frame>

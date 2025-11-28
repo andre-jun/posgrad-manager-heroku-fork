@@ -12,7 +12,20 @@
         <span>Histórico de Relatórios</span>
     </h3>
     <% if @reports.any? %>
+    <table class="min-w-full text-sm text-left text-gray-700">
+        <thead class="bg-blue-50 text-blue-700">
+            <tr>
+            <th class="px-4 py-2 border-b">Período</th>
+            <th class="px-4 py-2 border-b">Data de Envio</th>
+            <th class="px-4 py-2 border-b">Status</th>
+            <th class="px-4 py-2 border-b">Avaliação</th>
+            <th class="px-4 py-2 border-b">Avaliado em</th>
+            <th class="px-4 py-2 border-b">Avaliado por</th>
+            <th class="px-4 py-2 border-b">Visualizar</th>
+            </tr>
+        </thead>
         <%= render partial: "reports/minimized", collection: @reports, as: :report %>
+    </table>
     <% else %>
         <p class="text-gray-500 italic">Nenhum relatório ainda ainda.</p>
     <% end %>

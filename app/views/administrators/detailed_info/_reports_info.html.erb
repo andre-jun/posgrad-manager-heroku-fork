@@ -1,13 +1,52 @@
-<div>
-    <p> Aluno: <%= report.student.user.name %> <%= report.student.user.surname %> </p>
-    <p> Data de Envio: <%= report.date_sent&.strftime("%d de %B, %Y")  %> </p>
-    <p> Orientador: <%= Professor.find_by(id: report.reviewer_id).user.name %> <%= Professor.find_by(id: report.reviewer_id).user.surname %> </p>
-    <p> Status: <%= report.status %> </p>
-    <p> Responsável atual: <%= report.owner %> </p>
-    <p> Avaliação do Orientador: <%= report.review_professor %> </p>
-    <p> |->Data da Avaliação: <%= report.review_date&.strftime("%d de %B, %Y")  %> </p>
-    <p> Avaliação da Coordenação: <%= report.review_administrator %> </p>
-    <p> <%= link_to "Visualizar", report_answers_path(report_info: report), class: "border text-white bg-purple-500 px-3" %> </p>   
-    <%# aí aqui vai linkar pra um parcial do Report e vai ter todas as info de respostas, etc %>
-    <p> <%= link_to "Baixar em PDF", export_pdf_path(format: :pdf), class: "border text-white bg-orange-500 px-3" %> </p>
+<div class="p-4 border rounded-md bg-white shadow-sm space-y-1">
+
+  <p><strong>Aluno:</strong>
+    <%= report.student&.user&.full_name || "—" %>
+  </p>
+
+  <p><strong>Data de Envio:</strong>
+    <%= l(report.date_sent, format: :long, default: "—") %>
+  </p>
+
+  <p><strong>Orientador:</strong>
+    <%= Professor.find_by(id: report.reviewer_id)&.user&.full_name || "—" %>
+  </p>
+
+  <p><strong>Status:</strong>
+    <%= report.status || "—" %>
+  </p>
+
+  <p><strong>Responsável atual:</strong>
+    <%= report.owner || "—" %>
+  </p>
+
+  <p><strong>Avaliação do Orientador:</strong>
+    <%= report.review_professor || "—" %>
+  </p>
+
+  <p><strong>Data da Avaliação:</strong>
+    <%= l(report.review_date, format: :long, default: "—") %>
+  </p>
+
+  <p><strong>Avaliação da Coordenação:</strong>
+    <%= report.review_administrator || "—" %>
+  </p>
+
+  <div class="flex gap-3 mt-2">
+
+    <!-- Visualizar respostas -->
+    <%= link_to "Visualizar", report_info_path(report),  data: { turbo: false},
+        class: "px-3 py-1 bg-purple-600 text-white rounded hover:bg-purple-700" %>
+
+    <!-- Baixar PDF -->
+    <%= link_to "Baixar PDF",
+        export_pdf_path(report_id: report.id, format: :pdf),
+        class: "px-3 py-1 bg-orange-500 text-white rounded hover:bg-orange-600" %>
+
+    <% if report.status == 'Reviewed' %>
+      <%= link_to "Avaliar", administrator_submit_review_report_info_path(report), data: { turbo: false }, 
+            class: "px-4 py-2 bg-teal-600 hover:bg-teal-700 text-white rounded transition duration-300" %>
+    <% end %>
+  </div>
+
 </div>

@@ -1,0 +1,44 @@
+<%= turbo_frame_tag "tab_content" do %>
+    <div>
+        <h1> Perfil do Aluno </h1>
+
+        <!-- coisas de User -->
+        <div>
+            <p> Nome: <%= @student.user&.full_name %> </p>
+            <p> Pronomes: <%= @student.user&.pronoun %> </p>
+            <p> NUSP: <%= @student.user&.nusp %> </p>
+            <p> Email: <%= @student.user&.email %> </p>
+            <p> Status: <%= @student.user&.status %> </p>
+        </div>
+
+        <!-- coisas de Student -->
+        <div>
+            <p> Link lattes: <%= @student.lattes_link %>, último update em <%= @student.lattes_last_update %> </p>
+            <p> Carreira pretendida: <%= @student.pretended_career %> </p>
+            <p> Curso: <%= @student.program_level %> </p>
+            <p> Semestre: <%= @student.semester %> </p>
+        </div>
+
+        <!-- outras métricas -->
+        <div>
+            <p> Telefone: <%= @student.contact_info&.phone_number %> </p>
+            <p> Orientador: <%= @student&.professor.user&.full_name %> </p>
+        </div>
+
+        <!-- coisas de Publications -->
+        <div>
+            <p> Publicações: </p>
+            <% @student.publications.each do |pub| %>
+                <p> Título: <%= pub.title %> </p>
+                <p> Resumo: <%= pub.abstract %> </p>
+                <p> Data: <%= pub.publication_date %> </p>
+                <p> Link: <%= pub.link %> </p>
+                <p> Orientador: <%= pub.professor&.user&.full_name %> </p>
+            <% end %>
+        </div>
+    </div>
+    <%= link_to "Voltar",
+        adm_home_path(tab: 'alumni'),
+        data: { turbo_frame: "tab_content" },
+        class: "px-3 py-1 bg-gray-200 rounded hover:bg-gray-300" %>
+<% end %>

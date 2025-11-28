@@ -4,7 +4,7 @@
   </div>
 <% end %>
 
-<div class="min-h-screen bg-gradient-to-b from-white to-orange-50 px-4 py-8">
+<div class="min-h-screen bg-gradient-to-r from-blue-50 via-white to-orange-50 p-6 font-sans text-gray-800">
   <header class="flex items-center justify-between mb-6">
     <%= render "header", student: @student %>
   </header>
@@ -15,7 +15,7 @@
 
   <main class="max-w-6xl mx-auto space-y-6 bg-white rounded-md shadow p-6  mt-4">
     <%= turbo_frame_tag "student_tab" do %> 
-      <%= render "students/tabs/#{params[:tab] || 'profile'}", student: @student %> 
+      <%= render "students/tabs/#{params[:tab] || 'report'}", student: @student %> 
     <% end %>
   </main>
 </div>

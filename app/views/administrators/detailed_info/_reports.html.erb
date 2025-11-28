@@ -1,9 +1,24 @@
-<div class="outline">
-    <%= link_to "Visualizar", report, class: "text-blue-500" %>
-    <p> Período: <%= report.semester %>o Sem. <%= report.year %> </p>
-    <p> Prazos de entrega: </p>
-        <p> Estudante: <%= report.due_date_student&.strftime("%d de %B, %Y")  %> </p>
-        <p> Docente: <%= report.due_date_professor&.strftime("%d de %B, %Y")  %> </p>
-        <p> Coordenação: <%= report.due_date_administrator&.strftime("%d de %B, %Y")  %> </p>    
-    <%= button_to "Deletar relatório", report, method: :delete, class:"text-red-500", data: { confirm: "Are you sure?" } %> 
+<div class="outline p-6 bg-white rounded-md shadow-md w-full space-y-6">
+
+  <div class="flex justify-between items-center w-full">
+    <%= link_to "Visualizar", report,  data: { turbo: false}, class: "text-blue-600 hover:underline font-semibold" %>
+    <%= button_to "Deletar relatório", report, method: :delete, 
+          class: "text-red-600 hover:text-red-800 font-semibold", 
+          data: { confirm: "Are you sure?" } %>
+  </div>
+
+  <p class="text-gray-800 text-lg font-semibold w-full">
+    Período: <span class="font-normal"><%= report.semester %>o Sem. <%= report.year %></span>
+  </p>
+
+  <div class="w-full">
+    <p class="text-gray-800 font-semibold mb-2">Prazos de entrega:</p>
+
+    <ul class="text-gray-700 space-y-1 list-disc list-inside">
+      <li>Estudante: <span class="font-normal"><%= report.due_date_student&.then { l(_1, format: :long) } %></span></li>
+      <li>Docente: <span class="font-normal"><%= report.due_date_professor&.then { l(_1, format: :long) } %></span></li>
+      <li>Coordenação: <span class="font-normal"><%= report.due_date_administrator&.then { l(_1, format: :long) } %></span></li>
+
+    </ul>
+  </div>
 </div>
