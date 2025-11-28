@@ -42,20 +42,49 @@
   <div class="border-t border-gray-300 pt-8 space-y-8">
     <h3 class="text-xl font-bold text-gray-900 mb-4">Questões do relatório</h3>
     <%= form.fields_for :report_fields do |report_field| %>
-      <div class="grid grid-cols-1 sm:grid-cols-3 gap-6 items-center">
-        <div>
-          <%= report_field.label :question, "Questão", class: "block text-gray-800 font-semibold mb-2" %>
-          <%= report_field.text_field :question, class: "w-full border border-gray-300 rounded-lg px-4 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500" %>
-        </div>
+      <div class="border border-gray-200 rounded-lg p-4 mb-4">
+        <div class="grid grid-cols-1 sm:grid-cols-3 gap-6 items-start">
+          
+          <div>
+            <%= report_field.label :question, "Questão", class: "block text-gray-800 font-semibold mb-2" %>
+            <%= report_field.text_field :question, class: "w-full border border-gray-300 rounded-lg px-4 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500" %>
+          </div>
 
-        <div>
-          <%= report_field.label :field_type, "Tipo de Questão", class: "block text-gray-800 font-semibold mb-2" %>
-          <%= report_field.text_field :field_type, class: "w-full border border-gray-300 rounded-lg px-4 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500" %>
-        </div>
+          <div>
+            <%= report_field.label :field_type, "Tipo de Questão", class: "block text-gray-800 font-semibold mb-2" %>
+            <%= report_field.select :field_type,
+              options_for_select([
+                ["Texto curto", "string"],
+                ["Texto longo", "text"],
+                ["Seleção única", "select"],
+                ["Opções (rádio)", "radio"],
+                ["Opções (checkbox)", "checkbox"]
+              ], report_field.object.field_type),
+              { prompt: "Selecione um tipo" },
+              class: "w-full border border-gray-300 rounded-lg px-4 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500",
+              data: { action: "change->question#toggleOptions" } %>
 
-        <div class="flex items-center space-x-2 mt-6 sm:mt-0">
-          <%= report_field.check_box :required, class: "h-5 w-5 text-blue-600 border-gray-300 rounded focus:ring-blue-500" %>
-          <%= report_field.label :required, "Obrigatória?", class: "text-gray-800 font-semibold" %>
+            <div class="mt-2 options-field" style="<%= %w[select radio checkbox].include?(report_field.object.field_type) ? "" : "display:none" %>">
+              <%= report_field.label :options, "Opções (separadas por vírgula)", class: "block text-gray-800 font-semibold mb-1" %>
+              <%= report_field.text_field :options, placeholder: "Ex: Opção 1, Opção 2", class: "w-full border border-gray-300 rounded-lg px-4 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500" %>
+            </div>
+          </div>
+          <div class="flex flex-col space-y-2 mt-6 sm:mt-0">
+            <div class="flex items-center space-x-2">
+              <%= report_field.check_box :required, class: "h-5 w-5 text-blue-600 border-gray-300 rounded focus:ring-blue-500" %>
+              <%= report_field.label :required, "Obrigatória?", class: "text-gray-800 font-semibold" %>
+            </div>
+
+            <% if report_field.object.persisted? %>
+              <div class="flex items-center space-x-2">
+                <%= report_field.check_box :_destroy %>
+                <%= report_field.label :_destroy, "Deletar questão", class: "text-red-600 font-semibold" %>
+              </div>
+            <% end %>
+            <button type="button" class="text-red-600 font-semibold mt-2" onclick="this.closest('.border').remove()">
+              Remover questão
+            </button>
+          </div>
         </div>
       </div>
     <% end %>
@@ -64,6 +93,8 @@
   <div class="pt-6 text-center flex-center space-x-10">
     <%= form.submit "Adicionar questão", class: "bg-orange-500 hover:bg-blue-700 text-white font-semibold px-8 py-3 rounded-lg shadow-lg transition duration-200" %>
 
-    <%= form.submit "Confirmar", class: "bg-blue-600 hover:bg-blue-700 text-white font-semibold px-8 py-3 rounded-lg shadow-lg transition duration-200" %>
+    <%= form.submit "Confirmar", 
+      class: "bg-blue-600 hover:bg-blue-700 text-white font-semibold px-8 py-3 rounded-lg shadow-lg transition duration-200",
+      onclick: "alert('Rascunho salvo com sucesso!')" %>
   </div>
 <% end %>
