@@ -24,7 +24,7 @@ class ReportInfosController < ApplicationController
       when 'save_draft'
         'Draft'
       when 'submit'
-        'Submitted'
+        'Sent'
       else
         @report_info.status
       end
@@ -47,7 +47,8 @@ class ReportInfosController < ApplicationController
       review_professor: params[:report_info][:review_professor],
       professor_comments: params[:report_info][:professor_comments],
       review_date: Time.current,
-      reviewer_id: current_user.professor.id
+      reviewer_id: current_user.professor.id,
+      status: 'reviewed'
     )
       redirect_to report_info_path(@report_info), notice: 'Avaliação enviada com sucesso!'
     else
