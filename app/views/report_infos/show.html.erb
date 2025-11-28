@@ -30,6 +30,10 @@
       <%= @report_info.review_date&.strftime("%d/%m/%Y") || "-" %>
     </p>
   </div>
+  <div>
+    <strong>Comentario do professor:</strong>
+    <%= @report_info.professor_comments || "-" %>
+  </div>
 
     <% if current_user.professor? && @report_info.review_professor == 'Pendente' %>
       <%= link_to "Avaliar", professor_submit_review_report_info_path(@report_info), 
