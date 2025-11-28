@@ -13,9 +13,9 @@
       <td class="px-4 py-2 whitespace-nowrap">
         <% status_color =
             case info.status.to_s.downcase
-            when 'aprovado' then 'bg-green-100 text-green-800'
-            when 'aprovado com ressalvas' then 'bg-yellow-100 text-yellow-800'
-            when 'pendente' then 'bg-gray-100 text-gray-700'
+            when 'archived' then 'bg-green-100 text-green-800'
+            when 'reviewed' then 'bg-yellow-100 text-yellow-800'
+            when 'sent' then 'bg-gray-100 text-gray-700'
             else 'bg-red-100 text-red-800'
             end
         %>
@@ -26,11 +26,27 @@
       </td>
 
       <td class="px-4 py-2 whitespace-nowrap">
+        <% approval_color =
+            case info.review_administrator.to_s.downcase
+            when 'adequado' then 'bg-green-100 text-green-800'
+            when 'adequado com ressalvas' then 'bg-yellow-100 text-yellow-800'
+            when 'pendente' then 'bg-gray-100 text-gray-700'
+            else 'bg-red-100 text-red-800'
+            end
+        %>
+
+        <span class="px-2 py-1 rounded text-xs font-semibold <%= approval_color %>">
+          <%= info.review_administrator %>
+        </span>
+      </td>
+    
+
+      <td class="px-4 py-2 whitespace-nowrap">
         <%= info.review_date&.strftime("%d/%m/%Y") || "-" %>
       </td>
 
       <td class="px-4 py-2 whitespace-nowrap">
-        <%= info.reviewer&.user&.name || "Não revisado" %>
+        <%= info.reviewer&.user&.name || "Ainda não avaliado" %>
       </td>
 
       <td class="px-4 py-2 whitespace-nowrap">
