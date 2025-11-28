@@ -57,6 +57,7 @@ group :development do
 end
 
 gem 'rubyzip'
+gem 'rails-i18n'
 
 group :test do
   gem 'capybara'
