@@ -6,7 +6,7 @@ class ProfessorsController < ApplicationController
 
   def student_info
     @student = Student.find(params[:id])
-    render partial: 'professors/user_info/student_info', locals: { student: @student }
+    render partial: 'professors/user_info/student_info', locals: { student: @student, professor: @professor }
   end
 
   def home
@@ -75,7 +75,7 @@ class ProfessorsController < ApplicationController
   def set_students
     # estudantes que este professor orienta
     student_ids = ProfessorMentorsStudent.where(professor: @professor).pluck(:student_id)
-    @students = Student.where(id: student_ids)
+    @students = Student.where(id: student_ids).order(:id)
   end
 
   def check_permissions

@@ -37,11 +37,6 @@
       <%= form.label :professor_id, "Orientador", class: "block text-gray-800 font-semibold mb-2" %>
       <%= form.collection_select :professor_id, Professor.includes(:user), :id, :full_name, { prompt: "Escolha um professor" }, class: "border rounded px-3 py-2 w-full" %>
     </div>
-
-    <div>
-      <%= form.label :student_id, "Estudante", class: "block text-gray-800 font-semibold mb-2" %>
-      <%= form.collection_select :student_id, Student.includes(:user), :id, :full_name, { prompt: "Escolha um aluno" }, class: "border rounded px-3 py-2 w-full" %>
-    </div>
   </div>
 
 

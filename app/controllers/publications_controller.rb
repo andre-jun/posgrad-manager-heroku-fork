@@ -3,7 +3,8 @@ class PublicationsController < ApplicationController
   before_action :set_publication, only: %i[show edit update]
 
   def index
-    @publications = Publication.all.order(publication_date: :desc)
+    @student = params[:student]
+    @publications = Publication.where(student: @student).order(publication_date: :desc)
   end
 
   def show
@@ -30,6 +31,7 @@ class PublicationsController < ApplicationController
 
   def create
     @publication = Publication.build(publication_params)
+    @publication.update(student_id: current_user.student.id)
     if @publication.save
       redirect_to @publication, notice: 'Publicação criada!'
     else
@@ -45,7 +47,7 @@ class PublicationsController < ApplicationController
   end
 
   def publication_params
-    params.require(:publication).permit(:publication_id, :professor_id, :student_id, :name, :abstract, :link,
+    params.require(:publication).permit(:publication_id, :professor_id, :student_id, :title, :abstract, :link,
                                         :publication_date)
   end
 end

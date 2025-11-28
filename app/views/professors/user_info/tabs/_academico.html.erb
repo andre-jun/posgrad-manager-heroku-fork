@@ -17,8 +17,15 @@
           <h3> Próximo prazo:</h3>
         </div>
         <!-- [Bookmark] ta bugado o @professor resolva jun-->
-        <p class="text-red-600 font-semibold">Professor: <%= Report.where(id: ReportInfo.where(status: 'Sent', reviewer_id: @professor&.id, student_id: @student.id).pluck(:report_id))&.order(due_date_professor: :asc)&.first&.due_date_professor || "Já entregue" %></p>
-        <p class="text-xs text-gray-500">Aluno: <%= Report.where(id: ReportInfo.where(status: 'Draft', reviewer_id: @professor&.id, student_id: @student.id).pluck(:report_id))&.order(due_date_student: :asc)&.first&.due_date_student || "Já entregue" %> </p>
+        <p class="text-red-600 font-semibold">Professor: <%= Report.where(id: ReportInfo.where(status: 'Sent', reviewer_id: professor.id, student_id: @student.id).pluck(:report_id))&.order(due_date_professor: :asc)&.first&.due_date_professor || "Já entregue" %></p>
+        <p class="text-xs text-gray-500">Aluno: <%= Report.where(id: ReportInfo.where(status: 'Draft', reviewer_id: professor.id, student_id: @student.id).pluck(:report_id))&.order(due_date_student: :asc)&.first&.due_date_student || "Já entregue" %> </p>
+      </div>
+
+      <div class="border border-gray-200 rounded p-4 space-y-1">
+        <div class="flex items-center space-x-1 text-purple-600 font-semibold">
+          <h3> Publicações:</h3>
+        </div>
+        <p class="inline-block text-purple-600 font-semibold border-b-2 border-transparent hover:border-purple-600 transition-colors"><%= link_to "Visualizar Publicações", publications_path(student: @student), data: { turbo: false} %></p>
       </div>
     </div>
   </div>

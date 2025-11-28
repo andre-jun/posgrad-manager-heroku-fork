@@ -21,10 +21,10 @@
 
       <div class="space-y-1 text-sm text-blue-700">
         <p>
-          <span class="font-semibold"><%= student.user.name %></span> - <%= student.program_level || 'missing'%> - PPgSI EACH-USP
+          <span class="font-semibold"><%= student.user.full_name %></span> - <%= student.program_level || 'missing'%> - PPgSI EACH-USP
         </p>
         <p class="text-blue-600">
-          Orientador(a): <%= @professor&.user&.name || "Nenhum professor atribuido"%> | Número USP:  <%= @professor&.user&.nusp || ""%>
+          Orientador(a): <%= @professor&.user&.full_name || "Nenhum professor atribuido"%> | Número USP:  <%= @professor&.user&.nusp || ""%>
         </p>
       </div>
     </section>
