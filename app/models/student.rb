@@ -12,8 +12,6 @@ class Student < ApplicationRecord
   accepts_nested_attributes_for :contact_info
   # attr_accessible :user_attributes, :contact_info_attributes
 
-  validates :name, length: { minimum: 2, maximum: 800 }
-
   def full_name
     user.full_name
   end
