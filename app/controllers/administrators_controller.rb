@@ -1,3 +1,5 @@
+require 'zip'
+
 class AdministratorsController < ApplicationController
   before_action :authenticate_user!
   before_action :set_administrator, only: %i[home show edit update]
@@ -39,7 +41,7 @@ class AdministratorsController < ApplicationController
 
   def send_report
     @send = ReportInfo.find(params[:id])
-    if @send.update(owner: "Student", status: "Archived")
+    if @send.update(owner: 'Student', status: 'Archived')
       redirect_to adm_home_path, notice: 'Relatório avaliado!'
     else
       redirect_to adm_home_path, notice: 'Ocorreu algum erro e o relatório não pode ser avaliado.'
@@ -66,6 +68,22 @@ class AdministratorsController < ApplicationController
 
   def set_reports
     @reports = Report.all.order(year: :desc, semester: :desc)
+  end
+
+  # receiving a list of files, zip them and place in zip_name
+  def compile_reports_to_zip(files, zip_output)
+    zip_file = Temfile.new(zip_output)
+
+    Zip::OutputStream.open(zip_file) do |zos|
+      files.each do |file_path|
+        # 3. Add an entry to the zip file
+        zos.put_next_entry(File.basename(file_path))
+        # 4. Write the file's content to the entry
+      end
+    end
+
+    zip_file.close
+    zip_file.unlink
   end
 
   def set_pending_reports

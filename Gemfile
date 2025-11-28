@@ -56,6 +56,8 @@ group :development do
   gem 'web-console'
 end
 
+gem 'rubyzip'
+
 group :test do
   gem 'capybara'
   gem 'cucumber'
