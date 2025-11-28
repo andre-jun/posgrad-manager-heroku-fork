@@ -9,7 +9,7 @@
   <p>
     Entregue em: 
     <span class="font-medium">
-      <%= report.date_sent&.strftime("%d de %B, %Y") %>
+      <%= l(report.date_sent, format: :numeric, default: "-") %>
     </span>
   </p>
 

@@ -7,7 +7,7 @@
       </td>
 
       <td class="px-4 py-2 whitespace-nowrap">
-        <%= info.date_sent&.strftime("%d/%m/%Y") || "-" %>
+        <%= l(info.date_sent, format: :numeric, default: "-") %>
       </td>
 
       <td class="px-4 py-2 whitespace-nowrap">
@@ -42,7 +42,7 @@
     
 
       <td class="px-4 py-2 whitespace-nowrap">
-        <%= info.review_date&.strftime("%d/%m/%Y") || "-" %>
+        <%= l(info.review_date, format: :numeric, default: "-") %>
       </td>
 
       <td class="px-4 py-2 whitespace-nowrap">

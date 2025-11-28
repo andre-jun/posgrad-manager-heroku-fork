@@ -22,7 +22,7 @@
         <p> Orientador: <%= Professor.find_by(id: @report.reviewer_id).user&.full_name %> </p>
         <p> Status: <%= @report.status %> </p>
         <p> Responsável: <%= @report.owner %> </p>
-        <p> Data da Avaliação: <%= @report.review_date&.strftime("%d de %B, %Y") %> </p>
+        <p> Data da Avaliação: <%= l(@report.review_date, format: :long, default: "") %> </p>
     </div>
 
     <p class="text-red-500"> Questões obrigatórias não respondidas </p>

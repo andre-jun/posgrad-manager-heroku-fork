@@ -12,7 +12,7 @@
 
     <p>
       <strong>Enviado em:</strong>
-      <%= @report_info.date_sent&.strftime("%d/%m/%Y") || "-" %>
+      <%= l(report_info.date_sent, format: :numeric, default: "-") %>
     </p>
 
     <p>
@@ -27,7 +27,7 @@
 
     <p>
       <strong>Avaliado em:</strong>
-      <%= @report_info.review_date&.strftime("%d/%m/%Y") || "-" %>
+      <%= l(report_info.review_date, format: :numeric, default: "-") %>
     </p>
   </div>
   <div>

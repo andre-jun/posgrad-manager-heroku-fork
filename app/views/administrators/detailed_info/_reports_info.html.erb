@@ -5,7 +5,7 @@
   </p>
 
   <p><strong>Data de Envio:</strong>
-    <%= report.date_sent&.strftime("%d de %B, %Y") || "—" %>
+    <%= l(report.date_sent, format: :long, default: "—") %>
   </p>
 
   <p><strong>Orientador:</strong>
@@ -25,7 +25,7 @@
   </p>
 
   <p><strong>Data da Avaliação:</strong>
-    <%= report.review_date&.strftime("%d de %B, %Y") || "—" %>
+    <%= l(report.review_date, format: :long, default: "—") %>
   </p>
 
   <p><strong>Avaliação da Coordenação:</strong>

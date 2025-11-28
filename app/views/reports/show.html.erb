@@ -9,9 +9,10 @@
     <p><strong>Período:</strong> <%= @report.semester %>º semestre de <%= @report.year %></p>
     
     <p class="font-semibold mt-3">Prazos de entrega:</p>
-    <p>Estudante: <%= @report.due_date_student&.strftime("%d de %B, %Y") %></p>
-    <p>Professor: <%= @report.due_date_professor&.strftime("%d de %B, %Y") %></p>
-    <p>Coordenação: <%= @report.due_date_administrator&.strftime("%d de %B, %Y") %></p>
+    <p>Estudante: <%= @report.due_date_student&.then { l(_1, format: :long) } %></p>
+    <p>Professor: <%= @report.due_date_professor&.then { l(_1, format: :long) } %></p>
+    <p>Coordenação: <%= @report.due_date_administrator&.then { l(_1, format: :long) } %></p>
+    
   </div>
 
   <hr>

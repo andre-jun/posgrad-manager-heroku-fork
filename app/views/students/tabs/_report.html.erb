@@ -40,7 +40,8 @@
                 <path d="M12 21.5C17.1086 21.5 21.25 17.3586 21.25 12.25C21.25 7.14137 17.1086 3 12 3C6.89137 3 2.75 7.14137 2.75 12.25C2.75 17.3586 6.89137 21.5 12 21.5Z" stroke-linecap="round" stroke-linejoin="round"></path>
             </svg>
                 <p class="text-center">
-                    <strong>O prazo para preenchimento do relatório é <%= @pending_report&.due_date_student&.strftime("%d de %B, %Y")  %></strong>
+                    <strong>O prazo para preenchimento do relatório é <%= l(@pending_report&.due_date_student, format: :long, default: "") %></strong>
+
                 </p>
         </div>
 
