@@ -3,6 +3,10 @@ class ReportsController < ApplicationController
   before_action :set_report, only: %i[show edit update destroy]
   before_action :check_permissions, only: %i[new create]
 
+  def export_pdf_view
+    @student = Student.first
+  end
+
   def show
     @report = Report.find(params[:id])
 

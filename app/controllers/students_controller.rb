@@ -19,7 +19,7 @@ class StudentsController < ApplicationController
     @reports = @student.reports.order(year: :asc, semester: :asc)
 
     @pending_report_info = @student.report_infos
-                                   .where(owner: 'Student', status: 'Draft')
+                                   .where(status: 'Draft')
                                    .order(created_at: :asc)
                                    .last
 

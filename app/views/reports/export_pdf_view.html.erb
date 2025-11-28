@@ -52,12 +52,14 @@
   </style>
 </head>
 <body>
-  <h1>Students List</h1>
-  <h1>AQUI É COMPLETAMENTE TEMPORÁRIO</h1>
+  <h1>Relatório Semestral</h1>
+  <h1>EACH-USP SI</h1>
   
   <div class="summary">
-    <p><strong>Total Students:</strong> <%= @students.count %></p>
-    <p><strong>Generated:</strong> <%= Time.current.strftime("%B %d, %Y at %I:%M %p") %></p>
+    <p><strong>Aluno:</strong> <%= @student.user&.full_name %></p>
+    <p><strong>Curso:</strong> <%= @student.program_level %></p>
+    <p><strong>Orientador:</strong> <%= @student.professor&.user&.full_name %></p>
+    <p><strong>Gerado em:</strong> <%= Time.current.strftime("%b %d, %Y às %I:%M %p") %></p>
   </div>
 
   <table>
@@ -72,15 +74,13 @@
       </tr>
     </thead>
     <tbody>
-      <% @students.each do |student| %>
         <tr>
-          <td><%= student.id %></td>
-          <td><%= student.user.name %></td>
-          <td><%= student.user.email %></td>
-          <td><%= student.user.status %></td>
-          <td><%= student.lattes_link %></td>
+          <td><%= @student.id %></td>
+          <td><%= @student.user.name %></td>
+          <td><%= @student.user.email %></td>
+          <td><%= @student.user.status %></td>
+          <td><%= @student.lattes_link %></td>
         </tr>
-      <% end %>
     </tbody>
   </table>
 

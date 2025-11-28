@@ -65,7 +65,7 @@ class ReportInfosController < ApplicationController
   def submit_admin_review
     if @report_info.update(
       review_administrator: params[:report_info][:review_administrator],
-      coordinator_comments: params[:report_info][:coordinator_comments],
+      administrator_comments: params[:report_info][:administrator_comments],
       status: 'Archived'
     )
       redirect_to report_info_path(@report_info), notice: 'Avaliação do administrador enviada com sucesso!'

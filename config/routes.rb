@@ -57,6 +57,8 @@ Rails.application.routes.draw do
   # esse aqui é só pra simular uma aba, dps vai virar só um parcial eu acho
   get 'professor_report_temp', to: 'professors#temp_report', as: 'prof_temp'
 
+  get 'export_pdf_view', to: 'reports#export_pdf_view', as: 'export_pdf_view'
+
   # tem que fazer o root directionar pra home certa dependendo do tipo de usuario
   root to: 'application#root_redirect'
 end

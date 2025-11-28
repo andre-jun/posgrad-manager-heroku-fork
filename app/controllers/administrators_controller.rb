@@ -41,7 +41,7 @@ class AdministratorsController < ApplicationController
 
   def send_report
     @send = ReportInfo.find(params[:id])
-    if @send.update(owner: 'Student', status: 'Archived')
+    if @send.update(status: 'Archived')
       redirect_to adm_home_path, notice: 'Relatório avaliado!'
     else
       redirect_to adm_home_path, notice: 'Ocorreu algum erro e o relatório não pode ser avaliado.'
@@ -87,6 +87,6 @@ class AdministratorsController < ApplicationController
   end
 
   def set_pending_reports
-    @pending_reports = Report.where(owner: 'Admin').where('due_date_administrator > ?', Date.today)
+    @pending_reports = Report.where(status: 'Reviewed').where('due_date_administrator > ?', Date.today)
   end
 end
