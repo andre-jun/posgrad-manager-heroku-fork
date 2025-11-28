@@ -94,7 +94,7 @@ class ReportInfosController < ApplicationController
 
   def report_info_params
     params.require(:report_info).permit(
-      :status,
+      :status, :date_sent,
       report_field_answers_attributes: %i[id report_field_id answer]
     )
   end
