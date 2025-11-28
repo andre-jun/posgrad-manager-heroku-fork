@@ -56,8 +56,9 @@ group :development do
   gem 'web-console'
 end
 
-gem 'rubyzip'
+gem 'devise-i18n'
 gem 'rails-i18n'
+gem 'rubyzip'
 
 group :test do
   gem 'capybara'
