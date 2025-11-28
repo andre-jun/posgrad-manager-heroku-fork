@@ -6,6 +6,7 @@ class ProfessorsController < ApplicationController
 
   def student_info
     @student = Student.find(params[:id])
+    @professor = current_user.professor
     render partial: 'professors/user_info/student_info', locals: { student: @student, professor: @professor }
   end
 
